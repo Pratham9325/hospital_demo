@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Step Patient Form</title>
+  <style>
+    .container {
+  max-width: 900px;
+  margin: auto;
+}
+
+h2 {
+  text-align: center;
+}
+
+.form-step {
+  display: none;
+
+}
+
+.form-step.active {
+  display: block;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.item-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.item {
+  padding: 10px 15px;
+  background: #f0f0f0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.item.selected {
+  background: #007bff;
+  color: white;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 900px;
+  margin: 50px auto;
+  height: 600px;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.form-step {
+  display: none;
+}
+
+.form-step.active {
+  display: block;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #f5f5f5;
+}
+
+input:focus, select:focus {
+  border: 1px solid #007BFF;
+}
+.item-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Smaller minimum width */
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.item {
+  padding: 8px; /* Reduced padding */
+  background: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 14px; /* Adjust font size for smaller options */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.item:hover {
+  background-color: #e0e0e0;
+  transform: scale(1.05);
+}
+
+.item.selected {
+  background-color: #007BFF;
+  color: white;
+  border-color: #0056b3;
+}
+
+button {
+  padding: 10px 15px;
+  font-size: 15px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007BFF;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  height: 35px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.add-medicine-btn {
+  background-color: #28a745;
+}
+
+.add-medicine-btn:hover {
+  background-color: #218838;
+}
+
+.medicine-entry {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  height: 40px;
+}
+
+.medicine-entry select, .medicine-entry input {
+  flex: 1;
+  padding: 10px;
+}
+
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+input[type="text"] {
+  width: 90%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+
+
+
+/* Styling the navbar */
+.navbar {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #333;
+  padding: 20px;
+}
+
+/* Container for the logo and company name in one row */
+.navbar-content {
+  display: flex;
+  align-items: center;
+  gap: 15px;  /* Space between logo and company name */
+}
+
+/* Styling for the logo */
+.logo {
+  width: 50px;  /* Adjust logo size */
+  height: auto;
+}
+
+/* Styling for the company name */
+.company-name {
+  color: #fff;
+  font-size: 30px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+
+
+
+
+  </style>
+  <link rel="stylesheet" href="./style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-logo">
+
+            <h1 class="company-name">रविकल्प हॉस्पिटल</h1>
+        </div>
+    </nav>
+
+
+  <div class="container">
+    <h2>Multi-Step Patient Form</h2>
+    <form id="multiStepForm">
+      <!-- Step 1: Personal Information -->
+      <div class="form-step active" id="step-1">
+        <div class="form-group">
+          <label for="visit-date">Date of Visit:</label>
+          <input type="date" id="visit-date" readonly>
+        </div>
+        <div class="form-group">
+          <label for="patient-name">Patient Name:</label>
+          <input type="text" id="patient-name" placeholder="Enter patient name" required>
+        </div>
+        <div class="form-group">
+          <label for="age">Age:</label>
+          <input type="number" id="age" placeholder="Enter age" min="1" max="120" required>
+        </div>
+        <div class="form-group">
+          <label for="gender">Gender:</label>
+          <select id="gender" required>
+            <option value="" disabled selected>Select gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="mobile-number">Mobile Number:</label>
+          <input type="tel" id="mobile-number" placeholder="Enter mobile number" pattern="[0-9]{10}" required>
+        </div>
+        <div class="button-group">
+          <button type="button" onclick="nextStep()">Next</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Symptoms, Medical History, and Surgical History -->
+      <div class="form-step" id="step-2">
+        <div class="form-group">
+          <h3>Select Symptoms:</h3>
+          <div class="item-grid">
+            <div class="item" onclick="toggleSelection(this)">Fever</div>
+            <div class="item" onclick="toggleSelection(this)">Cough</div>
+            <div class="item" onclick="toggleSelection(this)">Headache</div>
+            <div class="item" onclick="toggleSelection(this)">Fatigue</div>
+          </div>
+        </div>
+        <div class="form-group" style="margin-top: 70px;">
+          <h3>Medical History:</h3>
+          <div class="item-grid">
+            <div class="item" onclick="toggleSelection(this)">Diabetes</div>
+            <div class="item" onclick="toggleSelection(this)">Hypertension</div>
+            <div class="item" onclick="toggleSelection(this)">Asthma</div>
+            <div class="item" onclick="toggleSelection(this)">Heart Disease</div>
+          </div>
+        </div>
+        <div class="form-group" style="margin-top: 60px;">
+          <h3>Surgical History:</h3>
+          <div class="item-grid">
+            <div class="item" onclick="toggleSelection(this)">Appendectomy</div>
+            <div class="item" onclick="toggleSelection(this)">Gallbladder Removal</div>
+            <div class="item" onclick="toggleSelection(this)">Hernia Surgery</div>
+            <div class="item" onclick="toggleSelection(this)">Joint Replacement</div>
+          </div>
+        </div>
+        <div class="button-group">
+          <button type="button" onclick="prevStep()">Back</button>
+          <button type="button" onclick="nextStep()">Next</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Current Power Glasses -->
+      <div class="form-step" id="step-3">
+        <div class="form-group">
+          <h3>Current Power Glasses:</h3>
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th colspan="4">Right Eye</th>
+                <th colspan="4">Left Eye</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>DV</td>
+                <td><input type="text" placeholder="SPH"></td>
+                <td><input type="text" placeholder="CYL"></td>
+                <td><input type="text" placeholder="Axis"></td>
+                <td><input type="text" placeholder="V/A"></td>
+                <td><input type="text" placeholder="SPH"></td>
+                <td><input type="text" placeholder="CYL"></td>
+                <td><input type="text" placeholder="Axis"></td>
+                <td><input type="text" placeholder="V/A"></td>
+              </tr>
+              <tr>
+                <td>NV</td>
+                <td><input type="text" placeholder="SPH"></td>
+                <td><input type="text" placeholder="CYL"></td>
+                <td><input type="text" placeholder="Axis"></td>
+                <td><input type="text" placeholder="V/A"></td>
+                <td><input type="text" placeholder="SPH"></td>
+                <td><input type="text" placeholder="CYL"></td>
+                <td><input type="text" placeholder="Axis"></td>
+                <td><input type="text" placeholder="V/A"></td>
+            </tr>
+            <tr>
+              <td>IPD (mm)</td>
+              <td colspan="8"><input type="text" placeholder="Enter IPD (mm)"></td>
+            </tr>
+            <tr>
+              <td>Type of Glass</td>
+              <td colspan="8"><input type="text" placeholder="Enter Type of Glass"></td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+        <div class="button-group">
+          <button type="button" onclick="prevStep()">Back</button>
+          <button type="button" onclick="nextStep()">Next</button>
+        </div>
+      </div>
+
+      <!-- Step 4: Prescribed Medicines -->
+      <div class="form-step" id="step-4">
+        <div class="form-group">
+          <h3>Prescribed Medicines:</h3>
+          <div id="medicine-list" class="medicine-list"></div>
+          <button type="button" class="add-medicine-btn" onclick="addMedicineEntry()">+ Add Medicine</button>
+        </div>
+        <div class="button-group">
+          <button type="button" onclick="prevStep()">Back</button>
+          <button type="button" onclick="nextStep()">Next</button>
+        </div>
+      </div>
+    </form>
+
+
+
+
+    <div class="form-step" id="step-5">
+        <div class="form-group">
+          <h3>Dignosis:</h3>
+          <div class="item-grid">
+            <div class="item" onclick="toggleSelection(this)">Fever</div>
+            <div class="item" onclick="toggleSelection(this)">Cough</div>
+            <div class="item" onclick="toggleSelection(this)">Headache</div>
+            <div class="item" onclick="toggleSelection(this)">Fatigue</div>
+          </div>
+        </div>
+        <div class="form-group" style="margin-top: 70px;">
+          <h3>Investigation:</h3>
+          <div class="item-grid">
+            <div class="item" onclick="toggleSelection(this)">Diabetes</div>
+            <div class="item" onclick="toggleSelection(this)">Hypertension</div>
+            <div class="item" onclick="toggleSelection(this)">Asthma</div>
+            <div class="item" onclick="toggleSelection(this)">Heart Disease</div>
+          </div>
+        </div>
+       
+        <div class="button-group">
+          <button type="button" onclick="prevStep()">Back</button>
+
+          <button type="button" onclick="generatePDF()">Submit</button>
+        </div>
+      </div>
+  </div>
+
+  <script >
+    // Automatically set the visit date to today's date
+document.getElementById("visit-date").value = new Date().toISOString().split("T")[0];
+
+let currentStep = 1;
+
+// Show the specified step
+function showStep(step) {
+  document.querySelectorAll(".form-step").forEach((el, index) => {
+    el.classList.toggle("active", index + 1 === step);
+  });
+}
+
+// Navigate to the next step
+function nextStep() {
+  currentStep++;
+  showStep(currentStep);
+}
+
+// Navigate to the previous step
+function prevStep() {
+  currentStep--;
+  showStep(currentStep);
+}
+
+// Toggle selection for symptoms, medical history, and surgical history
+function toggleSelection(element) {
+  element.classList.toggle("selected");
+}
+
+// Add a new medicine entry row
+function addMedicineEntry() {
+  const medicineList = document.getElementById("medicine-list");
+
+  const entry = document.createElement("div");
+  entry.className = "medicine-entry";
+
+  entry.innerHTML = `
+   <select class="medicine-type">
+      <option value="" disabled selected>Type</option>
+      <option value="Tablet">Tablet</option>
+      <option value="Eye Drop">Eye Drop</option>
+    </select>
+    <select class="medicine-select">
+      <option value="" disabled selected>Select Medicine</option>
+      <option value="Hydrakem Efdrop">Hydrakem Efdrop</option>
+      <option value="Resync Eyedrop">Resync Eyedrop</option>
+    </select>
+   
+    <input type="number" class="medicine-quantity" placeholder="Quantity" min="1">
+    <button type="button" onclick="this.parentNode.remove()">Remove</button>
+  `;
+
+  medicineList.appendChild(entry);
+}
+
+
+  </script>
+</body>
+</html>
