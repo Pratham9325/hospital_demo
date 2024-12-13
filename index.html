@@ -144,6 +144,98 @@ button {
   height: 35px;
 }
 
+/* code for medical class */
+.medical {
+  padding: 8px;
+  background: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.medical:hover {
+  background-color: #e0e0e0;
+  transform: scale(1.05);
+}
+
+.medical.selected {
+  background-color: #007BFF;
+  color: white;
+  border-color: #0056b3;
+}
+
+/* code for surgical class */
+.surgical {
+  padding: 8px;
+  background: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.surgical:hover {
+  background-color: #e0e0e0;
+  transform: scale(1.05);
+}
+
+.surgical.selected {
+  background-color: #007BFF;
+  color: white;
+  border-color: #0056b3;
+}
+
+/* code for dignosis class */
+.dignosis {
+  padding: 8px;
+  background: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.dignosis:hover {
+  background-color: #e0e0e0;
+  transform: scale(1.05);
+}
+
+.dignosis.selected {
+  background-color: #007BFF;
+  color: white;
+  border-color: #0056b3;
+}
+
+/* code for investigation class */
+.investigation {
+  padding: 8px;
+  background: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.investigation:hover {
+  background-color: #e0e0e0;
+  transform: scale(1.05);
+}
+
+.investigation.selected {
+  background-color: #007BFF;
+  color: white;
+  border-color: #0056b3;
+}
+
 button:hover {
   background-color: #0056b3;
 }
@@ -255,7 +347,7 @@ input[type="text"] {
         </div>
         <div class="form-group">
           <label for="patient-name">Patient Name:</label>
-          <input type="text" id="patient-name" placeholder="Enter patient name" required>
+          <input type="text" id="patient-name" placeholder="Enter patient name" oninput="savelocal()" required>
         </div>
         <div class="form-group">
           <label for="age">Age:</label>
@@ -265,9 +357,9 @@ input[type="text"] {
           <label for="gender">Gender:</label>
           <select id="gender" required>
             <option value="" disabled selected>Select gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
           </select>
         </div>
         <div class="form-group">
@@ -284,28 +376,28 @@ input[type="text"] {
         <div class="form-group">
           <h3>Select Symptoms:</h3>
           <div class="item-grid">
-            <div class="item" onclick="toggleSelection(this)">Fever</div>
-            <div class="item" onclick="toggleSelection(this)">Cough</div>
-            <div class="item" onclick="toggleSelection(this)">Headache</div>
-            <div class="item" onclick="toggleSelection(this)">Fatigue</div>
+            <div class="item" onclick="toggleSymptoms(this)">Fever</div>
+            <div class="item" onclick="toggleSymptoms(this)">Cough</div>
+            <div class="item" onclick="toggleSymptoms(this)">Headache</div>
+            <div class="item" onclick="toggleSymptoms(this)">Fatigue</div>
           </div>
         </div>
         <div class="form-group" style="margin-top: 70px;">
           <h3>Medical History:</h3>
           <div class="item-grid">
-            <div class="item" onclick="toggleSelection(this)">Diabetes</div>
-            <div class="item" onclick="toggleSelection(this)">Hypertension</div>
-            <div class="item" onclick="toggleSelection(this)">Asthma</div>
-            <div class="item" onclick="toggleSelection(this)">Heart Disease</div>
+            <div class="medical" onclick="toggleMedical(this)">Diabetes</div>
+            <div class="medical" onclick="toggleMedical(this)">Hypertension</div>
+            <div class="medical" onclick="toggleMedical(this)">Asthma</div>
+            <div class="medical" onclick="toggleMedical(this)">Heart Disease</div>
           </div>
         </div>
         <div class="form-group" style="margin-top: 60px;">
           <h3>Surgical History:</h3>
           <div class="item-grid">
-            <div class="item" onclick="toggleSelection(this)">Appendectomy</div>
-            <div class="item" onclick="toggleSelection(this)">Gallbladder Removal</div>
-            <div class="item" onclick="toggleSelection(this)">Hernia Surgery</div>
-            <div class="item" onclick="toggleSelection(this)">Joint Replacement</div>
+            <div class="surgical" onclick="toggleSurgical(this)">Appendectomy</div>
+            <div class="surgical" onclick="toggleSurgical(this)">Gallbladder Removal</div>
+            <div class="surgical" onclick="toggleSurgical(this)">Hernia Surgery</div>
+            <div class="surgical" onclick="toggleSurgical(this)">Joint Replacement</div>
           </div>
         </div>
         <div class="button-group">
@@ -329,33 +421,33 @@ input[type="text"] {
             <tbody>
               <tr>
                 <td>DV</td>
-                <td><input type="text" placeholder="SPH"></td>
-                <td><input type="text" placeholder="CYL"></td>
-                <td><input type="text" placeholder="Axis"></td>
-                <td><input type="text" placeholder="V/A"></td>
-                <td><input type="text" placeholder="SPH"></td>
-                <td><input type="text" placeholder="CYL"></td>
-                <td><input type="text" placeholder="Axis"></td>
-                <td><input type="text" placeholder="V/A"></td>
+                <td><input type="text" placeholder="SPH" id="DV-SPH"></td>
+                <td><input type="text" placeholder="CYL" id="DV-CYL"></td>
+                <td><input type="text" placeholder="Axis" id="DV-Axis"></td>
+                <td><input type="text" placeholder="V/A" id="DV-VA"></td>
+                <td><input type="text" placeholder="SPH" id="DV-SPH2"></td>
+                <td><input type="text" placeholder="CYL" id="DV-CYL2"></td>
+                <td><input type="text" placeholder="Axis" id="DV-Axis2"></td>
+                <td><input type="text" placeholder="V/A" id="DV-VA2"></td>
               </tr>
               <tr>
                 <td>NV</td>
-                <td><input type="text" placeholder="SPH"></td>
-                <td><input type="text" placeholder="CYL"></td>
-                <td><input type="text" placeholder="Axis"></td>
-                <td><input type="text" placeholder="V/A"></td>
-                <td><input type="text" placeholder="SPH"></td>
-                <td><input type="text" placeholder="CYL"></td>
-                <td><input type="text" placeholder="Axis"></td>
-                <td><input type="text" placeholder="V/A"></td>
+                <td><input type="text" placeholder="SPH" id="NV-SPH"></td>
+                <td><input type="text" placeholder="CYL" id="NV-CYL"></td>
+                <td><input type="text" placeholder="Axis" id="NV-Axis"></td>
+                <td><input type="text" placeholder="V/A" id="NV-VA"></td>
+                <td><input type="text" placeholder="SPH" id="NV-SPH2"></td>
+                <td><input type="text" placeholder="CYL" id="NV-CYL2"></td>
+                <td><input type="text" placeholder="Axis" id="NV-Axis2"></td>
+                <td><input type="text" placeholder="V/A" id="NV-VA2"></td>
             </tr>
             <tr>
               <td>IPD (mm)</td>
-              <td colspan="8"><input type="text" placeholder="Enter IPD (mm)"></td>
+              <td colspan="8"><input type="text" placeholder="Enter IPD (mm)" id="IPD"></td>
             </tr>
             <tr>
               <td>Type of Glass</td>
-              <td colspan="8"><input type="text" placeholder="Enter Type of Glass"></td>
+              <td colspan="8"><input type="text" placeholder="Enter Type of Glass" id="TOG"></td>
             </tr>
           </tbody>
         </table>
@@ -387,19 +479,19 @@ input[type="text"] {
         <div class="form-group">
           <h3>Dignosis:</h3>
           <div class="item-grid">
-            <div class="item" onclick="toggleSelection(this)">Fever</div>
-            <div class="item" onclick="toggleSelection(this)">Cough</div>
-            <div class="item" onclick="toggleSelection(this)">Headache</div>
-            <div class="item" onclick="toggleSelection(this)">Fatigue</div>
+            <div class="dignosis" onclick="toggleDignosis(this)">Fever</div>
+            <div class="dignosis" onclick="toggleDignosis(this)">Cough</div>
+            <div class="dignosis" onclick="toggleDignosis(this)">Headache</div>
+            <div class="dignosis" onclick="toggleDignosis(this)">Fatigue</div>
           </div>
         </div>
         <div class="form-group" style="margin-top: 70px;">
           <h3>Investigation:</h3>
           <div class="item-grid">
-            <div class="item" onclick="toggleSelection(this)">Diabetes</div>
-            <div class="item" onclick="toggleSelection(this)">Hypertension</div>
-            <div class="item" onclick="toggleSelection(this)">Asthma</div>
-            <div class="item" onclick="toggleSelection(this)">Heart Disease</div>
+            <div class="investigation" onclick="toggleInvestigation(this)">Diabetes</div>
+            <div class="investigation" onclick="toggleInvestigation(this)">Hypertension</div>
+            <div class="investigation" onclick="toggleInvestigation(this)">Asthma</div>
+            <div class="investigation" onclick="toggleInvestigation(this)">Heart Disease</div>
           </div>
         </div>
        
@@ -437,14 +529,78 @@ function prevStep() {
 }
 
 // Toggle selection for symptoms, medical history, and surgical history
-function toggleSelection(element) {
+function toggleSymptoms(element) {
   element.classList.toggle("selected");
+
+  // Get the selected items
+  const selectedItems = document.querySelectorAll(".item.selected");
+
+  // Log the selected items
+  console.log(Array.from(selectedItems).map(item => item.textContent));
+
+  // Save the selected items in local storage
+  localStorage.setItem("selectedSymptoms", JSON.stringify(Array.from(selectedItems).map(item => item.textContent)));
 }
+
+function toggleMedical(element) {
+  element.classList.toggle("selected");
+
+  // Get the selected items
+  const selectedItems = document.querySelectorAll(".medical.selected");
+
+  // Log the selected items
+  console.log(Array.from(selectedItems).map(item => item.textContent));
+
+  // Save the selected items in local storage
+  localStorage.setItem("selectedMedical", JSON.stringify(Array.from(selectedItems).map(item => item.textContent)));
+}
+
+function toggleSurgical(element) {
+  element.classList.toggle("selected");
+
+  // Get the selected items
+  const selectedItems = document.querySelectorAll(".surgical.selected");
+
+  // Log the selected items
+  console.log(Array.from(selectedItems).map(item => item.textContent));
+
+  // Save the selected items in local storage
+  localStorage.setItem("selectedSurgical", JSON.stringify(Array.from(selectedItems).map(item => item.textContent)));
+}
+
+function toggleDignosis(element) {
+  element.classList.toggle("selected");
+
+  // Get the selected items
+  const selectedItems = document.querySelectorAll(".dignosis.selected");
+
+  // Log the selected items
+  console.log(Array.from(selectedItems).map(item => item.textContent));
+
+  // Save the selected items in local storage
+  localStorage.setItem("selectedDignosis", JSON.stringify(Array.from(selectedItems).map(item => item.textContent)));
+}
+
+function toggleInvestigation(element) {
+  element.classList.toggle("selected");
+
+  // Get the selected items
+  const selectedItems = document.querySelectorAll(".investigation.selected");
+
+  // Log the selected items
+  console.log(Array.from(selectedItems).map(item => item.textContent));
+
+  // Save the selected items in local storage
+  localStorage.setItem("selectedInvestigation", JSON.stringify(Array.from(selectedItems).map(item => item.textContent)));
+}
+
 
 // Add a new medicine entry row
 function addMedicineEntry() {
   const medicineList = document.getElementById("medicine-list");
 
+  
+  // Create a new medicine entry
   const entry = document.createElement("div");
   entry.className = "medicine-entry";
 
@@ -466,6 +622,156 @@ function addMedicineEntry() {
 
   medicineList.appendChild(entry);
 }
+
+
+function savelocal(){
+  var name = document.getElementById("patient-name").value;
+  localStorage.setItem("name",name);
+  console.log(name);
+}
+
+function generatePDF() {
+  try{
+  // Get All the input values
+  const name = document.getElementById("patient-name").value;
+  const age = document.getElementById("age").value;
+  const gender = document.getElementById("gender").value;
+  const mobileNumber = document.getElementById("mobile-number").value;
+
+  console.log(name, age,gender,mobileNumber);
+
+  //Current Power Glasses values
+  const DVSPH = document.getElementById("DV-SPH").value;
+  const DVCYL = document.getElementById("DV-CYL").value;
+  const DVAxis = document.getElementById("DV-Axis").value;
+  const DVVA = document.getElementById("DV-VA").value;
+  const DVSPH2 = document.getElementById("DV-SPH2").value;
+  const DVCYL2 = document.getElementById("DV-CYL2").value;
+  const DVAxis2 = document.getElementById("DV-Axis2").value;
+  const DVVA2 = document.getElementById("DV-VA2").value;
+  const NVSPH = document.getElementById("NV-SPH").value;
+  const NVCYL = document.getElementById("NV-CYL").value;
+  const NVAxis = document.getElementById("NV-Axis").value;
+  const NVVA = document.getElementById("NV-VA").value;
+  const NVSPH2 = document.getElementById("NV-SPH2").value;
+  const NVCYL2 = document.getElementById("NV-CYL2").value;
+  const NVAxis2 = document.getElementById("NV-Axis2").value;
+  const NVVA2 = document.getElementById("NV-VA2").value;
+  const IPD = document.getElementById("IPD").value;
+  const TOG = document.getElementById("TOG").value;
+
+
+  // Store Current Power Glasses the dictionary name and value
+  const currentPowerGlasses = {
+    "DVSPH": DVSPH,
+    "DVCYL": DVCYL,
+    "DVAxis": DVAxis,
+    "DVVA": DVVA,
+    "DVSPH2": DVSPH2,
+    "DVCYL2": DVCYL2,
+    "DVAxis2": DVAxis2,
+    "DVVA2": DVVA2,
+    "NVSPH": NVSPH,
+    "NVCYL": NVCYL,
+    "NVAxis": NVAxis,
+    "NVVA": NVVA,
+    "NVSPH2": NVSPH2,
+    "NVCYL2": NVCYL2,
+    "NVAxis2": NVAxis2,
+    "NVVA2": NVVA2,
+    "IPD": IPD,
+    "TOG": TOG
+  };
+
+  console.log(currentPowerGlasses);
+
+  let count = 0;
+  // Check if all the values are present in keys of the currentPowerGlasses dictionary "" or not using for loop
+  for (const key in currentPowerGlasses) {
+    if(currentPowerGlasses[key] === "") {
+     count += 1;
+    }
+  }
+  console.log(count);
+
+
+  if(count === 18){
+    console.log("All the values are empty");
+    localStorage.setItem("CPG_Table", "false");
+  }
+  else{
+    console.log("All the values are not empty");
+    localStorage.setItem("CPG_Table", "true");
+  }
+  
+
+  // Save the values in local storage
+  localStorage.setItem("currentPowerGlasses", JSON.stringify(currentPowerGlasses));
+
+  // Get the medicine entries
+  const medicineEntries = document.querySelectorAll(".medicine-entry");
+
+  // Store the medicine entries in an array
+  const medicines = [];
+
+  // Loop through each medicine entry
+
+  medicineEntries.forEach((entry, index) => {
+    const medicineType = entry.querySelector(".medicine-type").value;
+    const medicineSelect = entry.querySelector(".medicine-select").value;
+    const medicineQuantity = entry.querySelector(".medicine-quantity").value;
+
+    // Store the medicine entry in a dictionary
+    const medicine = {
+      "medicineType": medicineType,
+      "medicineSelect": medicineSelect,
+      "medicineQuantity": medicineQuantity
+    };
+
+    // Push the medicine entry to the medicines array
+    medicines.push(medicine);
+  });
+
+  console.log(medicines);
+
+  // Save the medicines in local storage
+  localStorage.setItem("medicines", JSON.stringify(medicines));
+  
+  
+
+  // Save the values in local storage
+  localStorage.setItem("name", name);
+  localStorage.setItem("age", age);
+  localStorage.setItem("gender",gender);
+  localStorage.setItem("mobileNumber", mobileNumber);
+
+
+  if(name === "" || age === "" || gender === "") {
+    alert("Patient Name, Age, and Gender are required fields");
+    return;
+  }
+  else if(mobileNumber.length !== 10) {
+    alert("Mobile Number should be 10 digits");
+    return;
+  }
+  else{
+    // Opent print.html
+  window.open("print.html");
+  }
+}
+catch(e){
+  console.log(e);
+  alert("Error:"+e);
+} 
+
+  
+}
+
+// Dom loaded event
+document.addEventListener("DOMContentLoaded", () => {
+  //Clear the local storage
+  localStorage.clear();
+});
 
 
   </script>

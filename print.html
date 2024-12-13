@@ -239,10 +239,10 @@
 
     <div class="header">
         <div class="details">
-            <span id="patient-name"><b>Patient Name:</b> ATHARVA (10D/M)</span>
-            <span><b>AGE</b>: 22</span>
-            <span><b>Mobile</b>: 1234567898</span>
-            <span><b>Gender</b>: MALE</span>
+            <span id="patient-name"><b>Patient Name:</b></span>
+            <span id="patient-age"><b>AGE:</b></span>
+            <span id="patient-mobile"><b>Mobile:</b></span>
+            <span id="patient-gender"><b>Gender:</b></span>
         </div>
         <div>
             <span><b>Doctor:</b>  Dr. Alvin.R.Rane </span>
@@ -250,43 +250,50 @@
     </div>
 
     <div class="section">
-        <div class="details-section">
-            <h3>Diagnosis</h3>
-            <ul>
+        <div class="details-section" id="diagnosis-section">
+            <h3 >Diagnosis</h3>
+            <ul id="diagnosis-list">
                 <li>1A07.Z Typhoid Fever, Unspecified</li>
                 <li>Hypertension</li>
                 <li>Cataracts</li>
             </ul>
         </div>
 
-        <!-- Vertical Line -->
-        <div class="vertical-line"></div>
-
-        <div class="details-section">
+        <div class="details-section" id="Symptoms-section">
             <h3>Complaints/Symptoms</h3>
-            <ul>
+            <ul id="symptoms-list">
                 <li>Chest Pain</li>
                 <li>Eye Redness</li>
                 <li>Nausea</li>
             </ul>
         </div>
-    </div>
 
-    <div class="section">
-        <div class="details-section">
+        <div class="details-section" id="personal-history-section">
             <h3>Personal History</h3>
-            <ul>
+            <ul id="personal-history-list">
                 <li>Smoking, Involuntary</li>
                 <li>Tobacco Smoking</li>
                 <li>Allergy</li>
             </ul>
         </div>
 
-        <div class="vertical-line"></div>
+    </div>
 
-        <div class="details-section">
+    <div class="section">
+        <div class="details-section" id="past-history-section">
             <h3>Past History</h3>
-            <ul>
+            <ul id="past-history-list">
+                <li>Diabetes</li>
+                <li>A (Adenine)</li>
+                <li>Hypertension</li>
+            </ul>
+        </div>
+
+        <!-- <div class="vertical-line"></div> -->
+
+        <div class="details-section" id="investigation-section">
+            <h3>Investigation</h3>
+            <ul id="investigation-list">
                 <li>Diabetes</li>
                 <li>A (Adenine)</li>
                 <li>Hypertension</li>
@@ -295,7 +302,7 @@
     </div>
 
     <!-- Current Glass Power Section -->
-    <div class="section current-glass-power">
+    <div class="section current-glass-power" id="current-glass-power">
         <div class="details-section">
             <h3>Current Power Glass</h3>
             <table>
@@ -309,44 +316,341 @@
                 <tbody>
                     <tr>
                         <td>DV</td>
-                        <td><input type="text" placeholder="SPH" style="width: 50px;"></td>
-                        <td><input type="text" placeholder="CYL" style="width: 50px;"></td>
-                        <td><input type="text" placeholder="Axis"  style="width: 50px;"></td>
-                        <td><input type="text" placeholder="V/A"  style="width: 50px;"></td>
-                        <td><input type="text" placeholder="SPH"  style="width: 50px;"></td>
-                        <td><input type="text" placeholder="CYL"  style="width: 50px;"></td>
-                        <td><input type="text" placeholder="Axis"  style="width: 50px;"></td>
-                        <td><input type="text" placeholder="V/A"  style="width: 50px;"></td>
+                        <td><input type="text" placeholder="SPH" style="width: 50px;" id="DV-SPH"></td>
+                        <td><input type="text" placeholder="CYL" style="width: 50px;" id="DV-CYL"> </td>
+                        <td><input type="text" placeholder="Axis"  style="width: 50px;" id="DV-Axis"></td>
+                        <td><input type="text" placeholder="V/A"  style="width: 50px;" id="DV-VA"></td>
+                        <td><input type="text" placeholder="SPH"  style="width: 50px;" id="DV-SPH2"></td>
+                        <td><input type="text" placeholder="CYL"  style="width: 50px;" id="DV-CYL2"></td>
+                        <td><input type="text" placeholder="Axis"  style="width: 50px;" id="DV-Axis2"></td>
+                        <td><input type="text" placeholder="V/A"  style="width: 50px;" id="DV-VA2"></td>
                     </tr>
                     <tr>
                         <td>NV</td>
-                        <td><input type="text" placeholder="SPH"  style="width: 50px;"></td>
-                        <td><input type="text" placeholder="CYL"  style="width: 50px;"></td>
-                        <td><input type="text" placeholder="Axis"  style="width: 50px;"></td>
-                        <td><input type="text" placeholder="V/A"  style="width: 50px;"></td>
-                        <td><input type="text" placeholder="SPH"  style="width: 50px;"></td>
-                        <td><input type="text" placeholder="CYL"  style="width: 50px;"></td>
-                        <td><input type="text" placeholder="Axis"  style="width: 50px;"></td>
-                        <td><input type="text" placeholder="V/A"  style="width: 50px;"></td>
+                        <td><input type="text" placeholder="SPH"  style="width: 50px;" id="NV-SPH"></td>
+                        <td><input type="text" placeholder="CYL"  style="width: 50px;" id="NV-CYL"></td>
+                        <td><input type="text" placeholder="Axis"  style="width: 50px;" id="NV-Axis"></td>
+                        <td><input type="text" placeholder="V/A"  style="width: 50px;" id="NV-VA"></td>
+                        <td><input type="text" placeholder="SPH"  style="width: 50px;" id="NV-SPH2"></td>
+                        <td><input type="text" placeholder="CYL"  style="width: 50px;" id="NV-CYL2"></td>
+                        <td><input type="text" placeholder="Axis"  style="width: 50px;" id="NV-Axis2"></td>
+                        <td><input type="text" placeholder="V/A"  style="width: 50px;" id="NV-VA2"></td>
                     </tr>
                     <tr>
                         <td>IPD (mm)</td>
-                        <td colspan="8"><input type="text" placeholder="Enter IPD (mm)" style="width: 600px;"></td>
+                        <td colspan="8"><input type="text" placeholder="Enter IPD (mm)" style="width: 600px;" id="IPD"></td>
                     </tr>
                     <tr>
                         <td>Type of Glass</td>
-                        <td colspan="8"><input type="text" placeholder="Enter Type of Glass"style="width: 600px;"></td>
+                        <td colspan="8"><input type="text" placeholder="Enter Type of Glass"style="width: 600px;" id="TOG"></td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
 
+    <!-- Me Section -->
+
 
     <div class="footer">
         <p>Dr. Alvin.R.Rane </p>
     </div>
 </div>
+
+<script>
+    // Dom loaded event
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get values local storage
+        const patientName = localStorage.getItem('name');
+        const patientAge = localStorage.getItem('age');
+        const patientMobile = localStorage.getItem('mobileNumber');
+        const patientGender = localStorage.getItem('gender');
+
+        selectedSymptoms = JSON.parse(localStorage.getItem('selectedSymptoms'));
+        selectedMedical = JSON.parse(localStorage.getItem('selectedMedical'));
+        selectedSurgical = JSON.parse(localStorage.getItem('selectedSurgical'));
+        selectedDignosis = JSON.parse(localStorage.getItem('selectedDignosis'));
+        selectedInvestigation = JSON.parse(localStorage.getItem('selectedInvestigation'));
+        console.log(selectedDignosis);
+        currentPowerGlasses = JSON.parse(localStorage.getItem('currentPowerGlasses'));
+        const CPG_Table = localStorage.getItem('CPG_Table');
+        
+        // get medicines from local storage
+        const medicines = JSON.parse(localStorage.getItem('medicines'));
+        console.log(medicines);
+
+
+        console.log(currentPowerGlasses);
+
+        console.log(CPG_Table);
+        if(CPG_Table === 'true')
+        {
+            console.log('Table Found');
+        }
+        else{
+            console.log('Table Not Found');
+        }
+
+
+        // Print the patient's details
+        if (patientName) {
+            // Find the span with id "patient-name"
+            const nameElement = document.getElementById('patient-name');
+
+            // Append the patient's name after "<b>Patient Name:</b>"
+            nameElement.innerHTML += ` ${patientName}`;
+        }
+
+        if (patientAge) {
+            // Find the span with id "patient-name"
+            const nameElement = document.getElementById('patient-age');
+
+            // Append the patient's name after "<b>Patient Name:</b>"
+            nameElement.innerHTML += ` ${patientAge}`;
+        }
+
+        if (patientMobile) {
+            // Find the span with id "patient-name"
+            const nameElement = document.getElementById('patient-mobile');
+
+            // Append the patient's name after "<b>Patient Name:</b>"
+            nameElement.innerHTML += ` ${patientMobile}`;
+        }
+
+        if (patientGender) {
+            // Find the span with id "patient-name"
+            const nameElement = document.getElementById('patient-gender');
+
+            // Append the patient's name after "<b>Patient Name:</b>"
+            nameElement.innerHTML += ` ${patientGender}`;
+        }
+
+        // Print the selected symptoms
+        if (selectedSymptoms && selectedSymptoms != '') {
+            // Find the ul with id "diagnosis-list"
+            const diagnosisList = document.getElementById('symptoms-list');
+
+            // Clear the inner HTML
+            diagnosisList.innerHTML = '';
+
+            // Loop through the selected symptoms
+            selectedSymptoms.forEach((symptom, index) => {
+                // Create a new list item
+                const li = document.createElement('li');
+
+                // Set the text content of the list item
+                // li.textContent = `${index + 1}. ${symptom}`;
+                li.textContent = `${symptom}`;
+
+
+                // Append the list item to the ul
+                diagnosisList.appendChild(li);
+            });
+        }
+        else{
+            // Hide the section if there are no selected symptoms
+            document.getElementById('Symptoms-section').style.display = 'none';
+        }
+
+        // Print the selected medical history
+        if (selectedMedical && selectedMedical != '') {
+            // Find the ul with id "diagnosis-list"
+            const diagnosisList = document.getElementById('personal-history-list');
+
+            // Clear the inner HTML
+            diagnosisList.innerHTML = '';
+
+            // Loop through the selected symptoms
+            selectedMedical.forEach((symptom, index) => {
+                // Create a new list item
+                const li = document.createElement('li');
+
+                // Set the text content of the list item
+                // li.textContent = `${index + 1}. ${symptom}`;
+                li.textContent = `${symptom}`;
+
+                // Append the list item to the ul
+                diagnosisList.appendChild(li);
+            });
+        }
+        else{
+            // Hide the section if there are no selected symptoms
+            document.getElementById('personal-history-section').style.display = 'none';
+        }
+
+        // Print the selected surgical history
+        if (selectedSurgical && selectedSurgical != '') {
+            // Find the ul with id "diagnosis-list"
+            const diagnosisList = document.getElementById('past-history-list');
+
+            // Clear the inner HTML
+            diagnosisList.innerHTML = '';
+
+            // Loop through the selected symptoms
+            selectedSurgical.forEach((symptom, index) => {
+                // Create a new list item
+                const li = document.createElement('li');
+
+                // Set the text content of the list item
+                // li.textContent = `${index + 1}. ${symptom}`;
+                li.textContent = `${symptom}`;
+
+                // Append the list item to the ul
+                diagnosisList.appendChild(li);
+            });
+        }
+        else{
+            // Hide the section if there are no selected symptoms
+            document.getElementById('past-history-section').style.display = 'none';
+        }
+
+        // Print the selected dignosis
+        if (selectedDignosis && selectedDignosis != '') {
+            // Find the ul with id "diagnosis-list"
+            const diagnosisList = document.getElementById('diagnosis-list');
+
+            // Clear the inner HTML
+            diagnosisList.innerHTML = '';
+
+            // Loop through the selected symptoms
+            selectedDignosis.forEach((symptom, index) => {
+                // Create a new list item
+                const li = document.createElement('li');
+
+                // Set the text content of the list item
+                // li.textContent = `${index + 1}. ${symptom}`;
+                li.textContent = `${symptom}`;
+
+                // Append the list item to the ul
+                diagnosisList.appendChild(li);
+            });
+        }
+        else{
+            // Hide the section if there are no selected symptoms
+            document.getElementById('diagnosis-section').style.display = 'none';
+        }
+
+        // Print the selected investigation
+        if (selectedInvestigation && selectedInvestigation != '') {
+            // Find the ul with id "diagnosis-list"
+            const diagnosisList = document.getElementById('investigation-list');
+
+            // Clear the inner HTML
+            diagnosisList.innerHTML = '';
+
+            // Loop through the selected symptoms
+            selectedInvestigation.forEach((symptom, index) => {
+                // Create a new list item
+                const li = document.createElement('li');
+
+                // Set the text content of the list item
+                // li.textContent = `${index + 1}. ${symptom}`;
+                li.textContent = `${symptom}`;
+
+                // Append the list item to the ul
+                diagnosisList.appendChild(li);
+            });
+        }
+        else{
+            // Hide the section if there are no selected symptoms
+            document.getElementById('investigation-section').style.display = 'none';
+
+        }
+
+        if(CPG_Table === 'true'){
+                if(currentPowerGlasses.DVSPH != ''){
+                    document.getElementById('DV-SPH').value = currentPowerGlasses.DVSPH;
+                }
+
+                if(currentPowerGlasses.DVCYL != ''){
+                    document.getElementById('DV-CYL').value = currentPowerGlasses.DVCYL;
+                }
+
+                if(currentPowerGlasses.DVAxis != ''){
+                    document.getElementById('DV-Axis').value = currentPowerGlasses.DVAxis;
+                }
+
+                if(currentPowerGlasses.DVVA != ''){
+                    document.getElementById('DV-VA').value = currentPowerGlasses.DVVA;
+                }
+
+                if(currentPowerGlasses.DVSPH2 != ''){
+                    document.getElementById('DV-SPH2').value = currentPowerGlasses.DVSPH2;
+                }
+
+                if(currentPowerGlasses.DVCYL2 != ''){
+                    document.getElementById('DV-CYL2').value = currentPowerGlasses.DVCYL2;
+                }
+
+                if(currentPowerGlasses.DVAxis2 != ''){
+                    document.getElementById('DV-Axis2').value = currentPowerGlasses.DVAxis2;
+                }
+
+                if(currentPowerGlasses.DVVA2 != ''){
+                    document.getElementById('DV-VA2').value = currentPowerGlasses.DVVA2;
+                }
+
+                if(currentPowerGlasses.NVSPH != ''){
+                    document.getElementById('NV-SPH').value = currentPowerGlasses.NVSPH;
+                }
+
+                if(currentPowerGlasses.NVCYL != ''){
+                    document.getElementById('NV-CYL').value = currentPowerGlasses.NVCYL;
+                }
+
+                if(currentPowerGlasses.NVAxis != ''){
+                    document.getElementById('NV-Axis').value = currentPowerGlasses.NVAxis;
+                }
+
+                if(currentPowerGlasses.NVVA != ''){
+                    document.getElementById('NV-VA').value = currentPowerGlasses.NVVA;
+                }
+
+                if(currentPowerGlasses.NVSPH2 != ''){
+                    document.getElementById('NV-SPH2').value = currentPowerGlasses.NVSPH2;
+                }
+
+                if(currentPowerGlasses.NVCYL2 != ''){
+                    document.getElementById('NV-CYL2').value = currentPowerGlasses.NVCYL2;
+                }
+
+                if(currentPowerGlasses.NVAxis2 != ''){
+                    document.getElementById('NV-Axis2').value = currentPowerGlasses.NVAxis2;
+                }
+
+                if(currentPowerGlasses.NVVA2 != ''){
+                    document.getElementById('NV-VA2').value = currentPowerGlasses.NVVA2;
+                }
+
+                if(currentPowerGlasses.IPD != ''){
+                    document.getElementById('IPD').value = currentPowerGlasses.IPD;
+                }
+
+                if(currentPowerGlasses.TOG != ''){
+                    document.getElementById('TOG').value = currentPowerGlasses.TOG;
+                }
+
+
+       
+            }
+            else{
+                document.getElementById('current-glass-power').style.display = 'none';
+            }
+
+
+
+
+
+
+        
+
+
+
+
+
+        
+    });
+</script>
 
 </body>
 </html>
