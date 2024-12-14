@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medical Document</title>
+    <title></title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -16,19 +17,19 @@
         }
 
         .paper {
-            width: 100%;
-            height: 100%;
-            max-width: 21cm;
-            max-height: 29.7cm;
-            padding: 20px;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            box-sizing: border-box;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
+    width: 100%;
+    height: 100vh;
+    max-width: 21cm;
+    max-height: 29.7cm;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-sizing: border-box;
+    overflow: auto; /* This will allow the scrollbar to appear when the content overflows */
+    display: flex;
+    flex-direction: column;
+}
 
         .header {
             display: flex;
@@ -102,6 +103,7 @@
                 height: auto;
                 margin: 0;
                 padding: 0;
+                margin-top: 340.16px;
             }
 
             .footer {
@@ -225,6 +227,94 @@
         font-size: 12px;
     }
 }
+@media print {
+    body, .paper {
+        width: 100%;
+        height: auto;
+        margin: 0;
+        padding: 0;
+        margin-top: 240.16px;  /* Set the top margin for printing */
+    }
+
+    .footer {
+        font-size: 14px;
+    }
+
+    .section h3 {
+        font-size: 14px;
+    }
+
+    table, th, td {
+        padding: 6px;
+    }
+
+    .header {
+        margin-bottom: 10px;
+    }
+
+    .header .details {
+        font-size: 12px;
+    }
+
+    .poster {
+        width: 100%;
+        height: auto;
+        margin-top: 0px;
+    }
+    
+}
+
+@media print {
+    /* Hide the URL and page path in print */
+   
+    body {
+        visibility: hidden;
+    }
+
+    .paper {
+        visibility: visible;
+        position: absolute;
+        top: 0;
+    }
+
+    .header, .footer, .section, table {
+        visibility: visible;
+    }
+
+
+
+    body, .paper {
+        overflow: visible; /* Prevent scrolling and hide scrollbar during printing */
+    }
+
+  
+
+    
+
+    /* Hide the URL and file path in the browser header/footer during printing */
+    /* For most modern browsers, this can be hidden by disabling headers/footers in the print dialog */
+}@media print {
+    /* Hide browser-specific header and footer (including URL and time) during print */
+    body {
+        visibility: hidden;
+    }
+
+  
+
+    /* This ensures only the content within .paper is visible in print */
+    .header, .footer, .section, table {
+        visibility: visible;
+    }
+
+    /* Optional: Adjust the header/footer appearance during print */
+    @page {
+        margin:0;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-top: 10px;
+    }
+}
+
 
     </style>
 </head>
@@ -235,7 +325,7 @@
 
 <div class="paper">
     <!-- Poster Image -->
-    <img class="poster" src="./Screenshot 2024-12-13 145956.png" alt="Poster Image" width="500px">
+ 
 
     <div class="header">
         <div class="details">
@@ -269,7 +359,7 @@
         </div>
 
         <div class="details-section" id="personal-history-section">
-            <h3>Personal History</h3>
+            <h3>Medical History</h3>
             <ul id="personal-history-list">
                 <li>Smoking, Involuntary</li>
                 <li>Tobacco Smoking</li>
@@ -281,7 +371,7 @@
 
     <div class="section">
         <div class="details-section" id="past-history-section">
-            <h3>Past History</h3>
+            <h3>Surgical History</h3>
             <ul id="past-history-list">
                 <li>Diabetes</li>
                 <li>A (Adenine)</li>
@@ -313,28 +403,41 @@
                         <th colspan="4">Left Eye</th>
                     </tr>
                 </thead>
+                <thead>
+                    <tr>
+                      <th></th>
+                      <th colspan="1">SPH</th>
+                      <th colspan="1">CYL</th>
+                      <th colspan="1">Axis</th>
+                      <th colspan="1">V/A</th>
+                      <th colspan="1">SPH</th>
+                      <th colspan="1">CYK</th>
+                      <th colspan="1">Axis</th>
+                      <th colspan="1">V/A</th>
+                    </tr>
+                  </thead>
                 <tbody>
                     <tr>
                         <td>DV</td>
-                        <td><input type="text" placeholder="SPH" style="width: 50px;" id="DV-SPH"></td>
-                        <td><input type="text" placeholder="CYL" style="width: 50px;" id="DV-CYL"> </td>
-                        <td><input type="text" placeholder="Axis"  style="width: 50px;" id="DV-Axis"></td>
-                        <td><input type="text" placeholder="V/A"  style="width: 50px;" id="DV-VA"></td>
-                        <td><input type="text" placeholder="SPH"  style="width: 50px;" id="DV-SPH2"></td>
-                        <td><input type="text" placeholder="CYL"  style="width: 50px;" id="DV-CYL2"></td>
-                        <td><input type="text" placeholder="Axis"  style="width: 50px;" id="DV-Axis2"></td>
-                        <td><input type="text" placeholder="V/A"  style="width: 50px;" id="DV-VA2"></td>
+                        <td><input type="text"  style="width: 50px;" id="DV-SPH"></td>
+                        <td><input type="text"  style="width: 50px;" id="DV-CYL"> </td>
+                        <td><input type="text"   style="width: 50px;" id="DV-Axis"></td>
+                        <td><input type="text"  style="width: 50px;" id="DV-VA"></td>
+                        <td><input type="text"   style="width: 50px;" id="DV-SPH2"></td>
+                        <td><input type="text"  style="width: 50px;" id="DV-CYL2"></td>
+                        <td><input type="text"   style="width: 50px;" id="DV-Axis2"></td>
+                        <td><input type="text"   style="width: 50px;" id="DV-VA2"></td>
                     </tr>
                     <tr>
                         <td>NV</td>
-                        <td><input type="text" placeholder="SPH"  style="width: 50px;" id="NV-SPH"></td>
-                        <td><input type="text" placeholder="CYL"  style="width: 50px;" id="NV-CYL"></td>
-                        <td><input type="text" placeholder="Axis"  style="width: 50px;" id="NV-Axis"></td>
-                        <td><input type="text" placeholder="V/A"  style="width: 50px;" id="NV-VA"></td>
-                        <td><input type="text" placeholder="SPH"  style="width: 50px;" id="NV-SPH2"></td>
-                        <td><input type="text" placeholder="CYL"  style="width: 50px;" id="NV-CYL2"></td>
-                        <td><input type="text" placeholder="Axis"  style="width: 50px;" id="NV-Axis2"></td>
-                        <td><input type="text" placeholder="V/A"  style="width: 50px;" id="NV-VA2"></td>
+                        <td><input type="text"   style="width: 50px;" id="NV-SPH"></td>
+                        <td><input type="text"   style="width: 50px;" id="NV-CYL"></td>
+                        <td><input type="text"   style="width: 50px;" id="NV-Axis"></td>
+                        <td><input type="text"  style="width: 50px;" id="NV-VA"></td>
+                        <td><input type="text"  style="width: 50px;" id="NV-SPH2"></td>
+                        <td><input type="text"   style="width: 50px;" id="NV-CYL2"></td>
+                        <td><input type="text"   style="width: 50px;" id="NV-Axis2"></td>
+                        <td><input type="text"   style="width: 50px;" id="NV-VA2"></td>
                     </tr>
                     <tr>
                         <td>IPD (mm)</td>
@@ -350,12 +453,67 @@
     </div>
 
     <!-- Me Section -->
-
+    <h3>Medication List</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>type</th>
+                <th>Name</th>
+                <th>Dose Details</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Tablet</td>
+                <td>TAB.DOLO 650MG</td>
+                <td>1-1-4 AFTER FOOD-DAILY-3 DAY(S)</td>
+                <td>9</td>
+            </tr>
+            <tr>
+                <td>Tablet</td>
+                <td>TAB.DOLO 650MG</td>
+                <td>1-1-4 AFTER FOOD-DAILY-3 DAY(S)</td>
+                <td>9</td>
+            </tr>
+            <tr>
+                <td>Tablet</td>
+                <td>TAB.PILOCAR 1% DROPS</td>
+                <td>0-1-0 DAILY</td>
+                <td>—</td>
+            </tr>
+            <tr>
+                <td>Tablet</td>
+                <td>SOL.MINOXIDIL (ROGAINE)</td>
+                <td>0-0-1 (ML) BED TIME-DAILY-30 DAY(S)</td>
+                <td>1</td>
+            </tr>
+        </tbody>
+    </table>
 
     <div class="footer">
         <p>Dr. Alvin.R.Rane </p>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <script>
     // Dom loaded event

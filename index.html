@@ -60,7 +60,7 @@ body {
 .container {
   max-width: 900px;
   margin: 50px auto;
-  height: 600px;
+  height: 750px;
   padding: 20px;
   background: #fff;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
@@ -319,7 +319,12 @@ input[type="text"] {
   text-transform: uppercase;
 }
 
-
+/* Container for the logo and company name in one row */
+.navbar-content {
+  display: flex;
+  align-items: center;
+  margin-left: 70px;
+}
 
 
 
@@ -334,10 +339,11 @@ input[type="text"] {
             <h1 class="company-name">रविकल्प हॉस्पिटल</h1>
         </div>
     </nav>
+    
 
 
   <div class="container">
-    <h2>Multi-Step Patient Form</h2>
+    <h2>Patient Information</h2>
     <form id="multiStepForm">
       <!-- Step 1: Personal Information -->
       <div class="form-step active" id="step-1">
@@ -376,28 +382,64 @@ input[type="text"] {
         <div class="form-group">
           <h3>Select Symptoms:</h3>
           <div class="item-grid">
-            <div class="item" onclick="toggleSymptoms(this)">Fever</div>
-            <div class="item" onclick="toggleSymptoms(this)">Cough</div>
-            <div class="item" onclick="toggleSymptoms(this)">Headache</div>
-            <div class="item" onclick="toggleSymptoms(this)">Fatigue</div>
+            <div class="item" onclick="toggleSymptoms(this)">Blurry Vision</div>
+<div class="item" onclick="toggleSymptoms(this)">Black</div>
+<div class="item" onclick="toggleSymptoms(this)">Black Spot in Front of Eye</div>
+<div class="item" onclick="toggleSymptoms(this)">Light Sensitivity</div>
+<div class="item" onclick="toggleSymptoms(this)">Headache</div>
+<div class="item" onclick="toggleSymptoms(this)">Floaters</div>
+<div class="item" onclick="toggleSymptoms(this)">Chemosis</div>
+<div class="item" onclick="toggleSymptoms(this)">Pain in Eye</div>
+<div class="item" onclick="toggleSymptoms(this)">Swelling on Lid</div>
+<div class="item" onclick="toggleSymptoms(this)">Irritation</div>
+<div class="item" onclick="toggleSymptoms(this)">Itching</div>
+<div class="item" onclick="toggleSymptoms(this)">Watering</div>
+<div class="item" onclick="toggleSymptoms(this)">Night Vision Problem</div>
+<div class="item" onclick="toggleSymptoms(this)">Redness</div>
+<div class="item" onclick="toggleSymptoms(this)">Pain Around Eye</div>
+<div class="item" onclick="toggleSymptoms(this)">Discharge</div>
+<div class="item" onclick="toggleSymptoms(this)">Pain in Eye</div>
+
+<div class="item" onclick="toggleSymptoms(this)">Blind Eye (BE) DOV</div>
+<div class="item" onclick="toggleSymptoms(this)">Dryness in Eye</div>
+<div class="item" onclick="toggleSymptoms(this)">Sudden Loss of Vision</div>
+<div class="item" onclick="toggleSymptoms(this)">Burning</div>
+<div class="item" onclick="toggleSymptoms(this)">Double Vision</div>
+<div class="item" onclick="toggleSymptoms(this)">Barapon</div>
+<div class="item" onclick="toggleSymptoms(this)">Lump on Eyelid</div>
+<div class="item" onclick="toggleSymptoms(this)">Blood Spot in Eye</div>
+<div class="item" onclick="toggleSymptoms(this)">Dilated Pupil</div>
+<div class="item" onclick="toggleSymptoms(this)">Drooping Eyelid</div>
+
           </div>
         </div>
         <div class="form-group" style="margin-top: 70px;">
           <h3>Medical History:</h3>
           <div class="item-grid">
-            <div class="medical" onclick="toggleMedical(this)">Diabetes</div>
             <div class="medical" onclick="toggleMedical(this)">Hypertension</div>
             <div class="medical" onclick="toggleMedical(this)">Asthma</div>
-            <div class="medical" onclick="toggleMedical(this)">Heart Disease</div>
+            <div class="medical" onclick="toggleMedical(this)">Diabetes</div>
+           
+            <div class="medical" onclick="toggleMedical(this)">IHD</div>
+            <div class="medical" onclick="toggleMedical(this)">Jaundice</div>
+            <div class="medical" onclick="toggleMedical(this)">Koch's</div>
+            <div class="medical" onclick="toggleMedical(this)">Cancer</div>
+            <div class="medical" onclick="toggleMedical(this)">CABG</div>
+            <div class="medical" onclick="toggleMedical(this)">PTCA</div>
+           
+            
           </div>
         </div>
         <div class="form-group" style="margin-top: 60px;">
           <h3>Surgical History:</h3>
           <div class="item-grid">
-            <div class="surgical" onclick="toggleSurgical(this)">Appendectomy</div>
-            <div class="surgical" onclick="toggleSurgical(this)">Gallbladder Removal</div>
-            <div class="surgical" onclick="toggleSurgical(this)">Hernia Surgery</div>
-            <div class="surgical" onclick="toggleSurgical(this)">Joint Replacement</div>
+            <div class="surgical" onclick="toggleSurgical(this)">RE LE BE</div>
+            <div class="surgical" onclick="toggleSurgical(this)">Pedophatsa</div>
+            <div class="surgical" onclick="toggleSurgical(this)">Retina Surgery</div>
+            <div class="surgical" onclick="toggleSurgical(this)">Glaucoma Surgery</div>
+            <div class="surgical" onclick="toggleSurgical(this)">Cataract Surgery</div>
+            <div class="surgical" onclick="toggleSurgical(this)">Pterygium Surgery</div>
+            
           </div>
         </div>
         <div class="button-group">
@@ -418,28 +460,41 @@ input[type="text"] {
                 <th colspan="4">Left Eye</th>
               </tr>
             </thead>
+            <thead>
+              <tr>
+                <th></th>
+                <th colspan="1">SPH</th>
+                <th colspan="1">CYL</th>
+                <th colspan="1">Axis</th>
+                <th colspan="1">V/A</th>
+                <th colspan="1">SPH</th>
+                <th colspan="1">CYK</th>
+                <th colspan="1">Axis</th>
+                <th colspan="1"></th>
+              </tr>
+            </thead>
             <tbody>
               <tr>
                 <td>DV</td>
-                <td><input type="text" placeholder="SPH" id="DV-SPH"></td>
-                <td><input type="text" placeholder="CYL" id="DV-CYL"></td>
-                <td><input type="text" placeholder="Axis" id="DV-Axis"></td>
-                <td><input type="text" placeholder="V/A" id="DV-VA"></td>
-                <td><input type="text" placeholder="SPH" id="DV-SPH2"></td>
-                <td><input type="text" placeholder="CYL" id="DV-CYL2"></td>
-                <td><input type="text" placeholder="Axis" id="DV-Axis2"></td>
-                <td><input type="text" placeholder="V/A" id="DV-VA2"></td>
+                <td><input type="text"  id="DV-SPH"></td>
+                <td><input type="text"  id="DV-CYL"></td>
+                <td><input type="text"  id="DV-Axis"></td>
+                <td><input type="text"  id="DV-VA"></td>
+                <td><input type="text"  id="DV-SPH2"></td>
+                <td><input type="text"  id="DV-CYL2"></td>
+                <td><input type="text"  id="DV-Axis2"></td>
+                <td><input type="text"  id="DV-VA2"></td>
               </tr>
               <tr>
                 <td>NV</td>
-                <td><input type="text" placeholder="SPH" id="NV-SPH"></td>
-                <td><input type="text" placeholder="CYL" id="NV-CYL"></td>
-                <td><input type="text" placeholder="Axis" id="NV-Axis"></td>
-                <td><input type="text" placeholder="V/A" id="NV-VA"></td>
-                <td><input type="text" placeholder="SPH" id="NV-SPH2"></td>
-                <td><input type="text" placeholder="CYL" id="NV-CYL2"></td>
-                <td><input type="text" placeholder="Axis" id="NV-Axis2"></td>
-                <td><input type="text" placeholder="V/A" id="NV-VA2"></td>
+                <td><input type="text"  id="NV-SPH"></td>
+                <td><input type="text"  id="NV-CYL"></td>
+                <td><input type="text"  id="NV-Axis"></td>
+                <td><input type="text"  id="NV-VA"></td>
+                <td><input type="text"  id="NV-SPH2"></td>
+                <td><input type="text"  id="NV-CYL2"></td>
+                <td><input type="text"  id="NV-Axis2"></td>
+                <td><input type="text"  id="NV-VA2"></td>
             </tr>
             <tr>
               <td>IPD (mm)</td>
@@ -479,19 +534,52 @@ input[type="text"] {
         <div class="form-group">
           <h3>Dignosis:</h3>
           <div class="item-grid">
-            <div class="dignosis" onclick="toggleDignosis(this)">Fever</div>
-            <div class="dignosis" onclick="toggleDignosis(this)">Cough</div>
-            <div class="dignosis" onclick="toggleDignosis(this)">Headache</div>
-            <div class="dignosis" onclick="toggleDignosis(this)">Fatigue</div>
+            <div class="dignosis" onclick="toggleDignosis(this)">Myopia</div>
+            <div class="dignosis" onclick="toggleDignosis(this)">Blepharitis</div>
+            <div class="dignosis" onclick="toggleDignosis(this)">Hypermetropia</div>
+            <div class="dignosis" onclick="toggleDignosis(this)">Macular Edema</div>
+            <div class="dignosis" onclick="toggleDignosis(this)">Astigmatism</div>
+            <div class="dignosis" onclick="toggleDignosis(this)">Macular Hole</div>
+            <div class="dignosis" onclick="toggleDignosis(this)">Stye</div>
+            <div class="dignosis" onclick="toggleDignosis(this)">Macular Pucker</div>
+            <div class="dignosis" onclick="toggleDignosis(this)">Chalazion</div>
+            <div class="dignosis" onclick="toggleDignosis(this)">Presbyopia</div>
+            <div class="dignosis" onclick="toggleDignosis(this)">Conjunctivitis</div>
+            <div class="dignosis" onclick="toggleDignosis(this)">Refractive Errors</div>
+            <div class="dignosis" onclick="toggleDignosis(this)">Glaucoma</div>
+            <div class="dignosis" onclick="toggleDignosis(this)">Retinal Detachment</div>
+           
+            <div class="dignosis" onclick="toggleDignosis(this)">Pseudophakia</div>
+            <div class="dignosis" onclick="toggleDignosis(this)">Retinitis Pigmentosa</div>
+            <div class="dignosis" onclick="toggleDignosis(this)">Aphakia</div>
+            <div class="dignosis" onclick="toggleDignosis(this)">ROP</div>
+            <div class="dignosis" onclick="toggleDignosis(this)">Diabetic Retinopathy</div>
+            <div class="dignosis" onclick="toggleDignosis(this)">Iritis</div>
+            <div class="dignosis" onclick="toggleDignosis(this)">Uveitis</div>
+            <div class="dignosis" onclick="toggleDignosis(this)">Amblyopia</div>
+            <div class="dignosis" onclick="toggleDignosis(this)">Vitreous Detachment</div>
+            <div class="dignosis" onclick="toggleDignosis(this)">Color Blindness</div>
+            
+            <div class="dignosis" onclick="toggleDignosis(this)">Alternate Esotropia</div>
+            <div class="dignosis" onclick="toggleDignosis(this)">Alternate Exotropia</div>
+            <div class="dignosis" onclick="toggleDignosis(this)">Convergent Squint</div>
+            
           </div>
         </div>
         <div class="form-group" style="margin-top: 70px;">
           <h3>Investigation:</h3>
           <div class="item-grid">
-            <div class="investigation" onclick="toggleInvestigation(this)">Diabetes</div>
-            <div class="investigation" onclick="toggleInvestigation(this)">Hypertension</div>
-            <div class="investigation" onclick="toggleInvestigation(this)">Asthma</div>
-            <div class="investigation" onclick="toggleInvestigation(this)">Heart Disease</div>
+            <div class="investigation" onclick="toggleInvestigation(this)">CBC</div>
+<div class="investigation" onclick="toggleInvestigation(this)">BSL (R)</div>
+
+<div class="investigation" onclick="toggleInvestigation(this)">HBSAg</div>
+<div class="investigation" onclick="toggleInvestigation(this)">HIV</div>
+<div class="investigation" onclick="toggleInvestigation(this)">Urine (R)</div>
+<div class="investigation" onclick="toggleInvestigation(this)">Mountox</div>
+<div class="investigation" onclick="toggleInvestigation(this)">Uric Acid</div>
+<div class="investigation" onclick="toggleInvestigation(this)">Sr. Creat</div>
+<div class="investigation" onclick="toggleInvestigation(this)">Sr. Urea</div>
+
           </div>
         </div>
        
@@ -611,11 +699,50 @@ function addMedicineEntry() {
       <option value="Eye Drop">Eye Drop</option>
     </select>
     <select class="medicine-select">
-      <option value="" disabled selected>Select Medicine</option>
-      <option value="Hydrakem Efdrop">Hydrakem Efdrop</option>
-      <option value="Resync Eyedrop">Resync Eyedrop</option>
+     
+  <option value="" disabled selected>Select Medicine</option>
+  <option value="Hydrakem Efdrop">Hydrakem Efdrop</option>
+  <option value="Resync Eyedrop">Resync Eyedrop</option>
+  <option value="Gatiquin P Eldrop">Gatiquin P Eldrop</option>
+  <option value="Kaimorst Eyedrop">Kaimorst Eyedrop</option>
+  <option value="Gate P. Eye drop">Gate P. Eye drop</option>
+  <option value="Sotime">Sotime</option>
+  <option value="Admox LP Eye drop">Admox LP Eye drop</option>
+  <option value="Corosol XG Eld">Corosol XG Eld</option>
+  <option value="Moxosft Eyedrop">Moxosft Eyedrop</option>
+  <option value="Myatro Eld">Myatro Eld</option>
+  <option value="Veldrop Eyedrop">Veldrop Eyedrop</option>
+  <option value="Maha Flox LP Eld">Maha Flox LP Eld</option>
+  <option value="Nepamax Eye drop">Nepamax Eye drop</option>
+  <option value="Addtear Eld">Addtear Eld</option>
+  <option value="Ocupol Eye ointment">Ocupol Eye ointment</option>
+  <option value="Flagel Eld">Flagel Eld</option>
+  <option value="Azithral Eye Ointment">Azithral Eye Ointment</option>
+  <option value="Netacin Eld">Netacin Eld</option>
+  <option value="Ocupol Dx Eye oint">Ocupol Dx Eye oint</option>
+  <option value="Trokid Eld">Trokid Eld</option>
+  <option value="Homide Eye drop">Homide Eye drop</option>
+  <option value="Mofleren-D Eld">Mofleren-D Eld</option>
+  <option value="Tobastar Eye drop">Tobastar Eye drop</option>
+  <option value="Moxam-D Eld">Moxam-D Eld</option>
+  <option value="Tab. Ciprobid 500">Tab. Ciprobid 500</option>
+  <option value="I-Dew Eld">I-Dew Eld</option>
+  <option value="Tab. Combiflam">Tab. Combiflam</option>
+  <option value="Tab. Diamox 250">Tab. Diamox 250</option>
+  <option value="Tab. Genmox 625">Tab. Genmox 625</option>
+  <option value="K-Tear Eld">K-Tear Eld</option>
+  <option value="Albrim T Eld">Albrim T Eld</option>
+
+
     </select>
    
+     <select class="medicine-dose">
+      <option value="" disabled selected>Select Dose</option>
+      <option value="1-1-1">1-1-1</option>
+      <option value="1-0-1">1-0-1</option>
+       <option value="0-0-1">0-0-1</option>
+             <option value="1-0-0">1-0-0</option>
+    </select>
     <input type="number" class="medicine-quantity" placeholder="Quantity" min="1">
     <button type="button" onclick="this.parentNode.remove()">Remove</button>
   `;
@@ -772,6 +899,20 @@ document.addEventListener("DOMContentLoaded", () => {
   //Clear the local storage
   localStorage.clear();
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   </script>
