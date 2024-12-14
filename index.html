@@ -846,12 +846,14 @@ function generatePDF() {
   medicineEntries.forEach((entry, index) => {
     const medicineType = entry.querySelector(".medicine-type").value;
     const medicineSelect = entry.querySelector(".medicine-select").value;
+    const medicineDose = entry.querySelector(".medicine-dose").value;
     const medicineQuantity = entry.querySelector(".medicine-quantity").value;
 
     // Store the medicine entry in a dictionary
     const medicine = {
       "medicineType": medicineType,
       "medicineSelect": medicineSelect,
+      "medicineDose": medicineDose,
       "medicineQuantity": medicineQuantity
     };
 

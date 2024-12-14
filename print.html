@@ -419,33 +419,33 @@
                 <tbody>
                     <tr>
                         <td>DV</td>
-                        <td><input type="text"  style="width: 50px;" id="DV-SPH"></td>
-                        <td><input type="text"  style="width: 50px;" id="DV-CYL"> </td>
-                        <td><input type="text"   style="width: 50px;" id="DV-Axis"></td>
-                        <td><input type="text"  style="width: 50px;" id="DV-VA"></td>
-                        <td><input type="text"   style="width: 50px;" id="DV-SPH2"></td>
-                        <td><input type="text"  style="width: 50px;" id="DV-CYL2"></td>
-                        <td><input type="text"   style="width: 50px;" id="DV-Axis2"></td>
-                        <td><input type="text"   style="width: 50px;" id="DV-VA2"></td>
+                        <td><input type="text"  style="width: 50px;" id="DV-SPH" readonly></td>
+                        <td><input type="text"  style="width: 50px;" id="DV-CYL" readonly> </td>
+                        <td><input type="text"   style="width: 50px;" id="DV-Axis" readonly></td>
+                        <td><input type="text"  style="width: 50px;" id="DV-VA" readonly></td>
+                        <td><input type="text"   style="width: 50px;" id="DV-SPH2" readonly></td>
+                        <td><input type="text"  style="width: 50px;" id="DV-CYL2" readonly></td>
+                        <td><input type="text"   style="width: 50px;" id="DV-Axis2" readonly></td>
+                        <td><input type="text"   style="width: 50px;" id="DV-VA2" readonly></td>
                     </tr>
                     <tr>
                         <td>NV</td>
-                        <td><input type="text"   style="width: 50px;" id="NV-SPH"></td>
-                        <td><input type="text"   style="width: 50px;" id="NV-CYL"></td>
-                        <td><input type="text"   style="width: 50px;" id="NV-Axis"></td>
-                        <td><input type="text"  style="width: 50px;" id="NV-VA"></td>
-                        <td><input type="text"  style="width: 50px;" id="NV-SPH2"></td>
-                        <td><input type="text"   style="width: 50px;" id="NV-CYL2"></td>
-                        <td><input type="text"   style="width: 50px;" id="NV-Axis2"></td>
-                        <td><input type="text"   style="width: 50px;" id="NV-VA2"></td>
+                        <td><input type="text"   style="width: 50px;" id="NV-SPH" readonly></td>
+                        <td><input type="text"   style="width: 50px;" id="NV-CYL" readonly></td>
+                        <td><input type="text"   style="width: 50px;" id="NV-Axis" readonly></td>
+                        <td><input type="text"  style="width: 50px;" id="NV-VA" readonly></td>
+                        <td><input type="text"  style="width: 50px;" id="NV-SPH2" readonly></td>
+                        <td><input type="text"   style="width: 50px;" id="NV-CYL2" readonly></td>
+                        <td><input type="text"   style="width: 50px;" id="NV-Axis2" readonly></td>
+                        <td><input type="text"   style="width: 50px;" id="NV-VA2" readonly></td>
                     </tr>
                     <tr>
                         <td>IPD (mm)</td>
-                        <td colspan="8"><input type="text" placeholder="Enter IPD (mm)" style="width: 600px;" id="IPD"></td>
+                        <td colspan="8"><input type="text" placeholder="Enter IPD (mm)" style="width: 600px;" id="IPD" readonly></td>
                     </tr>
                     <tr>
                         <td>Type of Glass</td>
-                        <td colspan="8"><input type="text" placeholder="Enter Type of Glass"style="width: 600px;" id="TOG"></td>
+                        <td colspan="8"><input type="text" placeholder="Enter Type of Glass"style="width: 600px;" id="TOG" readonly></td>
                     </tr>
                 </tbody>
             </table>
@@ -453,41 +453,18 @@
     </div>
 
     <!-- Me Section -->
-    <h3>Medication List</h3>
-    <table>
+    <h3 id="medicines-title">Medication List</h3>
+    <table id="medicines-table">
         <thead>
             <tr>
-                <th>type</th>
+                <th>Type</th>
                 <th>Name</th>
                 <th>Dose Details</th>
                 <th>Quantity</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td>Tablet</td>
-                <td>TAB.DOLO 650MG</td>
-                <td>1-1-4 AFTER FOOD-DAILY-3 DAY(S)</td>
-                <td>9</td>
-            </tr>
-            <tr>
-                <td>Tablet</td>
-                <td>TAB.DOLO 650MG</td>
-                <td>1-1-4 AFTER FOOD-DAILY-3 DAY(S)</td>
-                <td>9</td>
-            </tr>
-            <tr>
-                <td>Tablet</td>
-                <td>TAB.PILOCAR 1% DROPS</td>
-                <td>0-1-0 DAILY</td>
-                <td>—</td>
-            </tr>
-            <tr>
-                <td>Tablet</td>
-                <td>SOL.MINOXIDIL (ROGAINE)</td>
-                <td>0-0-1 (ML) BED TIME-DAILY-30 DAY(S)</td>
-                <td>1</td>
-            </tr>
+        <tbody id="medicines-tbody">
+            <!-- Medicines will be dynamically inserted here -->
         </tbody>
     </table>
 
@@ -495,24 +472,6 @@
         <p>Dr. Alvin.R.Rane </p>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <script>
@@ -795,17 +754,30 @@
                 document.getElementById('current-glass-power').style.display = 'none';
             }
 
+            // / Check if medicines exist in localStorage
+            if (!medicines || medicines.length === 0) {
+                console.log("No medicines found in localStorage.");
+                // Hide the medicines section if no medicines are found
+                document.getElementById('medicines-title').style.display = 'none';
+                document.getElementById('medicines-table').style.display = 'none';
+                
+            }
+            else{
+                // Get the table body element
+            const tbody = document.getElementById('medicines-tbody');
 
-
-
-
-
-        
-
-
-
-
-
+                // Loop through the medicines and add rows to the table
+                medicines.forEach(medicine => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${medicine.medicineType || '-'}</td>
+                        <td>${medicine.medicineSelect || '-'}</td>
+                        <td>${medicine.medicineDose || '-'}</td>
+                        <td>${medicine.medicineQuantity || '-'}</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            }
         
     });
 </script>
