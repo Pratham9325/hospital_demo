@@ -350,9 +350,9 @@
         <div class="details">
           <span
             id="patient-name"
-            style="margin-left: 130px; margin-bottom: 47px"
+            style="margin-left: 130px; margin-bottom: 40px; font-size: 18px; font-weight: bold; "
           ></span>
-          <span id="patient-age" style="margin-left: 50px; margin-top: 0px; font-size: 18px;"><b>AGE:</b></span>
+          <span id="patient-age" style="margin-left: 50px; margin-top: 5px; font-size: 18px;"><b>AGE:</b></span>
           <!-- <span id="patient-mobile"><b>Mobile:</b></span> -->
           <!-- <span id="patient-gender"><b>Gender:</b></span> -->
         </div>
@@ -371,7 +371,7 @@
 
       <div class="container-fluid">
         <div class="row">
-          <div class="col">
+          <div class="col" id="Symptoms">
             <div class="details-section" id="Symptoms-section">
               <h3 style="font-size: 16px; font-weight: 600">
                 Complaints/Symptoms
@@ -383,7 +383,7 @@
               </ul>
             </div>
           </div>
-          <div class="col">
+          <div class="col" id="personal-history">
             <div class="details-section" id="personal-history-section">
               <h3 style="font-size: 16px; font-weight: 600">Medical History</h3>
               <ul id="personal-history-list">
@@ -393,7 +393,7 @@
               </ul>
             </div>
           </div>
-          <div class="col">
+          <div class="col" id="past-history">
             <div class="details-section" id="past-history-section">
               <h3 style="font-size: 16px; font-weight: 600">
                 Surgical History
@@ -405,7 +405,7 @@
               </ul>
             </div>
           </div>
-          <div class="col">
+          <div class="col" id="diagnosis">
             <div class="details-section" id="diagnosis-section">
               <h3 style="font-size: 16px; font-weight: 600">Diagnosis</h3>
               <ul id="diagnosis-list">
@@ -415,7 +415,7 @@
               </ul>
             </div>
           </div>
-          <div class="col">
+          <div class="col" id="investigation">
             <div class="details-section" id="investigation-section">
               <h3 style="font-size: 16px; font-weight: 600">Investigation</h3>
               <ul id="investigation-list">
@@ -716,6 +716,8 @@
         } else {
           // Hide the section if there are no selected symptoms
           document.getElementById("Symptoms-section").style.display = "none";
+          document.getElementById("Symptoms").style.display = "none";
+
         }
 
         // Print the selected medical history
@@ -744,6 +746,8 @@
         } else {
           // Hide the section if there are no selected symptoms
           document.getElementById("personal-history-section").style.display =
+            "none";
+            document.getElementById("personal-history").style.display =
             "none";
         }
 
@@ -775,6 +779,8 @@
           // Hide the section if there are no selected symptoms
           document.getElementById("past-history-section").style.display =
             "none";
+          document.getElementById("past-history").style.display =
+            "none";
         }
 
         // Print the selected dignosis
@@ -804,6 +810,8 @@
         } else {
           // Hide the section if there are no selected symptoms
           document.getElementById("diagnosis-section").style.display = "none";
+          document.getElementById("diagnosis").style.display = "none";
+
         }
 
         // Print the selected investigation
@@ -833,6 +841,8 @@
         } else {
           // Hide the section if there are no selected symptoms
           document.getElementById("investigation-section").style.display =
+            "none";
+            document.getElementById("investigation").style.display =
             "none";
         }
 
