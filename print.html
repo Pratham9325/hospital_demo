@@ -591,8 +591,7 @@
       >
         <thead>
           <tr class="text-center">
-            <th>Type</th>
-            <th>Name</th>
+            <th>Medicine Name</th>
             <th>Dose Details</th>
             <th>Quantity</th>
           </tr>
@@ -615,6 +614,12 @@
         const patientAge = localStorage.getItem("age");
         const patientMobile = localStorage.getItem("mobileNumber");
         const patientGender = localStorage.getItem("gender");
+
+        //Get the selected eye for symptoms, medical history, surgical history, dignosis, and investigation dropdown values from local storage
+        const selectedEyeSymptoms = localStorage.getItem("selectedEyeSymptoms");
+        const selectedEyeSurgical = localStorage.getItem("selectedEyeSurgical");
+        const selectedEyeDignosis = localStorage.getItem("selectedEyeDignosis");
+        const selectedEyeInvestigation = localStorage.getItem("selectedEyeInvestigation");
 
         selectedSymptoms = JSON.parse(localStorage.getItem("selectedSymptoms"));
         selectedMedical = JSON.parse(localStorage.getItem("selectedMedical"));
@@ -690,7 +695,11 @@
 
             // Set the text content of the list item
             // li.textContent = `${index + 1}. ${symptom}`;
-            li.textContent = `${symptom}`;
+            if (selectedEyeSymptoms === "") {
+              li.textContent = `${symptom}`;
+            }else{
+              li.textContent = `${symptom} (${selectedEyeSymptoms})`;
+            }
 
             // Append the list item to the ul
             diagnosisList.appendChild(li);
@@ -717,7 +726,9 @@
 
             // Set the text content of the list item
             // li.textContent = `${index + 1}. ${symptom}`;
+           
             li.textContent = `${symptom}`;
+            
 
             // Append the list item to the ul
             diagnosisList.appendChild(li);
@@ -743,7 +754,11 @@
 
             // Set the text content of the list item
             // li.textContent = `${index + 1}. ${symptom}`;
-            li.textContent = `${symptom}`;
+            if (selectedEyeSurgical === "") {
+              li.textContent = `${symptom}`;
+            }else{
+            li.textContent = `${symptom} (${selectedEyeSurgical})`;
+            }
 
             // Append the list item to the ul
             diagnosisList.appendChild(li);
@@ -769,7 +784,12 @@
 
             // Set the text content of the list item
             // li.textContent = `${index + 1}. ${symptom}`;
-            li.textContent = `${symptom}`;
+            if (selectedEyeDignosis === "") {
+              li.textContent = `${symptom}`;
+            }else{
+            li.textContent = `${symptom} (${selectedEyeDignosis})`;
+            }
+
 
             // Append the list item to the ul
             diagnosisList.appendChild(li);
@@ -794,7 +814,11 @@
 
             // Set the text content of the list item
             // li.textContent = `${index + 1}. ${symptom}`;
-            li.textContent = `${symptom}`;
+            if (selectedEyeInvestigation === "") {
+              li.textContent = `${symptom}`;
+            }else{
+            li.textContent = `${symptom} (${selectedEyeInvestigation})`;
+            }
 
             // Append the list item to the ul
             diagnosisList.appendChild(li);
@@ -877,14 +901,6 @@
           if (currentPowerGlasses.NVVA2 != "") {
             document.getElementById("NV-VA2").value = currentPowerGlasses.NVVA2;
           }
-
-          if (currentPowerGlasses.IPD != "") {
-            document.getElementById("IPD").value = currentPowerGlasses.IPD;
-          }
-
-          if (currentPowerGlasses.TOG != "") {
-            document.getElementById("TOG").value = currentPowerGlasses.TOG;
-          }
         } else {
           document.getElementById("current-glass-power").style.display = "none";
         }
@@ -903,7 +919,6 @@
           medicines.forEach((medicine) => {
             const row = document.createElement("tr");
             row.innerHTML = `
-                        <td>${medicine.medicineType || "-"}</td>
                         <td>${medicine.medicineSelect || "-"}</td>
                         <td>${medicine.medicineDose || "-"}</td>
                         <td>${medicine.medicineQuantity || "-"}</td>
