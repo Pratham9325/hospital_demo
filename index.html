@@ -4,328 +4,211 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Multi-Step Patient Form</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
+    /* Custom container */
     .container {
-  max-width: 900px;
-  margin: auto;
-}
+        max-width: 900px;
+        margin: auto;
+        background: #fff;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        padding: 20px;
+        height: 850px;
+    }
 
-h2 {
-  text-align: center;
-}
+    h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
 
-.form-step {
-  display: none;
+    .form-step {
+        display: none;
+    }
 
-}
+    .form-step.active {
+        display: block;
+    }
 
-.form-step.active {
-  display: block;
-}
+    .form-group {
+        margin-bottom: 20px;
+    }
 
-.form-group {
-  margin-bottom: 15px;
-}
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
 
-.item-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
+    input, select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background: #f5f5f5;
+    }
 
-.item {
-  padding: 10px 15px;
-  background: #f0f0f0;
-  border-radius: 5px;
-  cursor: pointer;
-}
+    input:focus, select:focus {
+        border: 1px solid #007BFF;
+    }
 
-.item.selected {
-  background: #007bff;
-  color: white;
-}
+    /* Item grid */
+    .item-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 10px;
+        margin-top: 10px;
+    }
 
-.button-group {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-}
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
-  margin: 0;
-  padding: 0;
-}
+    .item, .medical, .surgical, .dignosis, .investigation {
+        padding: 8px;
+        background: #f0f0f0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        text-align: center;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
 
-.container {
-  max-width: 900px;
-  margin: 50px auto;
-  height: 750px;
-  padding: 20px;
-  background: #fff;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-}
+    .item:hover, .medical:hover, .surgical:hover, .dignosis:hover, .investigation:hover {
+        background-color: #e0e0e0;
+        transform: scale(1.05);
+    }
 
-h2 {
-  text-align: center;
-  color: #333;
-  margin-bottom: 20px;
-}
+    .item.selected, .medical.selected, .surgical.selected, .dignosis.selected, .investigation.selected {
+        background-color: #007BFF;
+        color: white;
+        border-color: #0056b3;
+    }
 
-.form-step {
-  display: none;
-}
+    button {
+        padding: 10px 15px;
+        font-size: 15px;
+        font-weight: bold;
+        color: #fff;
+        background-color: #007BFF;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px;
+        height: 35px;
+    }
 
-.form-step.active {
-  display: block;
-}
+    button:hover {
+        background-color: #0056b3;
+    }
 
-.form-group {
-  margin-bottom: 20px;
-}
+    .add-medicine-btn {
+        background-color: #28a745;
+    }
 
-label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 8px;
-}
+    .add-medicine-btn:hover {
+        background-color: #218838;
+    }
 
-input, select {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background: #f5f5f5;
-}
+    /* Medicine Entry */
+    .medicine-entry {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 10px;
+        height: 40px;
+    }
 
-input:focus, select:focus {
-  border: 1px solid #007BFF;
-}
-.item-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Smaller minimum width */
-  gap: 10px;
-  margin-top: 10px;
-}
+    .medicine-entry select, .medicine-entry input {
+        flex: 1;
+        padding: 10px;
+    }
 
-.item {
-  padding: 8px; /* Reduced padding */
-  background: #f0f0f0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  text-align: center;
-  cursor: pointer;
-  font-size: 14px; /* Adjust font size for smaller options */
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
+    /* Table Styling */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+    }
 
-.item:hover {
-  background-color: #e0e0e0;
-  transform: scale(1.05);
-}
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+    }
 
-.item.selected {
-  background-color: #007BFF;
-  color: white;
-  border-color: #0056b3;
-}
+    th {
+        background-color: #f4f4f4;
+        font-weight: bold;
+    }
 
-button {
-  padding: 10px 15px;
-  font-size: 15px;
-  font-weight: bold;
-  color: #fff;
-  background-color: #007BFF;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 20px;
-  height: 35px;
-}
+    input[type="text"] {
+        width: 90%;
+        padding: 8px;
+        box-sizing: border-box;
+    }
 
-/* code for medical class */
-.medical {
-  padding: 8px;
-  background: #f0f0f0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  text-align: center;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
+    /* Navbar Styling */
+    .navbar {
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #333;
+        padding: 20px;
+        margin-top: 0PX;
+        width: 100%;
+    }
 
-.medical:hover {
-  background-color: #e0e0e0;
-  transform: scale(1.05);
-}
+    .navbar-logo {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
 
-.medical.selected {
-  background-color: #007BFF;
-  color: white;
-  border-color: #0056b3;
-}
+    .company-name {
+        color: #fff;
+        font-size: 30px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    
+    /* Options Table Styling */
+    .options-table {
+        display: none;
+        position: absolute;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        z-index: 1000;
+        max-height: 250px;
+        overflow-y: auto;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
 
-/* code for surgical class */
-.surgical {
-  padding: 8px;
-  background: #f0f0f0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  text-align: center;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
+    .options-table table {
+        border-collapse: collapse;
+        width: 100%;
+    }
 
-.surgical:hover {
-  background-color: #e0e0e0;
-  transform: scale(1.05);
-}
+    .options-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        cursor: pointer;
+    }
 
-.surgical.selected {
-  background-color: #007BFF;
-  color: white;
-  border-color: #0056b3;
-}
+    .options-table td:hover {
+        background-color: #f0f0f0;
+    }
 
-/* code for dignosis class */
-.dignosis {
-  padding: 8px;
-  background: #f0f0f0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  text-align: center;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
+    #axisOptionsTable td {
+        padding: 5px 10px;
+        border: 1px solid #ddd;
+        text-align: center;
+        cursor: pointer;
+    }
 
-.dignosis:hover {
-  background-color: #e0e0e0;
-  transform: scale(1.05);
-}
+    #axisOptionsTable td:hover {
+        background-color: #f0f0f0;
+    }
 
-.dignosis.selected {
-  background-color: #007BFF;
-  color: white;
-  border-color: #0056b3;
-}
-
-/* code for investigation class */
-.investigation {
-  padding: 8px;
-  background: #f0f0f0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  text-align: center;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.investigation:hover {
-  background-color: #e0e0e0;
-  transform: scale(1.05);
-}
-
-.investigation.selected {
-  background-color: #007BFF;
-  color: white;
-  border-color: #0056b3;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-.add-medicine-btn {
-  background-color: #28a745;
-}
-
-.add-medicine-btn:hover {
-  background-color: #218838;
-}
-
-.medicine-entry {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
-  height: 40px;
-}
-
-.medicine-entry select, .medicine-entry input {
-  flex: 1;
-  padding: 10px;
-}
-
-
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 15px;
-}
-
-th, td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: center;
-}
-
-th {
-  background-color: #f4f4f4;
-  font-weight: bold;
-}
-
-input[type="text"] {
-  width: 90%;
-  padding: 8px;
-  box-sizing: border-box;
-}
-
-
-
-
-/* Styling the navbar */
-.navbar {
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #333;
-  padding: 20px;
-}
-
-/* Container for the logo and company name in one row */
-.navbar-content {
-  display: flex;
-  align-items: center;
-  gap: 15px;  /* Space between logo and company name */
-}
-
-/* Styling for the logo */
-.logo {
-  width: 50px;  /* Adjust logo size */
-  height: auto;
-}
-
-/* Styling for the company name */
-.company-name {
-  color: #fff;
-  font-size: 30px;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-/* Container for the logo and company name in one row */
-.navbar-content {
-  display: flex;
-  align-items: center;
-  margin-left: 70px;
-}
-
+</style>
 
 
   </style>
@@ -381,14 +264,20 @@ input[type="text"] {
       <div class="form-step" id="step-2">
         <div class="form-group">
           <h3>Select Symptoms:</h3>
+          <select id="eye-select" name="eye" style="width: 140px;">
+            <option value="right-eye">Select Eye </option>
+            <option value="right-eye">Right Eye</option>
+            <option value="left-eye">Left Eye</option>
+            <option value="both-eyes">Both Eyes</option>
+          </select>
           <div class="item-grid">
             <div class="item" onclick="toggleSymptoms(this)">Blurry Vision</div>
-<div class="item" onclick="toggleSymptoms(this)">Black</div>
-<div class="item" onclick="toggleSymptoms(this)">Black Spot in Front of Eye</div>
+
+<div class="item" onclick="toggleSymptoms(this)">Spot in Front of Eye</div>
 <div class="item" onclick="toggleSymptoms(this)">Light Sensitivity</div>
 <div class="item" onclick="toggleSymptoms(this)">Headache</div>
 <div class="item" onclick="toggleSymptoms(this)">Floaters</div>
-<div class="item" onclick="toggleSymptoms(this)">Chemosis</div>
+
 <div class="item" onclick="toggleSymptoms(this)">Pain in Eye</div>
 <div class="item" onclick="toggleSymptoms(this)">Swelling on Lid</div>
 <div class="item" onclick="toggleSymptoms(this)">Irritation</div>
@@ -415,6 +304,13 @@ input[type="text"] {
         </div>
         <div class="form-group" style="margin-top: 70px;">
           <h3>Medical History:</h3>
+          <select id="eye-select" name="eye" style="width: 140px;">
+            <option value="right-eye">Select Eye </option>
+            <option value="right-eye">Right Eye</option>
+            <option value="left-eye">Left Eye</option>
+            <option value="both-eyes">Both Eyes</option>
+          </select>
+          
           <div class="item-grid">
             <div class="medical" onclick="toggleMedical(this)">Hypertension</div>
             <div class="medical" onclick="toggleMedical(this)">Asthma</div>
@@ -432,6 +328,14 @@ input[type="text"] {
         </div>
         <div class="form-group" style="margin-top: 60px;">
           <h3>Surgical History:</h3>
+
+<select id="eye-select" name="eye" style="width: 140px;">
+  <option value="right-eye">Select Eye </option>
+  <option value="right-eye">Right Eye</option>
+  <option value="left-eye">Left Eye</option>
+  <option value="both-eyes">Both Eyes</option>
+</select>
+
           <div class="item-grid">
             <div class="surgical" onclick="toggleSurgical(this)">RE LE BE</div>
             <div class="surgical" onclick="toggleSurgical(this)">Pedophatsa</div>
@@ -468,9 +372,9 @@ input[type="text"] {
                 <th colspan="1">Axis</th>
                 <th colspan="1">V/A</th>
                 <th colspan="1">SPH</th>
-                <th colspan="1">CYK</th>
+                <th colspan="1">CLK</th>
                 <th colspan="1">Axis</th>
-                <th colspan="1"></th>
+                <th colspan="1">V/A</th>
               </tr>
             </thead>
             <tbody>
@@ -496,14 +400,8 @@ input[type="text"] {
                 <td><input type="text"  id="NV-Axis2"></td>
                 <td><input type="text"  id="NV-VA2"></td>
             </tr>
-            <tr>
-              <td>IPD (mm)</td>
-              <td colspan="8"><input type="text" placeholder="Enter IPD (mm)" id="IPD"></td>
-            </tr>
-            <tr>
-              <td>Type of Glass</td>
-              <td colspan="8"><input type="text" placeholder="Enter Type of Glass" id="TOG"></td>
-            </tr>
+           
+          
           </tbody>
         </table>
         </div>
@@ -533,6 +431,12 @@ input[type="text"] {
     <div class="form-step" id="step-5">
         <div class="form-group">
           <h3>Dignosis:</h3>
+          <select id="eye-select" name="eye" style="width: 140px;">
+            <option value="right-eye">Select Eye </option>
+            <option value="right-eye">Right Eye</option>
+            <option value="left-eye">Left Eye</option>
+            <option value="both-eyes">Both Eyes</option>
+          </select>
           <div class="item-grid">
             <div class="dignosis" onclick="toggleDignosis(this)">Myopia</div>
             <div class="dignosis" onclick="toggleDignosis(this)">Blepharitis</div>
@@ -568,6 +472,13 @@ input[type="text"] {
         </div>
         <div class="form-group" style="margin-top: 70px;">
           <h3>Investigation:</h3>
+
+          <select id="eye-select" name="eye" style="width: 140px;">
+            <option value="right-eye">Select Eye </option>
+            <option value="right-eye">Right Eye</option>
+            <option value="left-eye">Left Eye</option>
+            <option value="both-eyes">Both Eyes</option>
+          </select>
           <div class="item-grid">
             <div class="investigation" onclick="toggleInvestigation(this)">CBC</div>
 <div class="investigation" onclick="toggleInvestigation(this)">BSL (R)</div>
@@ -591,6 +502,260 @@ input[type="text"] {
       </div>
   </div>
 
+
+
+<!-- Options Table -->
+<div id="optionsTable" class="options-table container-fluid"  style="height: 280px; width: 630px;">
+  <table border="1" cellspacing="0" cellpadding="5">
+      <!-- Table Head -->
+      <thead>
+          <tr>
+              <th colspan="6">-ve</th>
+              <th colspan="6">+ve</th>
+          </tr>
+      </thead>
+      <!-- Table Body -->
+      <tbody>
+          <tr>
+              <td>-0.00</td>
+              <td>-0.25</td>
+              <td>-0.50</td>
+              <td>-0.75</td>
+              <td>-1.00</td>
+              <td>-1.25</td>
+              <td>+0.00</td>
+              <td>+0.25</td>
+              <td>+0.50</td>
+              <td>+0.75</td>
+              <td>+1.00</td>
+              <td>+1.25</td>
+          </tr>
+          <tr>
+              <td>-1.50</td>
+              <td>-1.75</td>
+              <td>-2.00</td>
+              <td>-2.25</td>
+              <td>-2.50</td>
+              <td>-2.75</td>
+              <td>+1.50</td>
+              <td>+1.75</td>
+              <td>+2.00</td>
+              <td>+2.25</td>
+              <td>+2.50</td>
+              <td>+2.75</td>
+          </tr>
+          <tr>
+              <td>-3.00</td>
+              <td>-3.25</td>
+              <td>-3.50</td>
+              <td>-3.75</td>
+              <td>-4.00</td>
+              <td>-4.25</td>
+              <td>+3.00</td>
+              <td>+3.25</td>
+              <td>+3.50</td>
+              <td>+3.75</td>
+              <td>+4.00</td>
+              <td>+4.25</td>
+          </tr>
+          <tr>
+              <td>-4.50</td>
+              <td>-4.75</td>
+              <td>-5.00</td>
+              <td>-5.25</td>
+              <td>-5.50</td>
+              <td>-5.75</td>
+              <td>+4.50</td>
+              <td>+4.75</td>
+              <td>+5.00</td>
+              <td>+5.25</td>
+              <td>+5.50</td>
+              <td>+5.75</td>
+          </tr>
+          <tr>
+              <td>-6.00</td>
+              <td>-6.25</td>
+              <td>-6.50</td>
+              <td>-6.75</td>
+              <td>-7.00</td>
+              <td>-7.25</td>
+              <td>+6.00</td>
+              <td>+6.25</td>
+              <td>+6.50</td>
+              <td>+6.75</td>
+              <td>+7.00</td>
+              <td>+7.25</td>
+          </tr>
+          <tr>
+              <td>-7.50</td>
+              <td>-7.75</td>
+              <td>-8.00</td>
+              <td>-8.25</td>
+              <td>-8.50</td>
+              <td>-8.75</td>
+              <td>+7.50</td>
+              <td>+7.75</td>
+              <td>+8.00</td>
+              <td>+8.25</td>
+              <td>+8.50</td>
+              <td>+8.75</td>
+          </tr>
+          <tr>
+              <td>-9.00</td>
+              <td>-9.25</td>
+              <td>-9.50</td>
+              <td>-10.00</td>
+              <td>-10.50</td>
+              <td>-11.00</td>
+              <td>+9.00</td>
+              <td>+9.25</td>
+              <td>+9.50</td>
+              <td>+10.00</td>
+              <td>+10.50</td>
+              <td>+11.00</td>
+          </tr>
+          <tr>
+              <td>-11.50</td>
+              <td>-12.00</td>
+              <td>-12.50</td>
+              <td>-13.00</td>
+              <td>-13.50</td>
+              <td>-14.00</td>
+              <td>+11.50</td>
+              <td>+12.00</td>
+              <td>+12.50</td>
+              <td>+13.00</td>
+              <td>+13.50</td>
+              <td>+14.00</td>
+          </tr>
+          <tr>
+              <td>-14.50</td>
+              <td>-15.00</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>+14.50</td>
+              <td>+15.00</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+          </tr>
+      </tbody>
+  </table>
+</div>
+
+  <!-- Input Fields -->
+  <table id="axisOptionsTable" style="display: none; width: 450px;" class="options-table">
+    <tr>
+        <td>0</td>
+        <td>5</td>
+        <td>10</td>
+        <td>15</td>
+        <td>20</td>
+        <td>25</td>
+        <td>30</td>
+        <td>35</td>
+        <td>40</td>
+        <td>45</td>
+    </tr>
+    <tr>
+        <td>50</td>
+        <td>55</td>
+        <td>60</td>
+        <td>65</td>
+        <td>70</td>
+        <td>75</td>
+        <td>80</td>
+        <td>85</td>
+        <td>90</td>
+        <td>95</td>
+    </tr>
+    <tr>
+        <td>100</td>
+        <td>105</td>
+        <td>110</td>
+        <td>115</td>
+        <td>120</td>
+        <td>125</td>
+        <td>130</td>
+        <td>135</td>
+        <td>140</td>
+        <td>145</td>
+    </tr>
+    <tr>
+        <td>150</td>
+        <td>155</td>
+        <td>160</td>
+        <td>165</td>
+        <td>170</td>
+        <td>175</td>
+        <td>180</td>
+    </tr>
+  </table>
+
+
+  <table id="NV-VATable" style="display: none; width: 210px;" class="options-table">
+    <tr>
+        <td>6/6</td>
+        <td>6/6p</td>
+        <td>6/7.5</td>
+        <td>6/7.5P</td>
+        
+    </tr>
+    <tr>
+        <td>6/9</td>
+        <td>6/9p</td>
+        <td>6/12</td>
+        <td>6/12p</td>
+        
+    </tr>
+    <tr>
+        <td>6/15</td>
+        <td>6/15p</td>
+        <td>6/18</td>
+        <td>6/18p</td>
+       
+    </tr>
+    <tr>
+        <td>6/24</td>
+        <td>6/24p</td>
+        <td>6/30</td>
+        <td>6/30p</td>
+       
+    </tr>
+    <tr>
+      <td>6/36</td>
+      <td>6/36p</td>
+      <td>6/48</td>
+      <td>6/60</td>
+     
+  </tr>
+  </table>
+
+  <table id="NVDVATable" style="display: none; width: 155px;" class="options-table">
+    <tr>
+        <td>N-5</td>
+        <td>N-6</td>
+        <td>N-8</td>
+       
+    </tr>
+    <tr>
+        <td>N-10</td>
+        <td>N-12</td>
+        <td>N-14</td>
+   
+    </tr>
+    <tr>
+        <td>N-18</td>
+        <td>N-24</td>
+        <td>N-36</td>
+      
+    </tr>
+    
+  
+  </table>
   <script >
     // Automatically set the visit date to today's date
 document.getElementById("visit-date").value = new Date().toISOString().split("T")[0];
@@ -693,11 +858,7 @@ function addMedicineEntry() {
   entry.className = "medicine-entry";
 
   entry.innerHTML = `
-   <select class="medicine-type">
-      <option value="" disabled selected>Type</option>
-      <option value="Tablet">Tablet</option>
-      <option value="Eye Drop">Eye Drop</option>
-    </select>
+  
     <select class="medicine-select">
      
   <option value="" disabled selected>Select Medicine</option>
@@ -741,7 +902,11 @@ function addMedicineEntry() {
       <option value="1-1-1">1-1-1</option>
       <option value="1-0-1">1-0-1</option>
        <option value="0-0-1">0-0-1</option>
-             <option value="1-0-0">1-0-0</option>
+            
+        <option value="0-0-0-0">0-0-0-0</option>
+          <option value="0-0-0">0-0-0</option>
+           <option value="0-0">0-0</option>
+            <option value="1-0-1">1-0-0</option>
     </select>
     <input type="number" class="medicine-quantity" placeholder="Quantity" min="1">
     <button type="button" onclick="this.parentNode.remove()">Remove</button>
@@ -918,5 +1083,174 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   </script>
+  <SCRIPT>
+// First block: Options for SPH, CYL, etc.
+const inputs = document.querySelectorAll(
+    '#DV-SPH, #DV-CYL, #NV-SPH, #NV-CYL, #NV-SPH2, #NV-CYL2, #DV-CYL2, #DV-SPH2'
+);
+const optionsTable = document.getElementById('optionsTable');
+let currentInput = null;
+
+// Event listener to show options
+inputs.forEach((input) => {
+    input.addEventListener('click', (e) => {
+        currentInput = e.target; // Save reference to the clicked input box
+        const rect = currentInput.getBoundingClientRect();
+        optionsTable.style.top = `${rect.bottom + window.scrollY}px`;
+        optionsTable.style.left = `${rect.left + window.scrollX}px`;
+        optionsTable.style.display = 'block';
+    });
+});
+
+// Event listener for option selection
+optionsTable.addEventListener('click', (e) => {
+    if (e.target.tagName === 'TD' && currentInput) {
+        currentInput.value = e.target.innerText; // Set value to the clicked option
+        optionsTable.style.display = 'none';
+    }
+});
+
+// Close table when clicking outside
+document.addEventListener('click', (e) => {
+    if (!optionsTable.contains(e.target) && !Array.from(inputs).includes(e.target)) {
+        optionsTable.style.display = 'none';
+    }
+});
+
+
+
+
+// Second block: Axis Options
+const axisInputs = document.querySelectorAll(
+    '#NV-Axis, #NV-Axis2, #DV-Axis, #DV-Axis2'
+);
+const axisOptionsTable = document.getElementById('axisOptionsTable');
+let currentAxisInput = null;
+
+// Show options table on input click
+axisInputs.forEach((input) => {
+    input.addEventListener('click', (e) => {
+        currentAxisInput = e.target; // Save reference to the clicked input
+        const rect = currentAxisInput.getBoundingClientRect();
+        axisOptionsTable.style.top = `${rect.bottom + window.scrollY}px`;
+        axisOptionsTable.style.left = `${rect.left + window.scrollX}px`;
+        axisOptionsTable.style.display = 'block';
+    });
+});
+
+// Set value when option is clicked
+axisOptionsTable.addEventListener('click', (e) => {
+    if (e.target.tagName === 'TD' && currentAxisInput) {
+        currentAxisInput.value = e.target.innerText;
+        axisOptionsTable.style.display = 'none';
+    }
+});
+
+// Close options table on outside click
+document.addEventListener('click', (e) => {
+    if (!axisOptionsTable.contains(e.target) && !Array.from(axisInputs).includes(e.target)) {
+        axisOptionsTable.style.display = 'none';
+    }
+});
+
+
+
+
+// Third block: VA Options
+const vaInputs = document.querySelectorAll('#DV-VA, #DV-VA2'); // Corrected input field IDs
+const VAoptionsTable = document.getElementById('NV-VATable'); // Table to show options
+
+let activeVaInputField = null;
+
+// Show options table on input click
+vaInputs.forEach((input) => {
+    input.addEventListener('click', (e) => {
+        activeVaInputField = e.target; // Save reference to the clicked input
+        const rect = activeVaInputField.getBoundingClientRect();
+        VAoptionsTable.style.top = `${rect.bottom + window.scrollY}px`; // Position below the input
+        VAoptionsTable.style.left = `${rect.left + window.scrollX}px`; // Position aligned with the input
+        VAoptionsTable.style.display = 'block'; // Show the options table
+    });
+});
+
+// Set value when option is clicked
+VAoptionsTable.addEventListener('click', (e) => {
+    if (e.target.tagName === 'TD' && activeVaInputField) {
+        activeVaInputField.value = e.target.innerText; // Set the value to the clicked option
+        VAoptionsTable.style.display = 'none'; // Hide the options table after selection
+    }
+});
+
+// Close options table on outside click
+document.addEventListener('click', (e) => {
+    if (
+        !VAoptionsTable.contains(e.target) && // Clicked outside the table
+        !Array.from(vaInputs).includes(e.target) // Clicked outside the input fields
+    ) {
+        VAoptionsTable.style.display = 'none'; // Hide the options table
+    }
+});
+
+
+
+
+// Fourth block: NVD Options (with correct IDs and positions)
+const nvdInputs = document.querySelectorAll('#NV-VA, #NV-VA2'); // Corrected input field IDs
+const NVDoptionsTable = document.getElementById('NVDVATable'); // Corrected table ID
+let activeNvdInputField = null;
+
+// Function to position the options table
+function positionTable(input) {
+    const rect = input.getBoundingClientRect();
+    const tableHeight = NVDoptionsTable.offsetHeight; // Use NVDoptionsTable here
+    const tableWidth = NVDoptionsTable.offsetWidth; // Not used but added for completeness
+
+    // Position the table below the input field
+    const bottomPosition = rect.bottom + tableHeight <= window.innerHeight
+        ? rect.bottom
+        : rect.top - tableHeight;
+    const leftPosition = rect.left + window.scrollX;
+
+    // Set position for the options table
+    NVDoptionsTable.style.top = `${bottomPosition + window.scrollY}px`; // Use NVDoptionsTable
+    NVDoptionsTable.style.left = `${leftPosition}px`; // Use NVDoptionsTable
+}
+
+// Show the options table when input field is clicked
+nvdInputs.forEach((input) => {
+    input.addEventListener('click', (e) => {
+        activeNvdInputField = e.target; // Store reference to clicked input
+        positionTable(activeNvdInputField); // Position the table near the input
+        NVDoptionsTable.style.display = 'block'; // Show the options table
+    });
+});
+
+// Select value from the options table
+NVDoptionsTable.addEventListener('click', (e) => {
+    if (e.target.tagName === 'TD' && activeNvdInputField) {
+        activeNvdInputField.value = e.target.innerText; // Set input value
+        NVDoptionsTable.style.display = 'none'; // Hide the options table after selection
+    }
+    e.stopPropagation(); // Prevent event from propagating to document
+});
+
+// Close the options table when clicked outside
+document.addEventListener('click', (e) => {
+    if (
+        !NVDoptionsTable.contains(e.target) && // Clicked outside the table
+        !Array.from(nvdInputs).includes(e.target) // Clicked outside the input fields
+    ) {
+        NVDoptionsTable.style.display = 'none'; // Hide the options table
+    }
+});
+
+
+
+</script>
+
+</script>
+
+
+
 </body>
 </html>

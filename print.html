@@ -1,786 +1,958 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title></title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
 
+      .paper {
+        width: 100%;
+        height: 100vh;
+        max-width: 21cm;
+        max-height: 29.7cm;
+        padding: 20px;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        box-sizing: border-box;
+        overflow: auto; /* This will allow the scrollbar to appear when the content overflows */
+        display: flex;
+        flex-direction: column;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid #000;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+      }
+
+      .header .details {
+        line-height: 1.5;
+      }
+
+      .header .details span {
+        display: block;
+      }
+
+      .section {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: row;
+      }
+
+      .section h3 {
+        margin-bottom: 10px;
+        font-size: 16px;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 5px;
+      }
+
+      .details-section {
+        flex: 1;
+        padding-right: 30px; /* Adds space before the vertical line */
+      }
+
+      .vertical-line {
+        width: 1px;
+        background-color: #ddd;
+        margin-left: 100px; /* Adjusted for 100px margin */
+        height: 100%;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        border: 2px solid black;
+      }
+
+      table,
+      th,
+      td {
+        border: 1px solid #ddd;
+      }
+
+      th,
+      td {
+        text-align: center;
+        padding: 6px;
+        font-size: 14px;
+      }
+
+      .footer {
+        margin-top: 30px;
+        text-align: right;
+        font-size: 14px;
+        font-weight: bold;
+      }
+
+      /* Adjust for printing */
+      @media print {
+        body,
         .paper {
-    width: 100%;
-    height: 100vh;
-    max-width: 21cm;
-    max-height: 29.7cm;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    box-sizing: border-box;
-    overflow: auto; /* This will allow the scrollbar to appear when the content overflows */
-    display: flex;
-    flex-direction: column;
-}
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #000;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-
-        .header .details {
-            line-height: 1.5;
-        }
-
-        .header .details span {
-            display: block;
-        }
-
-        .section {
-            margin-top: 20px;
-            display: flex;
-            flex-direction: row;
-        }
-
-        .section h3 {
-            margin-bottom: 10px;
-            font-size: 16px;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 5px;
-        }
-
-        .details-section {
-            flex: 1;
-            padding-right: 30px; /* Adds space before the vertical line */
-        }
-
-        .vertical-line {
-            width: 1px;
-            background-color: #ddd;
-            margin-left: 100px; /* Adjusted for 100px margin */
-            height: 100%;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-
-        table, th, td {
-            border: 1px solid #ddd;
-        }
-
-        th, td {
-            text-align: center;
-            padding: 6px;
-            font-size: 14px;
+          width: 100%;
+          height: auto;
+          margin: 0;
+          padding: 0;
+          page-break-after: always;
+          margin-top: 340.16px;
         }
 
         .footer {
-            margin-top: 30px;
-            text-align: right;
-            font-size: 14px;
-            font-weight: bold;
+          font-size: 14px;
         }
 
-        /* Adjust for printing */
-        @media print {
-            body, .paper {
-                width: 100%;
-                height: auto;
-                margin: 0;
-                padding: 0;
-                margin-top: 340.16px;
-            }
-
-            .footer {
-                font-size: 14px;
-            }
-
-            .section h3 {
-                font-size: 14px;
-            }
-
-            table, th, td {
-                padding: 6px;
-            }
-
-            .header {
-                margin-bottom: 10px;
-            }
-
-            .header .details {
-                font-size: 12px;
-            }
+        .section h3 {
+          font-size: 14px;
         }
 
-        .print-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            border-radius: 5px;
-            
+        table,
+        th,
+        td {
+          padding: 6px;
         }
 
-        .print-btn:hover {
-            background-color: #45a049;
+        .header {
+          margin-bottom: 10px;
         }
 
-        /* Poster Image Style */
-        .poster {
-            width: 100%;
-            height: auto;
-            margin-bottom: 20px; /* Space between image and header */
+        .header .details {
+          font-size: 12px;
         }
+      }
 
-        .current-glass-power table input {
-            width: 100%;
-            padding: 8px;
-            font-size: 14px;
-            margin: 5px 0;
-        }
-
-        .current-glass-power td {
-            width: 9%;
-        }
-
-        .current-glass-power th,
-        .current-glass-power td {
-            text-align: left;
-        }
-
-        .current-glass-power input {
-            width: calc(100% - 12px);
-        }
-        .treatment-table {
-    display: none; /* Initially hide the table */
-
-
-    .treatment-inputs {
-        margin-top: 20px;
-    }
-    .input-row {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 10px;
-    }
-    .input-row label {
-        width: 30%;
-        font-weight: bold;
-    }
-    .input-row input {
-        width: 65%;
-        padding: 6px;
-        font-size: 14px;
-    }
-}
-@media print {
-    .poster {
-        width: 100%;         /* Make the image span the full width */
-        height: auto;        /* Keep the aspect ratio */
-        margin-top: 0px;     /* Remove the margin at the top */
-    }
-
-    body, .paper {
-        width: 100%;
-        height: auto;
-        margin: 0;
-        padding: 0;
-    }
-
-    .footer {
-        font-size: 14px;
-    }
-
-    .section h3 {
-        font-size: 14px;
-    }
-
-    table, th, td {
-        padding: 6px;
-    }
-
-    .header {
-        margin-bottom: 10px;
-    }
-
-    .header .details {
-        font-size: 12px;
-    }
-}
-@media print {
-    body, .paper {
-        width: 100%;
-        height: auto;
-        margin: 0;
-        padding: 0;
-        margin-top: 240.16px;  /* Set the top margin for printing */
-    }
-
-    .footer {
-        font-size: 14px;
-    }
-
-    .section h3 {
-        font-size: 14px;
-    }
-
-    table, th, td {
-        padding: 6px;
-    }
-
-    .header {
-        margin-bottom: 10px;
-    }
-
-    .header .details {
-        font-size: 12px;
-    }
-
-    .poster {
-        width: 100%;
-        height: auto;
-        margin-top: 0px;
-    }
-    
-}
-
-@media print {
-    /* Hide the URL and page path in print */
-   
-    body {
-        visibility: hidden;
-    }
-
-    .paper {
-        visibility: visible;
+      .print-btn {
         position: absolute;
-        top: 0;
-    }
+        top: 20px;
+        right: 20px;
+        padding: 10px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 5px;
+      }
 
-    .header, .footer, .section, table {
-        visibility: visible;
-    }
+      .print-btn:hover {
+        background-color: #45a049;
+      }
 
+      /* Poster Image Style */
+      .poster {
+        width: 100%;
+        height: auto;
+        margin-bottom: 20px; /* Space between image and header */
+      }
 
+      .current-glass-power table input {
+        width: 100%;
+        padding: 8px;
+        font-size: 14px;
+        margin: 5px 0;
+      }
 
-    body, .paper {
-        overflow: visible; /* Prevent scrolling and hide scrollbar during printing */
-    }
+      .current-glass-power td {
+        width: 9%;
+      }
 
-  
+      .current-glass-power th,
+      .current-glass-power td {
+        text-align: left;
+      }
 
-    
+      .current-glass-power input {
+        width: calc(100% - 12px);
+      }
+      .treatment-table {
+        display: none; /* Initially hide the table */
 
-    /* Hide the URL and file path in the browser header/footer during printing */
-    /* For most modern browsers, this can be hidden by disabling headers/footers in the print dialog */
-}@media print {
-    /* Hide browser-specific header and footer (including URL and time) during print */
-    body {
-        visibility: hidden;
-    }
+        .treatment-inputs {
+          margin-top: 20px;
+        }
+        .input-row {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 10px;
+        }
+        .input-row label {
+          width: 30%;
+          font-weight: bold;
+        }
+        .input-row input {
+          width: 65%;
+          padding: 6px;
+          font-size: 14px;
+        }
+      }
+      @media print {
+        .poster {
+          width: 100%; /* Make the image span the full width */
+          height: auto; /* Keep the aspect ratio */
+          margin-top: 0px; /* Remove the margin at the top */
+        }
 
-  
+        body,
+        .paper {
+          width: 100%;
+          height: auto;
+          margin: 0;
+          padding: 0;
+        }
 
-    /* This ensures only the content within .paper is visible in print */
-    .header, .footer, .section, table {
-        visibility: visible;
-    }
+        .footer {
+          font-size: 14px;
+        }
 
-    /* Optional: Adjust the header/footer appearance during print */
-    @page {
-        margin:0;
-        margin-left: 10px;
-        margin-right: 10px;
-        margin-top: 10px;
-    }
-}
+        .section h3 {
+          font-size: 14px;
+        }
 
+        table,
+        th,
+        td {
+          padding: 6px;
+        }
 
+        .header {
+          margin-bottom: 10px;
+        }
+
+        .header .details {
+          font-size: 12px;
+        }
+      }
+      @media print {
+        body,
+        .paper {
+          width: 100%;
+          height: auto;
+          margin: 0;
+          padding: 0;
+         
+          page-break-after: always;
+          margin-top: 250px; /* Top margin for the print */ /* Set the top margin for printing */
+        }
+
+        .footer {
+          font-size: 14px;
+        }
+
+        .section h3 {
+          font-size: 14px;
+        }
+
+        table,
+        th,
+        td {
+          padding: 6px;
+        }
+
+        .header {
+          margin-bottom: 10px;
+        }
+
+        .header .details {
+          font-size: 12px;
+        }
+
+        .poster {
+          width: 100%;
+          height: auto;
+          margin-top: 0px;
+        }
+      }
+
+      @media print {
+        /* Hide the URL and page path in print */
+
+        body {
+          visibility: hidden;
+        }
+
+        .paper {
+          visibility: visible;
+          position: absolute;
+          top: 0;
+        }
+
+        .header,
+        .footer,
+        .section,
+        table {
+          visibility: visible;
+        }
+
+        body,
+        .paper {
+          overflow: visible; /* Prevent scrolling and hide scrollbar during printing */
+        }
+
+        /* Hide the URL and file path in the browser header/footer during printing */
+        /* For most modern browsers, this can be hidden by disabling headers/footers in the print dialog */
+      }
+      @media print {
+        /* Hide browser-specific header and footer (including URL and time) during print */
+        body {
+          visibility: hidden;
+        }
+
+        /* This ensures only the content within .paper is visible in print */
+        .header,
+        .footer,
+        .section,
+        table {
+          visibility: visible;
+        }
+
+        /* Optional: Adjust the header/footer appearance during print */
+        @page {
+          margin: 0;
+          margin-left: 30px;
+          margin-right: 30px;
+          margin-top: 10px;
+        }
+      }
+
+      .table-custom-height {
+  height: 150px;
+  overflow-y: auto; /* Add scrolling if the content overflows */
+} 
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <!-- Print Button -->
+    <button class="print-btn" onclick="window.print()">Print</button>
 
-<!-- Print Button -->
-<button class="print-btn" onclick="window.print()">Print</button>
+    <div class="paper">
+      <!-- Poster Image -->
 
-<div class="paper">
-    <!-- Poster Image -->
- 
-
-    <div class="header">
+      <div class="header">
         <div class="details">
-            <span id="patient-name"><b>Patient Name:</b></span>
-            <span id="patient-age"><b>AGE:</b></span>
-            <span id="patient-mobile"><b>Mobile:</b></span>
-            <span id="patient-gender"><b>Gender:</b></span>
+          <span id="patient-name" style="margin-left: 130px; margin-bottom: 47px;"></span>
+          <span id="patient-age" style="margin-left: 50px;"><b>AGE:</b></span>
+          <!-- <span id="patient-mobile"><b>Mobile:</b></span> -->
+          <!-- <span id="patient-gender"><b>Gender:</b></span> -->
         </div>
+
         <div>
-            <span><b>Doctor:</b>  Dr. Alvin.R.Rane </span>
+          <br>
+          <br>
+          <br>
+          <br>
+      
+          <span id="patient-gender" style="margin-top: 3px;"><b>Gender:</b></span
+          ><br />
+          <span id="patient-mobile"><b>Mobile:</b> </span>
         </div>
-    </div>
+      </div>
+      
 
-    <div class="section">
-        <div class="details-section" id="diagnosis-section">
-            <h3 >Diagnosis</h3>
-            <ul id="diagnosis-list">
-                <li>1A07.Z Typhoid Fever, Unspecified</li>
-                <li>Hypertension</li>
-                <li>Cataracts</li>
-            </ul>
-        </div>
-
-        <div class="details-section" id="Symptoms-section">
-            <h3>Complaints/Symptoms</h3>
-            <ul id="symptoms-list">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col">
+            <div class="details-section" id="Symptoms-section">
+              <h3 style="font-size: 16px; font-weight: 600">
+                Complaints/Symptoms
+              </h3>
+              <ul id="symptoms-list">
                 <li>Chest Pain</li>
                 <li>Eye Redness</li>
                 <li>Nausea</li>
-            </ul>
-        </div>
-
-        <div class="details-section" id="personal-history-section">
-            <h3>Medical History</h3>
-            <ul id="personal-history-list">
+              </ul>
+            </div>
+          </div>
+          <div class="col">
+            <div class="details-section" id="personal-history-section">
+              <h3 style="font-size: 16px; font-weight: 600">Medical History</h3>
+              <ul id="personal-history-list">
                 <li>Smoking, Involuntary</li>
                 <li>Tobacco Smoking</li>
                 <li>Allergy</li>
-            </ul>
-        </div>
-
-    </div>
-
-    <div class="section">
-        <div class="details-section" id="past-history-section">
-            <h3>Surgical History</h3>
-            <ul id="past-history-list">
+              </ul>
+            </div>
+          </div>
+          <div class="col">
+            <div class="details-section" id="past-history-section">
+              <h3 style="font-size: 16px; font-weight: 600">
+                Surgical History
+              </h3>
+              <ul id="past-history-list">
                 <li>Diabetes</li>
                 <li>A (Adenine)</li>
                 <li>Hypertension</li>
-            </ul>
+              </ul>
+            </div>
+          </div>
+          <div class="col">
+            <div class="details-section" id="diagnosis-section">
+              <h3 style="font-size: 16px; font-weight: 600">Diagnosis</h3>
+              <ul id="diagnosis-list">
+                <li>1A07.Z Typhoid Fever, Unspecified</li>
+                <li>Hypertension</li>
+                <li>Cataracts</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col">
+            <div class="details-section" id="investigation-section">
+              <h3 style="font-size: 16px; font-weight: 600">Investigation</h3>
+              <ul id="investigation-list">
+                <li>Diabetes</li>
+                <li>A (Adenine)</li>
+                <li>Hypertension</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="container-fluid">
+          <div class="row"></div>
         </div>
 
         <!-- <div class="vertical-line"></div> -->
+      </div>
 
-        <div class="details-section" id="investigation-section">
-            <h3>Investigation</h3>
-            <ul id="investigation-list">
-                <li>Diabetes</li>
-                <li>A (Adenine)</li>
-                <li>Hypertension</li>
-            </ul>
-        </div>
-    </div>
+      <!-- Current Glass Power Section -->
 
-    <!-- Current Glass Power Section -->
-    <div class="section current-glass-power" id="current-glass-power">
+      <div class="section current-glass-power container h-30" id="current-glass-power">
         <div class="details-section">
-            <h3>Current Power Glass</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th colspan="4">Right Eye</th>
-                        <th colspan="4">Left Eye</th>
-                    </tr>
-                </thead>
-                <thead>
-                    <tr>
-                      <th></th>
-                      <th colspan="1">SPH</th>
-                      <th colspan="1">CYL</th>
-                      <th colspan="1">Axis</th>
-                      <th colspan="1">V/A</th>
-                      <th colspan="1">SPH</th>
-                      <th colspan="1">CYK</th>
-                      <th colspan="1">Axis</th>
-                      <th colspan="1">V/A</th>
-                    </tr>
-                  </thead>
-                <tbody>
-                    <tr>
-                        <td>DV</td>
-                        <td><input type="text"  style="width: 50px;" id="DV-SPH" readonly></td>
-                        <td><input type="text"  style="width: 50px;" id="DV-CYL" readonly> </td>
-                        <td><input type="text"   style="width: 50px;" id="DV-Axis" readonly></td>
-                        <td><input type="text"  style="width: 50px;" id="DV-VA" readonly></td>
-                        <td><input type="text"   style="width: 50px;" id="DV-SPH2" readonly></td>
-                        <td><input type="text"  style="width: 50px;" id="DV-CYL2" readonly></td>
-                        <td><input type="text"   style="width: 50px;" id="DV-Axis2" readonly></td>
-                        <td><input type="text"   style="width: 50px;" id="DV-VA2" readonly></td>
-                    </tr>
-                    <tr>
-                        <td>NV</td>
-                        <td><input type="text"   style="width: 50px;" id="NV-SPH" readonly></td>
-                        <td><input type="text"   style="width: 50px;" id="NV-CYL" readonly></td>
-                        <td><input type="text"   style="width: 50px;" id="NV-Axis" readonly></td>
-                        <td><input type="text"  style="width: 50px;" id="NV-VA" readonly></td>
-                        <td><input type="text"  style="width: 50px;" id="NV-SPH2" readonly></td>
-                        <td><input type="text"   style="width: 50px;" id="NV-CYL2" readonly></td>
-                        <td><input type="text"   style="width: 50px;" id="NV-Axis2" readonly></td>
-                        <td><input type="text"   style="width: 50px;" id="NV-VA2" readonly></td>
-                    </tr>
-                    <tr>
-                        <td>IPD (mm)</td>
-                        <td colspan="8"><input type="text" placeholder="Enter IPD (mm)" style="width: 600px;" id="IPD" readonly></td>
-                    </tr>
-                    <tr>
-                        <td>Type of Glass</td>
-                        <td colspan="8"><input type="text" placeholder="Enter Type of Glass"style="width: 600px;" id="TOG" readonly></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+          <h3>Current Power Glass</h3>
 
-    <!-- Me Section -->
-    <h3 id="medicines-title">Medication List</h3>
-    <table id="medicines-table">
+          <table class="table table-bordered border-primary container table-custom-height">
+            <thead>
+              <tr>
+                <th></th>
+                <th colspan="4">Right Eye</th>
+                <th colspan="4">Left Eye</th>
+              </tr>
+            </thead>
+            <thead>
+              <tr>
+                <th></th>
+                <th colspan="1">SPH</th>
+                <th colspan="1">CYL</th>
+                <th colspan="1">Axis</th>
+                <th colspan="1">V/A</th>
+                <th colspan="1">SPH</th>
+                <th colspan="1">CYK</th>
+                <th colspan="1">Axis</th>
+                <th colspan="1">V/A</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>DV</td>
+                <td>
+                  <input type="text" style="width: 50px" id="DV-SPH" readonly />
+                </td>
+                <td>
+                  <input type="text" style="width: 50px" id="DV-CYL" readonly />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    style="width: 50px"
+                    id="DV-Axis"
+                    readonly
+                  />
+                </td>
+                <td>
+                  <input type="text" style="width: 50px" id="DV-VA" readonly />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    style="width: 50px"
+                    id="DV-SPH2"
+                    readonly
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    style="width: 50px"
+                    id="DV-CYL2"
+                    readonly
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    style="width: 50px"
+                    id="DV-Axis2"
+                    readonly
+                  />
+                </td>
+                <td>
+                  <input type="text" style="width: 50px" id="DV-VA2" readonly />
+                </td>
+              </tr>
+              <tr>
+                <td>NV</td>
+                <td>
+                  <input type="text" style="width: 50px" id="NV-SPH" readonly />
+                </td>
+                <td>
+                  <input type="text" style="width: 50px" id="NV-CYL" readonly />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    style="width: 50px"
+                    id="NV-Axis"
+                    readonly
+                  />
+                </td>
+                <td>
+                  <input type="text" style="width: 50px" id="NV-VA" readonly />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    style="width: 50px"
+                    id="NV-SPH2"
+                    readonly
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    style="width: 50px"
+                    id="NV-CYL2"
+                    readonly
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    style="width: 50px"
+                    id="NV-Axis2"
+                    readonly
+                  />
+                </td>
+                <td>
+                  <input type="text" style="width: 50px" id="NV-VA2" readonly />
+                </td>
+              </tr>
+              <!-- <tr>
+                    <td>IPD (mm)</td>
+                    <td colspan="8">
+                      <input
+                        type="text"
+                        placeholder="Enter IPD (mm)"
+                        style="width: 600px"
+                        id="IPD"
+                        readonly
+                      />
+                    </td>
+                  </tr> -->
+              <!-- <tr>
+                    <td>Type of Glass</td>
+                    <td colspan="8">
+                      <input
+                        type="text"
+                        placeholder="Enter Type of Glass"
+                        style="width: 600px"
+                        id="TOG"
+                        readonly
+                      />
+                    </td>
+                  </tr> -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Me Section -->
+      <h3 id="medicines-title">Medication List</h3>
+      <table
+        id="medicines-table"
+        class="table table-bordered border-primary border border-3"
+      >
         <thead>
-            <tr>
-                <th>Type</th>
-                <th>Name</th>
-                <th>Dose Details</th>
-                <th>Quantity</th>
-            </tr>
+          <tr class="text-center">
+            <th>Type</th>
+            <th>Name</th>
+            <th>Dose Details</th>
+            <th>Quantity</th>
+          </tr>
         </thead>
         <tbody id="medicines-tbody">
-            <!-- Medicines will be dynamically inserted here -->
+          <!-- Medicines will be dynamically inserted here -->
         </tbody>
-    </table>
+      </table>
 
-    <div class="footer">
-        <p>Dr. Alvin.R.Rane </p>
+      <div class="footer">
+        <p>Dr. Alvin.R.Rane &#8209; <br />(Ophthalmology)</p>
+      </div>
     </div>
-</div>
 
-
-<script>
-    // Dom loaded event
-    document.addEventListener('DOMContentLoaded', function() {
+    <script>
+      // Dom loaded event
+      document.addEventListener("DOMContentLoaded", function () {
         // Get values local storage
-        const patientName = localStorage.getItem('name');
-        const patientAge = localStorage.getItem('age');
-        const patientMobile = localStorage.getItem('mobileNumber');
-        const patientGender = localStorage.getItem('gender');
+        const patientName = localStorage.getItem("name");
+        const patientAge = localStorage.getItem("age");
+        const patientMobile = localStorage.getItem("mobileNumber");
+        const patientGender = localStorage.getItem("gender");
 
-        selectedSymptoms = JSON.parse(localStorage.getItem('selectedSymptoms'));
-        selectedMedical = JSON.parse(localStorage.getItem('selectedMedical'));
-        selectedSurgical = JSON.parse(localStorage.getItem('selectedSurgical'));
-        selectedDignosis = JSON.parse(localStorage.getItem('selectedDignosis'));
-        selectedInvestigation = JSON.parse(localStorage.getItem('selectedInvestigation'));
+        selectedSymptoms = JSON.parse(localStorage.getItem("selectedSymptoms"));
+        selectedMedical = JSON.parse(localStorage.getItem("selectedMedical"));
+        selectedSurgical = JSON.parse(localStorage.getItem("selectedSurgical"));
+        selectedDignosis = JSON.parse(localStorage.getItem("selectedDignosis"));
+        selectedInvestigation = JSON.parse(
+          localStorage.getItem("selectedInvestigation")
+        );
         console.log(selectedDignosis);
-        currentPowerGlasses = JSON.parse(localStorage.getItem('currentPowerGlasses'));
-        const CPG_Table = localStorage.getItem('CPG_Table');
-        
-        // get medicines from local storage
-        const medicines = JSON.parse(localStorage.getItem('medicines'));
-        console.log(medicines);
+        currentPowerGlasses = JSON.parse(
+          localStorage.getItem("currentPowerGlasses")
+        );
+        const CPG_Table = localStorage.getItem("CPG_Table");
 
+        // get medicines from local storage
+        const medicines = JSON.parse(localStorage.getItem("medicines"));
+        console.log(medicines);
 
         console.log(currentPowerGlasses);
 
         console.log(CPG_Table);
-        if(CPG_Table === 'true')
-        {
-            console.log('Table Found');
+        if (CPG_Table === "true") {
+          console.log("Table Found");
+        } else {
+          console.log("Table Not Found");
         }
-        else{
-            console.log('Table Not Found');
-        }
-
 
         // Print the patient's details
         if (patientName) {
-            // Find the span with id "patient-name"
-            const nameElement = document.getElementById('patient-name');
+          // Find the span with id "patient-name"
+          const nameElement = document.getElementById("patient-name");
 
-            // Append the patient's name after "<b>Patient Name:</b>"
-            nameElement.innerHTML += ` ${patientName}`;
+          // Append the patient's name after "<b>Patient Name:</b>"
+          nameElement.innerHTML += ` ${patientName}`;
         }
 
         if (patientAge) {
-            // Find the span with id "patient-name"
-            const nameElement = document.getElementById('patient-age');
+          // Find the span with id "patient-name"
+          const nameElement = document.getElementById("patient-age");
 
-            // Append the patient's name after "<b>Patient Name:</b>"
-            nameElement.innerHTML += ` ${patientAge}`;
+          // Append the patient's name after "<b>Patient Name:</b>"
+          nameElement.innerHTML += ` ${patientAge}`;
         }
 
         if (patientMobile) {
-            // Find the span with id "patient-name"
-            const nameElement = document.getElementById('patient-mobile');
+          // Find the span with id "patient-name"
+          const nameElement = document.getElementById("patient-mobile");
 
-            // Append the patient's name after "<b>Patient Name:</b>"
-            nameElement.innerHTML += ` ${patientMobile}`;
+          // Append the patient's name after "<b>Patient Name:</b>"
+          nameElement.innerHTML += ` ${patientMobile}`;
         }
 
         if (patientGender) {
-            // Find the span with id "patient-name"
-            const nameElement = document.getElementById('patient-gender');
+          // Find the span with id "patient-name"
+          const nameElement = document.getElementById("patient-gender");
 
-            // Append the patient's name after "<b>Patient Name:</b>"
-            nameElement.innerHTML += ` ${patientGender}`;
+          // Append the patient's name after "<b>Patient Name:</b>"
+          nameElement.innerHTML += ` ${patientGender}`;
         }
 
         // Print the selected symptoms
-        if (selectedSymptoms && selectedSymptoms != '') {
-            // Find the ul with id "diagnosis-list"
-            const diagnosisList = document.getElementById('symptoms-list');
+        if (selectedSymptoms && selectedSymptoms != "") {
+          // Find the ul with id "diagnosis-list"
+          const diagnosisList = document.getElementById("symptoms-list");
 
-            // Clear the inner HTML
-            diagnosisList.innerHTML = '';
+          // Clear the inner HTML
+          diagnosisList.innerHTML = "";
 
-            // Loop through the selected symptoms
-            selectedSymptoms.forEach((symptom, index) => {
-                // Create a new list item
-                const li = document.createElement('li');
+          // Loop through the selected symptoms
+          selectedSymptoms.forEach((symptom, index) => {
+            // Create a new list item
+            const li = document.createElement("li");
 
-                // Set the text content of the list item
-                // li.textContent = `${index + 1}. ${symptom}`;
-                li.textContent = `${symptom}`;
+            // Set the text content of the list item
+            // li.textContent = `${index + 1}. ${symptom}`;
+            li.textContent = `${symptom}`;
 
-
-                // Append the list item to the ul
-                diagnosisList.appendChild(li);
-            });
-        }
-        else{
-            // Hide the section if there are no selected symptoms
-            document.getElementById('Symptoms-section').style.display = 'none';
+            // Append the list item to the ul
+            diagnosisList.appendChild(li);
+          });
+        } else {
+          // Hide the section if there are no selected symptoms
+          document.getElementById("Symptoms-section").style.display = "none";
         }
 
         // Print the selected medical history
-        if (selectedMedical && selectedMedical != '') {
-            // Find the ul with id "diagnosis-list"
-            const diagnosisList = document.getElementById('personal-history-list');
+        if (selectedMedical && selectedMedical != "") {
+          // Find the ul with id "diagnosis-list"
+          const diagnosisList = document.getElementById(
+            "personal-history-list"
+          );
 
-            // Clear the inner HTML
-            diagnosisList.innerHTML = '';
+          // Clear the inner HTML
+          diagnosisList.innerHTML = "";
 
-            // Loop through the selected symptoms
-            selectedMedical.forEach((symptom, index) => {
-                // Create a new list item
-                const li = document.createElement('li');
+          // Loop through the selected symptoms
+          selectedMedical.forEach((symptom, index) => {
+            // Create a new list item
+            const li = document.createElement("li");
 
-                // Set the text content of the list item
-                // li.textContent = `${index + 1}. ${symptom}`;
-                li.textContent = `${symptom}`;
+            // Set the text content of the list item
+            // li.textContent = `${index + 1}. ${symptom}`;
+            li.textContent = `${symptom}`;
 
-                // Append the list item to the ul
-                diagnosisList.appendChild(li);
-            });
-        }
-        else{
-            // Hide the section if there are no selected symptoms
-            document.getElementById('personal-history-section').style.display = 'none';
+            // Append the list item to the ul
+            diagnosisList.appendChild(li);
+          });
+        } else {
+          // Hide the section if there are no selected symptoms
+          document.getElementById("personal-history-section").style.display =
+            "none";
         }
 
         // Print the selected surgical history
-        if (selectedSurgical && selectedSurgical != '') {
-            // Find the ul with id "diagnosis-list"
-            const diagnosisList = document.getElementById('past-history-list');
+        if (selectedSurgical && selectedSurgical != "") {
+          // Find the ul with id "diagnosis-list"
+          const diagnosisList = document.getElementById("past-history-list");
 
-            // Clear the inner HTML
-            diagnosisList.innerHTML = '';
+          // Clear the inner HTML
+          diagnosisList.innerHTML = "";
 
-            // Loop through the selected symptoms
-            selectedSurgical.forEach((symptom, index) => {
-                // Create a new list item
-                const li = document.createElement('li');
+          // Loop through the selected symptoms
+          selectedSurgical.forEach((symptom, index) => {
+            // Create a new list item
+            const li = document.createElement("li");
 
-                // Set the text content of the list item
-                // li.textContent = `${index + 1}. ${symptom}`;
-                li.textContent = `${symptom}`;
+            // Set the text content of the list item
+            // li.textContent = `${index + 1}. ${symptom}`;
+            li.textContent = `${symptom}`;
 
-                // Append the list item to the ul
-                diagnosisList.appendChild(li);
-            });
-        }
-        else{
-            // Hide the section if there are no selected symptoms
-            document.getElementById('past-history-section').style.display = 'none';
+            // Append the list item to the ul
+            diagnosisList.appendChild(li);
+          });
+        } else {
+          // Hide the section if there are no selected symptoms
+          document.getElementById("past-history-section").style.display =
+            "none";
         }
 
         // Print the selected dignosis
-        if (selectedDignosis && selectedDignosis != '') {
-            // Find the ul with id "diagnosis-list"
-            const diagnosisList = document.getElementById('diagnosis-list');
+        if (selectedDignosis && selectedDignosis != "") {
+          // Find the ul with id "diagnosis-list"
+          const diagnosisList = document.getElementById("diagnosis-list");
 
-            // Clear the inner HTML
-            diagnosisList.innerHTML = '';
+          // Clear the inner HTML
+          diagnosisList.innerHTML = "";
 
-            // Loop through the selected symptoms
-            selectedDignosis.forEach((symptom, index) => {
-                // Create a new list item
-                const li = document.createElement('li');
+          // Loop through the selected symptoms
+          selectedDignosis.forEach((symptom, index) => {
+            // Create a new list item
+            const li = document.createElement("li");
 
-                // Set the text content of the list item
-                // li.textContent = `${index + 1}. ${symptom}`;
-                li.textContent = `${symptom}`;
+            // Set the text content of the list item
+            // li.textContent = `${index + 1}. ${symptom}`;
+            li.textContent = `${symptom}`;
 
-                // Append the list item to the ul
-                diagnosisList.appendChild(li);
-            });
-        }
-        else{
-            // Hide the section if there are no selected symptoms
-            document.getElementById('diagnosis-section').style.display = 'none';
+            // Append the list item to the ul
+            diagnosisList.appendChild(li);
+          });
+        } else {
+          // Hide the section if there are no selected symptoms
+          document.getElementById("diagnosis-section").style.display = "none";
         }
 
         // Print the selected investigation
-        if (selectedInvestigation && selectedInvestigation != '') {
-            // Find the ul with id "diagnosis-list"
-            const diagnosisList = document.getElementById('investigation-list');
+        if (selectedInvestigation && selectedInvestigation != "") {
+          // Find the ul with id "diagnosis-list"
+          const diagnosisList = document.getElementById("investigation-list");
 
-            // Clear the inner HTML
-            diagnosisList.innerHTML = '';
+          // Clear the inner HTML
+          diagnosisList.innerHTML = "";
 
-            // Loop through the selected symptoms
-            selectedInvestigation.forEach((symptom, index) => {
-                // Create a new list item
-                const li = document.createElement('li');
+          // Loop through the selected symptoms
+          selectedInvestigation.forEach((symptom, index) => {
+            // Create a new list item
+            const li = document.createElement("li");
 
-                // Set the text content of the list item
-                // li.textContent = `${index + 1}. ${symptom}`;
-                li.textContent = `${symptom}`;
+            // Set the text content of the list item
+            // li.textContent = `${index + 1}. ${symptom}`;
+            li.textContent = `${symptom}`;
 
-                // Append the list item to the ul
-                diagnosisList.appendChild(li);
-            });
+            // Append the list item to the ul
+            diagnosisList.appendChild(li);
+          });
+        } else {
+          // Hide the section if there are no selected symptoms
+          document.getElementById("investigation-section").style.display =
+            "none";
         }
-        else{
-            // Hide the section if there are no selected symptoms
-            document.getElementById('investigation-section').style.display = 'none';
 
+        if (CPG_Table === "true") {
+          if (currentPowerGlasses.DVSPH != "") {
+            document.getElementById("DV-SPH").value = currentPowerGlasses.DVSPH;
+          }
+
+          if (currentPowerGlasses.DVCYL != "") {
+            document.getElementById("DV-CYL").value = currentPowerGlasses.DVCYL;
+          }
+
+          if (currentPowerGlasses.DVAxis != "") {
+            document.getElementById("DV-Axis").value =
+              currentPowerGlasses.DVAxis;
+          }
+
+          if (currentPowerGlasses.DVVA != "") {
+            document.getElementById("DV-VA").value = currentPowerGlasses.DVVA;
+          }
+
+          if (currentPowerGlasses.DVSPH2 != "") {
+            document.getElementById("DV-SPH2").value =
+              currentPowerGlasses.DVSPH2;
+          }
+
+          if (currentPowerGlasses.DVCYL2 != "") {
+            document.getElementById("DV-CYL2").value =
+              currentPowerGlasses.DVCYL2;
+          }
+
+          if (currentPowerGlasses.DVAxis2 != "") {
+            document.getElementById("DV-Axis2").value =
+              currentPowerGlasses.DVAxis2;
+          }
+
+          if (currentPowerGlasses.DVVA2 != "") {
+            document.getElementById("DV-VA2").value = currentPowerGlasses.DVVA2;
+          }
+
+          if (currentPowerGlasses.NVSPH != "") {
+            document.getElementById("NV-SPH").value = currentPowerGlasses.NVSPH;
+          }
+
+          if (currentPowerGlasses.NVCYL != "") {
+            document.getElementById("NV-CYL").value = currentPowerGlasses.NVCYL;
+          }
+
+          if (currentPowerGlasses.NVAxis != "") {
+            document.getElementById("NV-Axis").value =
+              currentPowerGlasses.NVAxis;
+          }
+
+          if (currentPowerGlasses.NVVA != "") {
+            document.getElementById("NV-VA").value = currentPowerGlasses.NVVA;
+          }
+
+          if (currentPowerGlasses.NVSPH2 != "") {
+            document.getElementById("NV-SPH2").value =
+              currentPowerGlasses.NVSPH2;
+          }
+
+          if (currentPowerGlasses.NVCYL2 != "") {
+            document.getElementById("NV-CYL2").value =
+              currentPowerGlasses.NVCYL2;
+          }
+
+          if (currentPowerGlasses.NVAxis2 != "") {
+            document.getElementById("NV-Axis2").value =
+              currentPowerGlasses.NVAxis2;
+          }
+
+          if (currentPowerGlasses.NVVA2 != "") {
+            document.getElementById("NV-VA2").value = currentPowerGlasses.NVVA2;
+          }
+
+          if (currentPowerGlasses.IPD != "") {
+            document.getElementById("IPD").value = currentPowerGlasses.IPD;
+          }
+
+          if (currentPowerGlasses.TOG != "") {
+            document.getElementById("TOG").value = currentPowerGlasses.TOG;
+          }
+        } else {
+          document.getElementById("current-glass-power").style.display = "none";
         }
 
-        if(CPG_Table === 'true'){
-                if(currentPowerGlasses.DVSPH != ''){
-                    document.getElementById('DV-SPH').value = currentPowerGlasses.DVSPH;
-                }
+        // / Check if medicines exist in localStorage
+        if (!medicines || medicines.length === 0) {
+          console.log("No medicines found in localStorage.");
+          // Hide the medicines section if no medicines are found
+          document.getElementById("medicines-title").style.display = "none";
+          document.getElementById("medicines-table").style.display = "none";
+        } else {
+          // Get the table body element
+          const tbody = document.getElementById("medicines-tbody");
 
-                if(currentPowerGlasses.DVCYL != ''){
-                    document.getElementById('DV-CYL').value = currentPowerGlasses.DVCYL;
-                }
-
-                if(currentPowerGlasses.DVAxis != ''){
-                    document.getElementById('DV-Axis').value = currentPowerGlasses.DVAxis;
-                }
-
-                if(currentPowerGlasses.DVVA != ''){
-                    document.getElementById('DV-VA').value = currentPowerGlasses.DVVA;
-                }
-
-                if(currentPowerGlasses.DVSPH2 != ''){
-                    document.getElementById('DV-SPH2').value = currentPowerGlasses.DVSPH2;
-                }
-
-                if(currentPowerGlasses.DVCYL2 != ''){
-                    document.getElementById('DV-CYL2').value = currentPowerGlasses.DVCYL2;
-                }
-
-                if(currentPowerGlasses.DVAxis2 != ''){
-                    document.getElementById('DV-Axis2').value = currentPowerGlasses.DVAxis2;
-                }
-
-                if(currentPowerGlasses.DVVA2 != ''){
-                    document.getElementById('DV-VA2').value = currentPowerGlasses.DVVA2;
-                }
-
-                if(currentPowerGlasses.NVSPH != ''){
-                    document.getElementById('NV-SPH').value = currentPowerGlasses.NVSPH;
-                }
-
-                if(currentPowerGlasses.NVCYL != ''){
-                    document.getElementById('NV-CYL').value = currentPowerGlasses.NVCYL;
-                }
-
-                if(currentPowerGlasses.NVAxis != ''){
-                    document.getElementById('NV-Axis').value = currentPowerGlasses.NVAxis;
-                }
-
-                if(currentPowerGlasses.NVVA != ''){
-                    document.getElementById('NV-VA').value = currentPowerGlasses.NVVA;
-                }
-
-                if(currentPowerGlasses.NVSPH2 != ''){
-                    document.getElementById('NV-SPH2').value = currentPowerGlasses.NVSPH2;
-                }
-
-                if(currentPowerGlasses.NVCYL2 != ''){
-                    document.getElementById('NV-CYL2').value = currentPowerGlasses.NVCYL2;
-                }
-
-                if(currentPowerGlasses.NVAxis2 != ''){
-                    document.getElementById('NV-Axis2').value = currentPowerGlasses.NVAxis2;
-                }
-
-                if(currentPowerGlasses.NVVA2 != ''){
-                    document.getElementById('NV-VA2').value = currentPowerGlasses.NVVA2;
-                }
-
-                if(currentPowerGlasses.IPD != ''){
-                    document.getElementById('IPD').value = currentPowerGlasses.IPD;
-                }
-
-                if(currentPowerGlasses.TOG != ''){
-                    document.getElementById('TOG').value = currentPowerGlasses.TOG;
-                }
-
-
-       
-            }
-            else{
-                document.getElementById('current-glass-power').style.display = 'none';
-            }
-
-            // / Check if medicines exist in localStorage
-            if (!medicines || medicines.length === 0) {
-                console.log("No medicines found in localStorage.");
-                // Hide the medicines section if no medicines are found
-                document.getElementById('medicines-title').style.display = 'none';
-                document.getElementById('medicines-table').style.display = 'none';
-                
-            }
-            else{
-                // Get the table body element
-            const tbody = document.getElementById('medicines-tbody');
-
-                // Loop through the medicines and add rows to the table
-                medicines.forEach(medicine => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${medicine.medicineType || '-'}</td>
-                        <td>${medicine.medicineSelect || '-'}</td>
-                        <td>${medicine.medicineDose || '-'}</td>
-                        <td>${medicine.medicineQuantity || '-'}</td>
+          // Loop through the medicines and add rows to the table
+          medicines.forEach((medicine) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                        <td>${medicine.medicineType || "-"}</td>
+                        <td>${medicine.medicineSelect || "-"}</td>
+                        <td>${medicine.medicineDose || "-"}</td>
+                        <td>${medicine.medicineQuantity || "-"}</td>
                     `;
-                    tbody.appendChild(row);
-                });
-            }
-        
+            tbody.appendChild(row);
+          });
+        }
+      });
+    </script>
+
+<script>
+  // Function to display the print time on every page
+  function addPrintTime() {
+    const printTime = new Date().toLocaleString(); // Get the current date and time
+    const headerElements = document.querySelectorAll('.paper .header'); // Get all headers
+
+    headerElements.forEach(header => {
+      const timeElement = document.createElement('span');
+      timeElement.style.fontSize = '12px';
+      timeElement.style.fontStyle = 'italic';
+      timeElement.textContent = `Print Time: ${printTime}`;
+      
+      // Create a wrapper for positioning the time
+      const timeWrapper = document.createElement('div');
+      timeWrapper.style.position = 'absolute';
+      timeWrapper.style.top = '300px'; // Position 300px from the top
+      timeWrapper.style.left = '0';
+      timeWrapper.style.width = '100%'; // Ensures it's full width
+      timeWrapper.style.textAlign = 'center'; // Center the time on the page
+      timeWrapper.appendChild(timeElement); // Append the time element to the wrapper
+
+      // Append the wrapper to the body or a specific container
+      document.body.appendChild(timeWrapper);
     });
+  }
+
+  // Add print time before printing
+  window.onbeforeprint = addPrintTime;
 </script>
 
-</body>
+
+
+  
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+  </body>
 </html>
