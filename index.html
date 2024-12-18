@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Multi-Step Patient Form</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <style>
-    /* Custom container */
-    .container {
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Multi-Step Patient Form</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="icon" type="image/x-icon" href="./Screenshot 2024-12-17 224433.png">
+    <style>
+      /* Custom container */
+      .container {
         max-width: 900px;
         margin: auto;
         background: #fff;
@@ -15,53 +22,60 @@
         border-radius: 10px;
         padding: 20px;
         height: 850px;
-    }
+      }
 
-    h2 {
+      h2 {
         text-align: center;
         color: #333;
         margin-bottom: 20px;
-    }
+      }
 
-    .form-step {
+      .form-step {
         display: none;
-    }
+      }
 
-    .form-step.active {
+      .form-step.active {
         display: block;
-    }
+      }
 
-    .form-group {
+      .form-group {
         margin-bottom: 20px;
-    }
+       
+      }
 
-    label {
+      label {
         display: block;
         font-weight: bold;
         margin-bottom: 8px;
-    }
+      }
 
-    input, select {
+      input,
+      select {
         width: 100%;
         padding: 10px;
         border: 1px solid #ccc;
         border-radius: 5px;
         background: #f5f5f5;
-    }
+      }
 
-    input:focus, select:focus {
-        border: 1px solid #007BFF;
-    }
+      input:focus,
+      select:focus {
+        border: 1px solid #007bff;
+      }
 
-    /* Item grid */
-    .item-grid {
+      /* Item grid */
+      .item-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
         gap: 10px;
         margin-top: 10px;
-    }
+      }
 
-    .item, .medical, .surgical, .dignosis, .investigation {
+      .item,
+      .medical,
+      .surgical,
+      .dignosis,
+      .investigation {
         padding: 8px;
         background: #f0f0f0;
         border: 1px solid #ccc;
@@ -70,108 +84,119 @@
         cursor: pointer;
         font-size: 14px;
         transition: background-color 0.3s ease, transform 0.2s ease;
-    }
+        width: fit-content;
+      }
 
-    .item:hover, .medical:hover, .surgical:hover, .dignosis:hover, .investigation:hover {
+      .item:hover,
+      .medical:hover,
+      .surgical:hover,
+      .dignosis:hover,
+      .investigation:hover {
         background-color: #e0e0e0;
         transform: scale(1.05);
-    }
+      }
 
-    .item.selected, .medical.selected, .surgical.selected, .dignosis.selected, .investigation.selected {
-        background-color: #007BFF;
+      .item.selected,
+      .medical.selected,
+      .surgical.selected,
+      .diagnosis.selected,
+      .investigation.selected {
+        background-color: #007bff;
         color: white;
         border-color: #0056b3;
-    }
+      }
 
-    button {
+      button {
         padding: 10px 15px;
         font-size: 15px;
         font-weight: bold;
         color: #fff;
-        background-color: #007BFF;
+        background-color: #007bff;
         border: none;
         border-radius: 5px;
         cursor: pointer;
         margin-top: 20px;
-        height: 35px;
-    }
+        height: 40px;
+      }
 
-    button:hover {
+      button:hover {
         background-color: #0056b3;
-    }
+      }
 
-    .add-medicine-btn {
+      .add-medicine-btn {
         background-color: #28a745;
-    }
+      }
 
-    .add-medicine-btn:hover {
+      .add-medicine-btn:hover {
         background-color: #218838;
-    }
+      }
 
-    /* Medicine Entry */
-    .medicine-entry {
+      /* Medicine Entry */
+      .medicine-entry {
         display: flex;
         gap: 10px;
         margin-bottom: 10px;
         height: 40px;
-    }
+      }
 
-    .medicine-entry select, .medicine-entry input {
+      .medicine-entry select,
+      .medicine-entry input {
         flex: 1;
         padding: 10px;
-    }
+      }
 
-    /* Table Styling */
-    table {
+      /* Table Styling */
+      table {
         width: 100%;
         border-collapse: collapse;
         margin-top: 15px;
-    }
+      }
 
-    th, td {
+      th,
+      td {
         border: 1px solid #ddd;
         padding: 8px;
         text-align: center;
-    }
+      }
 
-    th {
+      th {
         background-color: #f4f4f4;
         font-weight: bold;
-    }
+      }
 
-    input[type="text"] {
+      input[type="text"] {
         width: 90%;
         padding: 8px;
         box-sizing: border-box;
-    }
+      }
 
-    /* Navbar Styling */
-    .navbar {
-        height: 50px;
+      /* Navbar Styling */
+      .navbar {
+        height: 80px;
         display: flex;
         justify-content: center;
         align-items: center;
         background-color: #333;
         padding: 20px;
-        margin-top: 0PX;
+        margin-top: 0px;
         width: 100%;
-    }
+      }
 
-    .navbar-logo {
+      .navbar-logo {
         display: flex;
         align-items: center;
         gap: 15px;
-    }
+      }
 
-    .company-name {
+      .company-name {
         color: #fff;
         font-size: 30px;
         font-weight: bold;
         text-transform: uppercase;
-    }
-    
-    /* Options Table Styling */
-    .options-table {
+      }
+
+      /* Options Table Styling */
+      .options-table {
         display: none;
         position: absolute;
         background-color: #fff;
@@ -180,474 +205,692 @@
         max-height: 250px;
         overflow-y: auto;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    }
+      }
 
-    .options-table table {
+      .options-table table {
         border-collapse: collapse;
         width: 100%;
-    }
+      }
 
-    .options-table td {
+      .options-table td {
         border: 1px solid #ddd;
         padding: 8px;
         cursor: pointer;
-    }
+      }
 
-    .options-table td:hover {
+      .options-table td:hover {
         background-color: #f0f0f0;
-    }
+      }
 
-    #axisOptionsTable td {
+      #axisOptionsTable td {
         padding: 5px 10px;
         border: 1px solid #ddd;
         text-align: center;
         cursor: pointer;
-    }
+      }
 
-    #axisOptionsTable td:hover {
+      #axisOptionsTable td:hover {
         background-color: #f0f0f0;
-    }
+      }
+      .item-grid {
+        display: none;
+      }
+      .surgical {
+        cursor: pointer;
+        margin: 5px;
+        padding: 5px;
+        background-color: lightgray;
+      }
+      .surgical.selected {
+        background-color: #007bff;
+      }
 
-</style>
+      /* .surgical {
+        cursor: pointer;
+        padding: 10px;
+        background-color: lightgray;
+        text-align: center;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      } */
 
-
-  </style>
-  <link rel="stylesheet" href="./style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-</head>
-<body>
-    <nav class="navbar">
-        <div class="navbar-logo">
-
-            <h1 class="company-name">रविकल्प हॉस्पिटल</h1>
-        </div>
-    </nav>
     
+      .item-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
 
+      .col-item {
+        flex: 1 1 calc(20% - 10px); /* 5 items per row */
+      }
 
-  <div class="container">
-    <h2>Patient Information</h2>
-    <form id="multiStepForm">
-      <!-- Step 1: Personal Information -->
-      <div class="form-step active" id="step-1">
-        <div class="form-group">
-          <label for="visit-date">Date of Visit:</label>
-          <input type="date" id="visit-date" readonly>
-        </div>
-        <div class="form-group">
-          <label for="patient-name">Patient Name:</label>
-          <input type="text" id="patient-name" placeholder="Enter patient name" oninput="savelocal()" required>
-        </div>
-        <div class="form-group">
-          <label for="age">Age:</label>
-          <input type="number" id="age" placeholder="Enter age" min="1" max="120" required>
-        </div>
-        <div class="form-group">
-          <label for="gender">Gender:</label>
-          <select id="gender" required>
-            <option value="" disabled selected>Select gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="mobile-number">Mobile Number:</label>
-          <input type="tel" id="mobile-number" placeholder="Enter mobile number" pattern="[0-9]{10}" required>
-        </div>
-        <div class="button-group">
-          <button type="button" onclick="nextStep()">Next</button>
-        </div>
+      .item-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .diagnosis {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    background:#f0f0f0;
+    color: black;
+  }
+
+  .diagnosis.selected {
+    background-color: #007bff;
+    color: white;
+  }
+
+    </style>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar-logo">
+        <h1 class="company-name">रविकल्प हॉस्पिटल</h1>
       </div>
+    </nav>
 
-      <!-- Step 2: Symptoms, Medical History, and Surgical History -->
-      <div class="form-step" id="step-2">
-        <div class="form-group">
-          <h3>Select Symptoms:</h3>
-          <select id="symptoms-eye-select" name="eye" style="width: 140px;">
-            <option value="">Select Eye </option>
-            <option value="RE">Right Eye</option>
-            <option value="LE">Left Eye</option>
-            <option value="BE">Both Eyes</option>
-          </select>
-          <div class="item-grid">
-            <div class="item" onclick="toggleSymptoms(this)">Blurry Vision</div>
-
-<div class="item" onclick="toggleSymptoms(this)">Spot in Front of Eye</div>
-<div class="item" onclick="toggleSymptoms(this)">Light Sensitivity</div>
-<div class="item" onclick="toggleSymptoms(this)">Headache</div>
-<div class="item" onclick="toggleSymptoms(this)">Floaters</div>
-
-<div class="item" onclick="toggleSymptoms(this)">Pain in Eye</div>
-<div class="item" onclick="toggleSymptoms(this)">Swelling on Lid</div>
-<div class="item" onclick="toggleSymptoms(this)">Irritation</div>
-<div class="item" onclick="toggleSymptoms(this)">Itching</div>
-<div class="item" onclick="toggleSymptoms(this)">Watering</div>
-<div class="item" onclick="toggleSymptoms(this)">Night Vision Problem</div>
-<div class="item" onclick="toggleSymptoms(this)">Redness</div>
-<div class="item" onclick="toggleSymptoms(this)">Pain Around Eye</div>
-<div class="item" onclick="toggleSymptoms(this)">Discharge</div>
-<div class="item" onclick="toggleSymptoms(this)">Pain in Eye</div>
-
-<div class="item" onclick="toggleSymptoms(this)">Blind Eye (BE) DOV</div>
-<div class="item" onclick="toggleSymptoms(this)">Dryness in Eye</div>
-<div class="item" onclick="toggleSymptoms(this)">Sudden Loss of Vision</div>
-<div class="item" onclick="toggleSymptoms(this)">Burning</div>
-<div class="item" onclick="toggleSymptoms(this)">Double Vision</div>
-<div class="item" onclick="toggleSymptoms(this)">Barapon</div>
-<div class="item" onclick="toggleSymptoms(this)">Lump on Eyelid</div>
-<div class="item" onclick="toggleSymptoms(this)">Blood Spot in Eye</div>
-<div class="item" onclick="toggleSymptoms(this)">Dilated Pupil</div>
-<div class="item" onclick="toggleSymptoms(this)">Drooping Eyelid</div>
-
+    <div class="container">
+      <h2>Patient Information</h2>
+      <form id="multiStepForm">
+        <!-- Step 1: Personal Information -->
+        <div class="form-step active" id="step-1">
+          <div class="form-group">
+            <label for="visit-date">Date of Visit:</label>
+            <input type="date" id="visit-date" readonly />
+          </div>
+          <div class="form-group">
+            <label for="patient-name">Patient Name:</label>
+            <input
+              type="text"
+              id="patient-name"
+              placeholder="Enter patient name"
+              oninput="savelocal()"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="age">Age:</label>
+            <input
+              type="number"
+              id="age"
+              placeholder="Enter age"
+              min="1"
+              max="120"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="gender">Gender:</label>
+            <select id="gender" required>
+              <option value="" disabled selected>Select gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="mobile-number">Mobile Number:</label>
+            <input
+              type="tel"
+              id="mobile-number"
+              placeholder="Enter mobile number"
+              pattern="[0-9]{10}"
+              required
+            />
+          </div>
+          <div class="button-group">
+            <button type="button" onclick="nextStep()">Next</button>
           </div>
         </div>
-        <div class="form-group" style="margin-top: 70px;">
-          <h3>Medical History:</h3>
-          <!-- <select id="medical-eye-select" name="eye" style="width: 140px;">
+
+        <!-- Step 2: Symptoms, Medical History, and Surgical History -->
+        <div class="form-step" id="step-2">
+          <div class="form-group">
+            <h3>Select Symptoms:</h3>
+            <select id="symptoms-eye-select" name="eye" style="width: 140px" onchange="showSymptomOptions()">
+              <option value="">Select Eye</option>
+              <option value="RE">Right Eye</option>
+              <option value="LE">Left Eye</option>
+              <option value="BE">Both Eyes</option>
+            </select>
+            
+            <!-- Symptom options for Right Eye -->
+            <div class="item-grid" id="Right-Eye-Symptoms" style="display: none">
+              <div class="item" onclick="toggleSymptoms(this)">Blurry Vision</div>
+              <div class="item" onclick="toggleSymptoms(this)">Spot in Front of Eye</div>
+              <div class="item" onclick="toggleSymptoms(this)">Light Sensitivity</div>
+              <div class="item" onclick="toggleSymptoms(this)">Headache</div>
+              <div class="item" onclick="toggleSymptoms(this)">Floaters</div>
+              <div class="item" onclick="toggleSymptoms(this)">Pain in Eye</div>
+              <div class="item" onclick="toggleSymptoms(this)">Swelling on Lid</div>
+              <div class="item" onclick="toggleSymptoms(this)">Irritation</div>
+              <div class="item" onclick="toggleSymptoms(this)">Itching</div>
+              <div class="item" onclick="toggleSymptoms(this)">Watering</div>
+              <div class="item" onclick="toggleSymptoms(this)">Night Vision Problem</div>
+              <div class="item" onclick="toggleSymptoms(this)">Redness</div>
+              <!-- Add more symptoms if needed -->
+            </div>
+            
+            <!-- Symptom options for Left Eye -->
+            <div class="item-grid" id="Left-Eye-Symptoms" style="display: none">
+              <div class="item" onclick="toggleSymptoms(this)">Blurry Vision</div>
+              <div class="item" onclick="toggleSymptoms(this)">Spot in Front of Eye</div>
+              <div class="item" onclick="toggleSymptoms(this)">Light Sensitivity</div>
+              <div class="item" onclick="toggleSymptoms(this)">Headache</div>
+              <div class="item" onclick="toggleSymptoms(this)">Floaters</div>
+              <div class="item" onclick="toggleSymptoms(this)">Pain in Eye</div>
+              <div class="item" onclick="toggleSymptoms(this)">Swelling on Lid</div>
+              <div class="item" onclick="toggleSymptoms(this)">Irritation</div>
+              <div class="item" onclick="toggleSymptoms(this)">Itching</div>
+              <div class="item" onclick="toggleSymptoms(this)">Watering</div>
+              <div class="item" onclick="toggleSymptoms(this)">Night Vision Problem</div>
+              <div class="item" onclick="toggleSymptoms(this)">Redness</div>
+              <!-- Add more symptoms if needed -->
+            </div>
+            <!-- Symptom options for Both Eyes -->
+<div class="item-grid" id="Both-Eyes-Symptoms" style="display: none">
+  <div class="item" onclick="toggleSymptoms(this)">Blurry Vision</div>
+  <div class="item" onclick="toggleSymptoms(this)">Spot in Front of Eye</div>
+  <div class="item" onclick="toggleSymptoms(this)">Light Sensitivity</div>
+  <div class="item" onclick="toggleSymptoms(this)">Headache</div>
+  <div class="item" onclick="toggleSymptoms(this)">Floaters</div>
+  <div class="item" onclick="toggleSymptoms(this)">Pain in Eye</div>
+  <div class="item" onclick="toggleSymptoms(this)">Swelling on Lid</div>
+  <div class="item" onclick="toggleSymptoms(this)">Irritation</div>
+  <div class="item" onclick="toggleSymptoms(this)">Itching</div>
+  <div class="item" onclick="toggleSymptoms(this)">Watering</div>
+  <div class="item" onclick="toggleSymptoms(this)">Night Vision Problem</div>
+  <div class="item" onclick="toggleSymptoms(this)">Redness</div>
+  <!-- Add more symptoms if needed -->
+</div>
+          </div>
+          <div class="form-group" style="margin-top: 70px">
+            <h3>Medical History:</h3>
+            <!-- <select id="medical-eye-select" name="eye" style="width: 140px;">
             <option value="">Select Eye </option>
             <option value="RE">Right Eye</option>
             <option value="LE">Left Eye</option>
             <option value="BE">Both Eyes</option>
           </select> -->
-          
-          <div class="item-grid">
-            <div class="medical" onclick="toggleMedical(this)">Hypertension</div>
-            <div class="medical" onclick="toggleMedical(this)">Asthma</div>
-            <div class="medical" onclick="toggleMedical(this)">Diabetes</div>
-           
-            <div class="medical" onclick="toggleMedical(this)">IHD</div>
-            <div class="medical" onclick="toggleMedical(this)">Jaundice</div>
-            <div class="medical" onclick="toggleMedical(this)">Koch's</div>
-            <div class="medical" onclick="toggleMedical(this)">Cancer</div>
-            <div class="medical" onclick="toggleMedical(this)">CABG</div>
-            <div class="medical" onclick="toggleMedical(this)">PTCA</div>
-           
-            
+
+            <div class="item-grid">
+              <div class="medical" onclick="toggleMedical(this)">
+                Hypertension
+              </div>
+              <div class="medical" onclick="toggleMedical(this)">Asthama</div>
+              <div class="medical" onclick="toggleMedical(this)">Diabetes</div>
+
+              <div class="medical" onclick="toggleMedical(this)">IHD</div>
+              <div class="medical" onclick="toggleMedical(this)">Jaundice</div>
+              <div class="medical" onclick="toggleMedical(this)">Koch's</div>
+              <div class="medical" onclick="toggleMedical(this)">Cancer</div>
+              <div class="medical" onclick="toggleMedical(this)">CABG</div>
+              <div class="medical" onclick="toggleMedical(this)">PTCA</div>
+            </div>
+          </div>
+         
+          <div class="form-group" style="margin-top: 60px">
+            <h3>Surgical History:</h3>
+
+            <!-- Select dropdown to choose eye -->
+            <select
+              id="surgical-eye-select"
+              name="eye"
+              class="form-select"
+              style="width: 140px"
+              onchange="showSurgicalOptions()"
+            >
+              <option value="">Select Eye</option>
+              <option value="RE">Right Eye</option>
+              <option value="LE">Left Eye</option>
+              <option value="BE">Both Eyes</option>
+            </select>
+
+            <!-- Surgical options for Right Eye -->
+            <div class="item-grid " id="Right Eye" style="display: none">
+              <div class="col-item">
+                <div class="surgical w-5" onclick="toggleSurgical(this)">
+                  Retina Surgery
+                </div>
+              </div>
+              <div class="col-item">
+                <div class="surgical" onclick="toggleSurgical(this)">
+                  Glaucoma Surgery
+                </div>
+              </div>
+              <div class="col-item">
+                <div class="surgical" onclick="toggleSurgical(this)">
+                  Cataract Surgery
+                </div>
+              </div>
+              <div class="col-item">
+                <div class="surgical" onclick="toggleSurgical(this)">
+                  Pterygium Surgery
+                </div>
+              </div>
+              <!-- Add more surgery options if needed -->
+              <div class="col-item">
+                <div class="surgical" onclick="toggleSurgical(this)">
+                  Another Surgery
+                </div>
+              </div>
+            </div>
+
+            <!-- Surgical options for Left Eye -->
+            <div class="item-grid" id="Left Eye" style="display: none">
+              <div class="col-item">
+                <div class="surgical" onclick="toggleSurgical(this)">
+                  Retina Surgery
+                </div>
+              </div>
+              <div class="col-item">
+                <div class="surgical" onclick="toggleSurgical(this)">
+                  Glaucoma Surgery
+                </div>
+              </div>
+              <div class="col-item">
+                <div class="surgical" onclick="toggleSurgical(this)">
+                  Cataract Surgery
+                </div>
+              </div>
+              <div class="col-item">
+                <div class="surgical" onclick="toggleSurgical(this)">
+                  Pterygium Surgery
+                </div>
+              </div>
+              <!-- Add more surgery options if needed -->
+              <div class="col-item">
+                <div class="surgical" onclick="toggleSurgical(this)">
+                  Another Surgery
+                </div>
+              </div>
+            </div>
+
+            <!-- Surgical options for Both Eyes -->
+            <div class="item-grid" id="Both Eyes" style="display: none">
+              <div class="col-item">
+                <div class="surgical" onclick="toggleSurgical(this)">
+                  Retina Surgery
+                </div>
+              </div>
+              <div class="col-item">
+                <div class="surgical" onclick="toggleSurgical(this)">
+                  Glaucoma Surgery
+                </div>
+              </div>
+              <div class="col-item">
+                <div class="surgical" onclick="toggleSurgical(this)">
+                  Cataract Surgery
+                </div>
+              </div>
+              <div class="col-item">
+                <div class="surgical" onclick="toggleSurgical(this)">
+                  Pterygium Surgery
+                </div>
+              </div>
+              <!-- Add more surgery options if needed -->
+              <div class="col-item">
+                <div class="surgical" onclick="toggleSurgical(this)">
+                  Another Surgery
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="button-group">
+            <button type="button" onclick="prevStep()">Back</button>
+            <button type="button" onclick="nextStep()">Next</button>
           </div>
         </div>
-        <div class="form-group" style="margin-top: 60px;">
-          <h3>Surgical History:</h3>
 
-<select id="surgical-eye-select" name="eye" style="width: 140px;">
-  <option value="">Select Eye </option>
-  <option value="RE">Right Eye</option>
-  <option value="LE">Left Eye</option>
-  <option value="BE">Both Eyes</option>
-</select>
-
-          <div class="item-grid">
-            <div class="surgical" onclick="toggleSurgical(this)">Pedophatsa</div>
-            <div class="surgical" onclick="toggleSurgical(this)">Retina Surgery</div>
-            <div class="surgical" onclick="toggleSurgical(this)">Glaucoma Surgery</div>
-            <div class="surgical" onclick="toggleSurgical(this)">Cataract Surgery</div>
-            <div class="surgical" onclick="toggleSurgical(this)">Pterygium Surgery</div>
-            
+        <!-- Step 3: Current Power Glasses -->
+        <div class="form-step" id="step-3">
+          <div class="form-group">
+            <h3>Current Power Glasses:</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th colspan="4">Right Eye</th>
+                  <th colspan="4">Left Eye</th>
+                </tr>
+              </thead>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th colspan="1">SPH</th>
+                  <th colspan="1">CYL</th>
+                  <th colspan="1">Axis</th>
+                  <th colspan="1">V/A</th>
+                  <th colspan="1">SPH</th>
+                  <th colspan="1">CLK</th>
+                  <th colspan="1">Axis</th>
+                  <th colspan="1">V/A</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>DV</td>
+                  <td><input type="text" id="DV-SPH" /></td>
+                  <td><input type="text" id="DV-CYL" /></td>
+                  <td><input type="text" id="DV-Axis" /></td>
+                  <td><input type="text" id="DV-VA" /></td>
+                  <td><input type="text" id="DV-SPH2" /></td>
+                  <td><input type="text" id="DV-CYL2" /></td>
+                  <td><input type="text" id="DV-Axis2" /></td>
+                  <td><input type="text" id="DV-VA2" /></td>
+                </tr>
+                <tr>
+                  <td>NV</td>
+                  <td><input type="text" id="NV-SPH" /></td>
+                  <td><input type="text" id="NV-CYL" /></td>
+                  <td><input type="text" id="NV-Axis" /></td>
+                  <td><input type="text" id="NV-VA" /></td>
+                  <td><input type="text" id="NV-SPH2" /></td>
+                  <td><input type="text" id="NV-CYL2" /></td>
+                  <td><input type="text" id="NV-Axis2" /></td>
+                  <td><input type="text" id="NV-VA2" /></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="button-group">
+            <button type="button" onclick="prevStep()">Back</button>
+            <button type="button" onclick="nextStep()">Next</button>
           </div>
         </div>
-        <div class="button-group">
-          <button type="button" onclick="prevStep()">Back</button>
-          <button type="button" onclick="nextStep()">Next</button>
+
+        <!-- Step 4: Prescribed Medicines -->
+        <div class="form-step" id="step-4">
+          <div class="form-group">
+            <h3>Prescribed Medicines:</h3>
+            <div id="medicine-list" class="medicine-list"></div>
+            <button
+              type="button"
+              class="add-medicine-btn"
+              onclick="addMedicineEntry()"
+            >
+              + Add Medicine
+            </button>
+          </div>
+          <div class="button-group">
+            <button type="button" onclick="prevStep()">Back</button>
+            <button type="button" onclick="nextStep()">Next</button>
+          </div>
         </div>
-      </div>
+      </form>
 
-      <!-- Step 3: Current Power Glasses -->
-      <div class="form-step" id="step-3">
-        <div class="form-group">
-          <h3>Current Power Glasses:</h3>
-          <table>
-            <thead>
-              <tr>
-                <th></th>
-                <th colspan="4">Right Eye</th>
-                <th colspan="4">Left Eye</th>
-              </tr>
-            </thead>
-            <thead>
-              <tr>
-                <th></th>
-                <th colspan="1">SPH</th>
-                <th colspan="1">CYL</th>
-                <th colspan="1">Axis</th>
-                <th colspan="1">V/A</th>
-                <th colspan="1">SPH</th>
-                <th colspan="1">CLK</th>
-                <th colspan="1">Axis</th>
-                <th colspan="1">V/A</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>DV</td>
-                <td><input type="text"  id="DV-SPH"></td>
-                <td><input type="text"  id="DV-CYL"></td>
-                <td><input type="text"  id="DV-Axis"></td>
-                <td><input type="text"  id="DV-VA"></td>
-                <td><input type="text"  id="DV-SPH2"></td>
-                <td><input type="text"  id="DV-CYL2"></td>
-                <td><input type="text"  id="DV-Axis2"></td>
-                <td><input type="text"  id="DV-VA2"></td>
-              </tr>
-              <tr>
-                <td>NV</td>
-                <td><input type="text"  id="NV-SPH"></td>
-                <td><input type="text"  id="NV-CYL"></td>
-                <td><input type="text"  id="NV-Axis"></td>
-                <td><input type="text"  id="NV-VA"></td>
-                <td><input type="text"  id="NV-SPH2"></td>
-                <td><input type="text"  id="NV-CYL2"></td>
-                <td><input type="text"  id="NV-Axis2"></td>
-                <td><input type="text"  id="NV-VA2"></td>
-            </tr>
-           
-          
-          </tbody>
-        </table>
-        </div>
-        <div class="button-group">
-          <button type="button" onclick="prevStep()">Back</button>
-          <button type="button" onclick="nextStep()">Next</button>
-        </div>
-      </div>
-
-      <!-- Step 4: Prescribed Medicines -->
-      <div class="form-step" id="step-4">
-        <div class="form-group">
-          <h3>Prescribed Medicines:</h3>
-          <div id="medicine-list" class="medicine-list"></div>
-          <button type="button" class="add-medicine-btn" onclick="addMedicineEntry()">+ Add Medicine</button>
-        </div>
-        <div class="button-group">
-          <button type="button" onclick="prevStep()">Back</button>
-          <button type="button" onclick="nextStep()">Next</button>
-        </div>
-      </div>
-    </form>
-
-
-
-
-    <div class="form-step" id="step-5">
+      <div class="form-step" id="step-5">
         <div class="form-group">
           <h3>Dignosis:</h3>
-          <select id="dignosis-eye-select" name="eye" style="width: 140px;">
-            <option value="">Select Eye </option>
+          <select id="diagnosis-eye-select" name="eye" style="width: 140px" onchange="showDiagnosisOptions()">
+            <option value="">Select Eye</option>
             <option value="RE">Right Eye</option>
             <option value="LE">Left Eye</option>
             <option value="BE">Both Eyes</option>
           </select>
-          <div class="item-grid">
-            <div class="dignosis" onclick="toggleDignosis(this)">Myopia</div>
-            <div class="dignosis" onclick="toggleDignosis(this)">Blepharitis</div>
-            <div class="dignosis" onclick="toggleDignosis(this)">Hypermetropia</div>
-            <div class="dignosis" onclick="toggleDignosis(this)">Macular Edema</div>
-            <div class="dignosis" onclick="toggleDignosis(this)">Astigmatism</div>
-            <div class="dignosis" onclick="toggleDignosis(this)">Macular Hole</div>
-            <div class="dignosis" onclick="toggleDignosis(this)">Stye</div>
-            <div class="dignosis" onclick="toggleDignosis(this)">Macular Pucker</div>
-            <div class="dignosis" onclick="toggleDignosis(this)">Chalazion</div>
-            <div class="dignosis" onclick="toggleDignosis(this)">Presbyopia</div>
-            <div class="dignosis" onclick="toggleDignosis(this)">Conjunctivitis</div>
-            <div class="dignosis" onclick="toggleDignosis(this)">Refractive Errors</div>
-            <div class="dignosis" onclick="toggleDignosis(this)">Glaucoma</div>
-            <div class="dignosis" onclick="toggleDignosis(this)">Retinal Detachment</div>
-           
-            <div class="dignosis" onclick="toggleDignosis(this)">Pseudophakia</div>
-            <div class="dignosis" onclick="toggleDignosis(this)">Retinitis Pigmentosa</div>
-            <div class="dignosis" onclick="toggleDignosis(this)">Aphakia</div>
-            <div class="dignosis" onclick="toggleDignosis(this)">ROP</div>
-            <div class="dignosis" onclick="toggleDignosis(this)">Diabetic Retinopathy</div>
-            <div class="dignosis" onclick="toggleDignosis(this)">Iritis</div>
-            <div class="dignosis" onclick="toggleDignosis(this)">Uveitis</div>
-            <div class="dignosis" onclick="toggleDignosis(this)">Amblyopia</div>
-            <div class="dignosis" onclick="toggleDignosis(this)">Vitreous Detachment</div>
-            <div class="dignosis" onclick="toggleDignosis(this)">Color Blindness</div>
-            
-            <div class="dignosis" onclick="toggleDignosis(this)">Alternate Esotropia</div>
-            <div class="dignosis" onclick="toggleDignosis(this)">Alternate Exotropia</div>
-            <div class="dignosis" onclick="toggleDignosis(this)">Convergent Squint</div>
-            
+          
+          <!-- Diagnosis options for Right Eye -->
+          <div class="item-grid" id="Right-Eye-Diagnosis" style="display: none">
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Myopia</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Blepharitis</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Hypermetropia</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Macular Edema</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Astigmatism</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Macular Hole</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Stye</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Chalazion</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Presbyopia</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Conjunctivitis</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Refractive Errors</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Glaucoma</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Retinal Detachment</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Pseudophakia</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Diabetic Retinopathy</div>
+          </div>
+          
+          <!-- Diagnosis options for Left Eye -->
+          <div class="item-grid" id="Left-Eye-Diagnosis" style="display: none">
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Myopia</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Blepharitis</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Hypermetropia</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Macular Edema</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Astigmatism</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Macular Hole</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Stye</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Chalazion</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Presbyopia</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Conjunctivitis</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Refractive Errors</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Glaucoma</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Retinal Detachment</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Pseudophakia</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Diabetic Retinopathy</div>
+          </div>
+          
+          <!-- Diagnosis options for Both Eyes -->
+          <div class="item-grid" id="Both-Eyes-Diagnosis" style="display: none">
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Myopia</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Blepharitis</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Hypermetropia</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Macular Edema</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Astigmatism</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Macular Hole</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Stye</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Chalazion</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Presbyopia</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Conjunctivitis</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Refractive Errors</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Glaucoma</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Retinal Detachment</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Pseudophakia</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Diabetic Retinopathy</div>
           </div>
         </div>
-        <div class="form-group" style="margin-top: 70px;">
+        <div class="form-group" style="margin-top: 70px">
           <h3>Investigation:</h3>
 
-          <select id="investigation-eye-select" name="eye" style="width: 140px;">
-            <option value="">Select Eye </option>
-            <option value="RE">Right Eye</option>
-            <option value="LE">Left Eye</option>
-            <option value="BE">Both Eyes</option>
-          </select>
+          
           <div class="item-grid">
-            <div class="investigation" onclick="toggleInvestigation(this)">CBC</div>
-<div class="investigation" onclick="toggleInvestigation(this)">BSL (R)</div>
+            <div class="investigation" onclick="toggleInvestigation(this)">
+              CBC
+            </div>
+            <div class="investigation" onclick="toggleInvestigation(this)">
+              BSL (R)
+            </div>
 
-<div class="investigation" onclick="toggleInvestigation(this)">HBSAg</div>
-<div class="investigation" onclick="toggleInvestigation(this)">HIV</div>
-<div class="investigation" onclick="toggleInvestigation(this)">Urine (R)</div>
-<div class="investigation" onclick="toggleInvestigation(this)">Mountox</div>
-<div class="investigation" onclick="toggleInvestigation(this)">Uric Acid</div>
-<div class="investigation" onclick="toggleInvestigation(this)">Sr. Creat</div>
-<div class="investigation" onclick="toggleInvestigation(this)">Sr. Urea</div>
-
+            <div class="investigation" onclick="toggleInvestigation(this)">
+              HBSAg
+            </div>
+            <div class="investigation" onclick="toggleInvestigation(this)">
+              HIV
+            </div>
+            <div class="investigation" onclick="toggleInvestigation(this)">
+              Urine (R)
+            </div>
+            <div class="investigation" onclick="toggleInvestigation(this)">
+              Mountox
+            </div>
+            <div class="investigation" onclick="toggleInvestigation(this)">
+              Uric Acid
+            </div>
+            <div class="investigation" onclick="toggleInvestigation(this)">
+              Sr. Creat
+            </div>
+            <div class="investigation" onclick="toggleInvestigation(this)">
+              Sr. Urea
+            </div>
           </div>
         </div>
-       
+
         <div class="button-group">
           <button type="button" onclick="prevStep()">Back</button>
 
           <button type="button" onclick="generatePDF()">Submit</button>
         </div>
       </div>
-  </div>
+    </div>
 
+    <!-- Options Table -->
+    <div
+      id="optionsTable"
+      class="options-table container-fluid"
+      style="height: 280px; width: 630px"
+    >
+      <table border="1" cellspacing="0" cellpadding="5">
+        <!-- Table Head -->
+        <thead>
+          <tr>
+            <th colspan="6">-ve</th>
+            <th colspan="6">+ve</th>
+          </tr>
+        </thead>
+        <!-- Table Body -->
+        <tbody>
+          <tr>
+            <td>-0.00</td>
+            <td>-0.25</td>
+            <td>-0.50</td>
+            <td>-0.75</td>
+            <td>-1.00</td>
+            <td>-1.25</td>
+            <td>+0.00</td>
+            <td>+0.25</td>
+            <td>+0.50</td>
+            <td>+0.75</td>
+            <td>+1.00</td>
+            <td>+1.25</td>
+          </tr>
+          <tr>
+            <td>-1.50</td>
+            <td>-1.75</td>
+            <td>-2.00</td>
+            <td>-2.25</td>
+            <td>-2.50</td>
+            <td>-2.75</td>
+            <td>+1.50</td>
+            <td>+1.75</td>
+            <td>+2.00</td>
+            <td>+2.25</td>
+            <td>+2.50</td>
+            <td>+2.75</td>
+          </tr>
+          <tr>
+            <td>-3.00</td>
+            <td>-3.25</td>
+            <td>-3.50</td>
+            <td>-3.75</td>
+            <td>-4.00</td>
+            <td>-4.25</td>
+            <td>+3.00</td>
+            <td>+3.25</td>
+            <td>+3.50</td>
+            <td>+3.75</td>
+            <td>+4.00</td>
+            <td>+4.25</td>
+          </tr>
+          <tr>
+            <td>-4.50</td>
+            <td>-4.75</td>
+            <td>-5.00</td>
+            <td>-5.25</td>
+            <td>-5.50</td>
+            <td>-5.75</td>
+            <td>+4.50</td>
+            <td>+4.75</td>
+            <td>+5.00</td>
+            <td>+5.25</td>
+            <td>+5.50</td>
+            <td>+5.75</td>
+          </tr>
+          <tr>
+            <td>-6.00</td>
+            <td>-6.25</td>
+            <td>-6.50</td>
+            <td>-6.75</td>
+            <td>-7.00</td>
+            <td>-7.25</td>
+            <td>+6.00</td>
+            <td>+6.25</td>
+            <td>+6.50</td>
+            <td>+6.75</td>
+            <td>+7.00</td>
+            <td>+7.25</td>
+          </tr>
+          <tr>
+            <td>-7.50</td>
+            <td>-7.75</td>
+            <td>-8.00</td>
+            <td>-8.25</td>
+            <td>-8.50</td>
+            <td>-8.75</td>
+            <td>+7.50</td>
+            <td>+7.75</td>
+            <td>+8.00</td>
+            <td>+8.25</td>
+            <td>+8.50</td>
+            <td>+8.75</td>
+          </tr>
+          <tr>
+            <td>-9.00</td>
+            <td>-9.25</td>
+            <td>-9.50</td>
+            <td>-10.00</td>
+            <td>-10.50</td>
+            <td>-11.00</td>
+            <td>+9.00</td>
+            <td>+9.25</td>
+            <td>+9.50</td>
+            <td>+10.00</td>
+            <td>+10.50</td>
+            <td>+11.00</td>
+          </tr>
+          <tr>
+            <td>-11.50</td>
+            <td>-12.00</td>
+            <td>-12.50</td>
+            <td>-13.00</td>
+            <td>-13.50</td>
+            <td>-14.00</td>
+            <td>+11.50</td>
+            <td>+12.00</td>
+            <td>+12.50</td>
+            <td>+13.00</td>
+            <td>+13.50</td>
+            <td>+14.00</td>
+          </tr>
+          <tr>
+            <td>-14.50</td>
+            <td>-15.00</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>+14.50</td>
+            <td>+15.00</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-
-<!-- Options Table -->
-<div id="optionsTable" class="options-table container-fluid"  style="height: 280px; width: 630px;">
-  <table border="1" cellspacing="0" cellpadding="5">
-      <!-- Table Head -->
-      <thead>
-          <tr>
-              <th colspan="6">-ve</th>
-              <th colspan="6">+ve</th>
-          </tr>
-      </thead>
-      <!-- Table Body -->
-      <tbody>
-          <tr>
-              <td>-0.00</td>
-              <td>-0.25</td>
-              <td>-0.50</td>
-              <td>-0.75</td>
-              <td>-1.00</td>
-              <td>-1.25</td>
-              <td>+0.00</td>
-              <td>+0.25</td>
-              <td>+0.50</td>
-              <td>+0.75</td>
-              <td>+1.00</td>
-              <td>+1.25</td>
-          </tr>
-          <tr>
-              <td>-1.50</td>
-              <td>-1.75</td>
-              <td>-2.00</td>
-              <td>-2.25</td>
-              <td>-2.50</td>
-              <td>-2.75</td>
-              <td>+1.50</td>
-              <td>+1.75</td>
-              <td>+2.00</td>
-              <td>+2.25</td>
-              <td>+2.50</td>
-              <td>+2.75</td>
-          </tr>
-          <tr>
-              <td>-3.00</td>
-              <td>-3.25</td>
-              <td>-3.50</td>
-              <td>-3.75</td>
-              <td>-4.00</td>
-              <td>-4.25</td>
-              <td>+3.00</td>
-              <td>+3.25</td>
-              <td>+3.50</td>
-              <td>+3.75</td>
-              <td>+4.00</td>
-              <td>+4.25</td>
-          </tr>
-          <tr>
-              <td>-4.50</td>
-              <td>-4.75</td>
-              <td>-5.00</td>
-              <td>-5.25</td>
-              <td>-5.50</td>
-              <td>-5.75</td>
-              <td>+4.50</td>
-              <td>+4.75</td>
-              <td>+5.00</td>
-              <td>+5.25</td>
-              <td>+5.50</td>
-              <td>+5.75</td>
-          </tr>
-          <tr>
-              <td>-6.00</td>
-              <td>-6.25</td>
-              <td>-6.50</td>
-              <td>-6.75</td>
-              <td>-7.00</td>
-              <td>-7.25</td>
-              <td>+6.00</td>
-              <td>+6.25</td>
-              <td>+6.50</td>
-              <td>+6.75</td>
-              <td>+7.00</td>
-              <td>+7.25</td>
-          </tr>
-          <tr>
-              <td>-7.50</td>
-              <td>-7.75</td>
-              <td>-8.00</td>
-              <td>-8.25</td>
-              <td>-8.50</td>
-              <td>-8.75</td>
-              <td>+7.50</td>
-              <td>+7.75</td>
-              <td>+8.00</td>
-              <td>+8.25</td>
-              <td>+8.50</td>
-              <td>+8.75</td>
-          </tr>
-          <tr>
-              <td>-9.00</td>
-              <td>-9.25</td>
-              <td>-9.50</td>
-              <td>-10.00</td>
-              <td>-10.50</td>
-              <td>-11.00</td>
-              <td>+9.00</td>
-              <td>+9.25</td>
-              <td>+9.50</td>
-              <td>+10.00</td>
-              <td>+10.50</td>
-              <td>+11.00</td>
-          </tr>
-          <tr>
-              <td>-11.50</td>
-              <td>-12.00</td>
-              <td>-12.50</td>
-              <td>-13.00</td>
-              <td>-13.50</td>
-              <td>-14.00</td>
-              <td>+11.50</td>
-              <td>+12.00</td>
-              <td>+12.50</td>
-              <td>+13.00</td>
-              <td>+13.50</td>
-              <td>+14.00</td>
-          </tr>
-          <tr>
-              <td>-14.50</td>
-              <td>-15.00</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>+14.50</td>
-              <td>+15.00</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-          </tr>
-      </tbody>
-  </table>
-</div>
-
-  <!-- Input Fields -->
-  <table id="axisOptionsTable" style="display: none; width: 450px;" class="options-table">
-    <tr>
+    <!-- Input Fields -->
+    <table
+      id="axisOptionsTable"
+      style="display: none; width: 450px"
+      class="options-table"
+    >
+      <tr>
         <td>0</td>
         <td>5</td>
         <td>10</td>
@@ -658,8 +901,8 @@
         <td>35</td>
         <td>40</td>
         <td>45</td>
-    </tr>
-    <tr>
+      </tr>
+      <tr>
         <td>50</td>
         <td>55</td>
         <td>60</td>
@@ -670,8 +913,8 @@
         <td>85</td>
         <td>90</td>
         <td>95</td>
-    </tr>
-    <tr>
+      </tr>
+      <tr>
         <td>100</td>
         <td>105</td>
         <td>110</td>
@@ -682,8 +925,8 @@
         <td>135</td>
         <td>140</td>
         <td>145</td>
-    </tr>
-    <tr>
+      </tr>
+      <tr>
         <td>150</td>
         <td>155</td>
         <td>160</td>
@@ -691,172 +934,196 @@
         <td>170</td>
         <td>175</td>
         <td>180</td>
-    </tr>
-  </table>
+      </tr>
+    </table>
 
-
-  <table id="NV-VATable" style="display: none; width: 210px;" class="options-table">
-    <tr>
+    <table
+      id="NV-VATable"
+      style="display: none; width: 210px"
+      class="options-table"
+    >
+      <tr>
         <td>6/6</td>
         <td>6/6p</td>
         <td>6/7.5</td>
         <td>6/7.5P</td>
-        
-    </tr>
-    <tr>
+      </tr>
+      <tr>
         <td>6/9</td>
         <td>6/9p</td>
         <td>6/12</td>
         <td>6/12p</td>
-        
-    </tr>
-    <tr>
+      </tr>
+      <tr>
         <td>6/15</td>
         <td>6/15p</td>
         <td>6/18</td>
         <td>6/18p</td>
-       
-    </tr>
-    <tr>
+      </tr>
+      <tr>
         <td>6/24</td>
         <td>6/24p</td>
         <td>6/30</td>
         <td>6/30p</td>
-       
-    </tr>
-    <tr>
-      <td>6/36</td>
-      <td>6/36p</td>
-      <td>6/48</td>
-      <td>6/60</td>
-     
-  </tr>
-  </table>
+      </tr>
+      <tr>
+        <td>6/36</td>
+        <td>6/36p</td>
+        <td>6/48</td>
+        <td>6/60</td>
+      </tr>
+    </table>
 
-  <table id="NVDVATable" style="display: none; width: 155px;" class="options-table">
-    <tr>
+    <table
+      id="NVDVATable"
+      style="display: none; width: 155px"
+      class="options-table"
+    >
+      <tr>
         <td>N-5</td>
         <td>N-6</td>
         <td>N-8</td>
-       
-    </tr>
-    <tr>
+      </tr>
+      <tr>
         <td>N-10</td>
         <td>N-12</td>
         <td>N-14</td>
-   
-    </tr>
-    <tr>
+      </tr>
+      <tr>
         <td>N-18</td>
         <td>N-24</td>
         <td>N-36</td>
-      
-    </tr>
-    
-  
-  </table>
-  <script >
-    // Automatically set the visit date to today's date
-document.getElementById("visit-date").value = new Date().toISOString().split("T")[0];
+      </tr>
+    </table>
+    <script>
+      // Automatically set the visit date to today's date
+      document.getElementById("visit-date").value = new Date()
+        .toISOString()
+        .split("T")[0];
 
-let currentStep = 1;
+      let currentStep = 1;
 
-// Show the specified step
-function showStep(step) {
-  document.querySelectorAll(".form-step").forEach((el, index) => {
-    el.classList.toggle("active", index + 1 === step);
-  });
-}
+      // Show the specified step
+      function showStep(step) {
+        document.querySelectorAll(".form-step").forEach((el, index) => {
+          el.classList.toggle("active", index + 1 === step);
+        });
+      }
 
-// Navigate to the next step
-function nextStep() {
-  currentStep++;
-  showStep(currentStep);
-}
+      // Navigate to the next step
+      function nextStep() {
+        currentStep++;
+        showStep(currentStep);
+      }
 
-// Navigate to the previous step
-function prevStep() {
-  currentStep--;
-  showStep(currentStep);
-}
+      // Navigate to the previous step
+      function prevStep() {
+        currentStep--;
+        showStep(currentStep);
+      }
 
-// Toggle selection for symptoms, medical history, and surgical history
-function toggleSymptoms(element) {
-  element.classList.toggle("selected");
+      // Toggle selection for symptoms, medical history, and surgical history
+      function toggleSymptoms(element) {
+        element.classList.toggle("selected");
 
-  // Get the selected items
-  const selectedItems = document.querySelectorAll(".item.selected");
+        // Get the selected items
+        const selectedItems = document.querySelectorAll(".item.selected");
 
-  // Log the selected items
-  console.log(Array.from(selectedItems).map(item => item.textContent));
+        // Log the selected items
+        console.log(Array.from(selectedItems).map((item) => item.textContent));
 
-  // Save the selected items in local storage
-  localStorage.setItem("selectedSymptoms", JSON.stringify(Array.from(selectedItems).map(item => item.textContent)));
-}
+        // Save the selected items in local storage
+        localStorage.setItem(
+          "selectedSymptoms",
+          JSON.stringify(
+            Array.from(selectedItems).map((item) => item.textContent)
+          )
+        );
+      }
 
-function toggleMedical(element) {
-  element.classList.toggle("selected");
+      function toggleMedical(element) {
+        element.classList.toggle("selected");
 
-  // Get the selected items
-  const selectedItems = document.querySelectorAll(".medical.selected");
+        // Get the selected items
+        const selectedItems = document.querySelectorAll(".medical.selected");
 
-  // Log the selected items
-  console.log(Array.from(selectedItems).map(item => item.textContent));
+        // Log the selected items
+        console.log(Array.from(selectedItems).map((item) => item.textContent));
 
-  // Save the selected items in local storage
-  localStorage.setItem("selectedMedical", JSON.stringify(Array.from(selectedItems).map(item => item.textContent)));
-}
+        // Save the selected items in local storage
+        localStorage.setItem(
+          "selectedMedical",
+          JSON.stringify(
+            Array.from(selectedItems).map((item) => item.textContent)
+          )
+        );
+      }
 
-function toggleSurgical(element) {
-  element.classList.toggle("selected");
+      function toggleSurgical(element) {
+        element.classList.toggle("selected");
 
-  // Get the selected items
-  const selectedItems = document.querySelectorAll(".surgical.selected");
+        // Get the selected items
+        const selectedItems = document.querySelectorAll(".surgical.selected");
 
-  // Log the selected items
-  console.log(Array.from(selectedItems).map(item => item.textContent));
+        // Log the selected items
+        console.log(Array.from(selectedItems).map((item) => item.textContent));
 
-  // Save the selected items in local storage
-  localStorage.setItem("selectedSurgical", JSON.stringify(Array.from(selectedItems).map(item => item.textContent)));
-}
+        // Save the selected items in local storage
+        localStorage.setItem(
+          "selectedSurgical",
+          JSON.stringify(
+            Array.from(selectedItems).map((item) => item.textContent)
+          )
+        );
+      }
 
-function toggleDignosis(element) {
-  element.classList.toggle("selected");
+      function toggleDignosis(element) {
+        element.classList.toggle("selected");
 
-  // Get the selected items
-  const selectedItems = document.querySelectorAll(".dignosis.selected");
+        // Get the selected items
+        const selectedItems = document.querySelectorAll(".dignosis.selected");
 
-  // Log the selected items
-  console.log(Array.from(selectedItems).map(item => item.textContent));
+        // Log the selected items
+        console.log(Array.from(selectedItems).map((item) => item.textContent));
 
-  // Save the selected items in local storage
-  localStorage.setItem("selectedDignosis", JSON.stringify(Array.from(selectedItems).map(item => item.textContent)));
-}
+        // Save the selected items in local storage
+        localStorage.setItem(
+          "selectedDignosis",
+          JSON.stringify(
+            Array.from(selectedItems).map((item) => item.textContent)
+          )
+        );
+      }
 
-function toggleInvestigation(element) {
-  element.classList.toggle("selected");
+      function toggleInvestigation(element) {
+        element.classList.toggle("selected");
 
-  // Get the selected items
-  const selectedItems = document.querySelectorAll(".investigation.selected");
+        // Get the selected items
+        const selectedItems = document.querySelectorAll(
+          ".investigation.selected"
+        );
 
-  // Log the selected items
-  console.log(Array.from(selectedItems).map(item => item.textContent));
+        // Log the selected items
+        console.log(Array.from(selectedItems).map((item) => item.textContent));
 
-  // Save the selected items in local storage
-  localStorage.setItem("selectedInvestigation", JSON.stringify(Array.from(selectedItems).map(item => item.textContent)));
-}
+        // Save the selected items in local storage
+        localStorage.setItem(
+          "selectedInvestigation",
+          JSON.stringify(
+            Array.from(selectedItems).map((item) => item.textContent)
+          )
+        );
+      }
 
+      // Add a new medicine entry row
+      function addMedicineEntry() {
+        const medicineList = document.getElementById("medicine-list");
 
-// Add a new medicine entry row
-function addMedicineEntry() {
-  const medicineList = document.getElementById("medicine-list");
+        // Create a new medicine entry
+        const entry = document.createElement("div");
+        entry.className = "medicine-entry";
 
-  
-  // Create a new medicine entry
-  const entry = document.createElement("div");
-  entry.className = "medicine-entry";
-
-  entry.innerHTML = `
+        entry.innerHTML = `
   
     <select class="medicine-select">
      
@@ -911,341 +1178,419 @@ function addMedicineEntry() {
     <button type="button" onclick="this.parentNode.remove()">Remove</button>
   `;
 
-  medicineList.appendChild(entry);
-}
+        medicineList.appendChild(entry);
+      }
+
+      function savelocal() {
+        var name = document.getElementById("patient-name").value;
+        localStorage.setItem("name", name);
+        console.log(name);
+      }
+
+      function generatePDF() {
+        try {
+          // Get All the input values
+          const name = document.getElementById("patient-name").value;
+          const age = document.getElementById("age").value;
+          const gender = document.getElementById("gender").value;
+          const mobileNumber = document.getElementById("mobile-number").value;
+
+          //Get the selected eye for symptoms, medical history, surgical history, dignosis, and investigation dropdown values
+          const selectedEyeSymptoms = document.getElementById(
+            "symptoms-eye-select"
+          ).value;
+          const selectedEyeSurgical = document.getElementById(
+            "surgical-eye-select"
+          ).value;
+          const selectedEyeDignosis = document.getElementById(
+            "dignosis-eye-select"
+          ).value;
+          const selectedEyeInvestigation = document.getElementById(
+            "investigation-eye-select"
+          ).value;
+
+          // Store the selected eye values in local storage
+          localStorage.setItem("selectedEyeSymptoms", selectedEyeSymptoms);
+          localStorage.setItem("selectedEyeSurgical", selectedEyeSurgical);
+          localStorage.setItem("selectedEyeDignosis", selectedEyeDignosis);
+          localStorage.setItem(
+            "selectedEyeInvestigation",
+            selectedEyeInvestigation
+          );
+
+          // print the values in the console
+          console.log(
+            selectedEyeSymptoms,
+            selectedEyeSurgical,
+            selectedEyeDignosis,
+            selectedEyeInvestigation
+          );
+
+          console.log(name, age, gender, mobileNumber);
+
+          //Current Power Glasses values
+          const DVSPH = document.getElementById("DV-SPH").value;
+          const DVCYL = document.getElementById("DV-CYL").value;
+          const DVAxis = document.getElementById("DV-Axis").value;
+          const DVVA = document.getElementById("DV-VA").value;
+          const DVSPH2 = document.getElementById("DV-SPH2").value;
+          const DVCYL2 = document.getElementById("DV-CYL2").value;
+          const DVAxis2 = document.getElementById("DV-Axis2").value;
+          const DVVA2 = document.getElementById("DV-VA2").value;
+          const NVSPH = document.getElementById("NV-SPH").value;
+          const NVCYL = document.getElementById("NV-CYL").value;
+          const NVAxis = document.getElementById("NV-Axis").value;
+          const NVVA = document.getElementById("NV-VA").value;
+          const NVSPH2 = document.getElementById("NV-SPH2").value;
+          const NVCYL2 = document.getElementById("NV-CYL2").value;
+          const NVAxis2 = document.getElementById("NV-Axis2").value;
+          const NVVA2 = document.getElementById("NV-VA2").value;
+
+          // Store Current Power Glasses the dictionary name and value
+          const currentPowerGlasses = {
+            DVSPH: DVSPH,
+            DVCYL: DVCYL,
+            DVAxis: DVAxis,
+            DVVA: DVVA,
+            DVSPH2: DVSPH2,
+            DVCYL2: DVCYL2,
+            DVAxis2: DVAxis2,
+            DVVA2: DVVA2,
+            NVSPH: NVSPH,
+            NVCYL: NVCYL,
+            NVAxis: NVAxis,
+            NVVA: NVVA,
+            NVSPH2: NVSPH2,
+            NVCYL2: NVCYL2,
+            NVAxis2: NVAxis2,
+            NVVA2: NVVA2,
+          };
+
+          console.log(currentPowerGlasses);
+
+          let count = 0;
+          // Check if all the values are present in keys of the currentPowerGlasses dictionary "" or not using for loop
+          for (const key in currentPowerGlasses) {
+            if (currentPowerGlasses[key] === "") {
+              count += 1;
+            }
+          }
+          console.log(count);
+
+          if (count === 16) {
+            console.log("All the values are empty");
+            localStorage.setItem("CPG_Table", "false");
+          } else {
+            console.log("All the values are not empty");
+            localStorage.setItem("CPG_Table", "true");
+          }
+
+          // Save the values in local storage
+          localStorage.setItem(
+            "currentPowerGlasses",
+            JSON.stringify(currentPowerGlasses)
+          );
+
+          // Get the medicine entries
+          const medicineEntries = document.querySelectorAll(".medicine-entry");
+
+          // Store the medicine entries in an array
+          const medicines = [];
+
+          // Loop through each medicine entry
+
+          medicineEntries.forEach((entry, index) => {
+            const medicineSelect =
+              entry.querySelector(".medicine-select").value;
+            const medicineDose = entry.querySelector(".medicine-dose").value;
+            const medicineQuantity =
+              entry.querySelector(".medicine-quantity").value;
+
+            // Store the medicine entry in a dictionary
+            const medicine = {
+              medicineSelect: medicineSelect,
+              medicineDose: medicineDose,
+              medicineQuantity: medicineQuantity,
+            };
+
+            // Push the medicine entry to the medicines array
+            medicines.push(medicine);
+          });
+
+          console.log(medicines);
+
+          // Save the medicines in local storage
+          localStorage.setItem("medicines", JSON.stringify(medicines));
+
+          // Save the values in local storage
+          localStorage.setItem("name", name);
+          localStorage.setItem("age", age);
+          localStorage.setItem("gender", gender);
+          localStorage.setItem("mobileNumber", mobileNumber);
+
+          if (name === "" || age === "" || gender === "") {
+            alert("Patient Name, Age, and Gender are required fields");
+            return;
+          } else if (mobileNumber.length !== 10) {
+            alert("Mobile Number should be 10 digits");
+            return;
+          } else {
+            // Opent print.html
+            window.open("print.html");
+          }
+        } catch (e) {
+          console.log(e);
+          alert("Error:" + e);
+        }
+      }
+
+      // Dom loaded event
+      document.addEventListener("DOMContentLoaded", () => {
+        //Clear the local storage
+        localStorage.clear();
+      });
+    </script>
+    <script>
+      // First block: Options for SPH, CYL, etc.
+      const inputs = document.querySelectorAll(
+        "#DV-SPH, #DV-CYL, #NV-SPH, #NV-CYL, #NV-SPH2, #NV-CYL2, #DV-CYL2, #DV-SPH2"
+      );
+      const optionsTable = document.getElementById("optionsTable");
+      let currentInput = null;
+
+      // Event listener to show options
+      inputs.forEach((input) => {
+        input.addEventListener("click", (e) => {
+          currentInput = e.target; // Save reference to the clicked input box
+          const rect = currentInput.getBoundingClientRect();
+          optionsTable.style.top = `${rect.bottom + window.scrollY}px`;
+          optionsTable.style.left = `${rect.left + window.scrollX}px`;
+          optionsTable.style.display = "block";
+        });
+      });
+
+      // Event listener for option selection
+      optionsTable.addEventListener("click", (e) => {
+        if (e.target.tagName === "TD" && currentInput) {
+          currentInput.value = e.target.innerText; // Set value to the clicked option
+          optionsTable.style.display = "none";
+        }
+      });
+
+      // Close table when clicking outside
+      document.addEventListener("click", (e) => {
+        if (
+          !optionsTable.contains(e.target) &&
+          !Array.from(inputs).includes(e.target)
+        ) {
+          optionsTable.style.display = "none";
+        }
+      });
+
+      // Second block: Axis Options
+      const axisInputs = document.querySelectorAll(
+        "#NV-Axis, #NV-Axis2, #DV-Axis, #DV-Axis2"
+      );
+      const axisOptionsTable = document.getElementById("axisOptionsTable");
+      let currentAxisInput = null;
+
+      // Show options table on input click
+      axisInputs.forEach((input) => {
+        input.addEventListener("click", (e) => {
+          currentAxisInput = e.target; // Save reference to the clicked input
+          const rect = currentAxisInput.getBoundingClientRect();
+          axisOptionsTable.style.top = `${rect.bottom + window.scrollY}px`;
+          axisOptionsTable.style.left = `${rect.left + window.scrollX}px`;
+          axisOptionsTable.style.display = "block";
+        });
+      });
+
+      // Set value when option is clicked
+      axisOptionsTable.addEventListener("click", (e) => {
+        if (e.target.tagName === "TD" && currentAxisInput) {
+          currentAxisInput.value = e.target.innerText;
+          axisOptionsTable.style.display = "none";
+        }
+      });
+
+      // Close options table on outside click
+      document.addEventListener("click", (e) => {
+        if (
+          !axisOptionsTable.contains(e.target) &&
+          !Array.from(axisInputs).includes(e.target)
+        ) {
+          axisOptionsTable.style.display = "none";
+        }
+      });
+
+      // Third block: VA Options
+      const vaInputs = document.querySelectorAll("#DV-VA, #DV-VA2"); // Corrected input field IDs
+      const VAoptionsTable = document.getElementById("NV-VATable"); // Table to show options
+
+      let activeVaInputField = null;
+
+      // Show options table on input click
+      vaInputs.forEach((input) => {
+        input.addEventListener("click", (e) => {
+          activeVaInputField = e.target; // Save reference to the clicked input
+          const rect = activeVaInputField.getBoundingClientRect();
+          VAoptionsTable.style.top = `${rect.bottom + window.scrollY}px`; // Position below the input
+          VAoptionsTable.style.left = `${rect.left + window.scrollX}px`; // Position aligned with the input
+          VAoptionsTable.style.display = "block"; // Show the options table
+        });
+      });
+
+      // Set value when option is clicked
+      VAoptionsTable.addEventListener("click", (e) => {
+        if (e.target.tagName === "TD" && activeVaInputField) {
+          activeVaInputField.value = e.target.innerText; // Set the value to the clicked option
+          VAoptionsTable.style.display = "none"; // Hide the options table after selection
+        }
+      });
+
+      // Close options table on outside click
+      document.addEventListener("click", (e) => {
+        if (
+          !VAoptionsTable.contains(e.target) && // Clicked outside the table
+          !Array.from(vaInputs).includes(e.target) // Clicked outside the input fields
+        ) {
+          VAoptionsTable.style.display = "none"; // Hide the options table
+        }
+      });
+
+      // Fourth block: NVD Options (with correct IDs and positions)
+      const nvdInputs = document.querySelectorAll("#NV-VA, #NV-VA2"); // Corrected input field IDs
+      const NVDoptionsTable = document.getElementById("NVDVATable"); // Corrected table ID
+      let activeNvdInputField = null;
+
+      // Function to position the options table
+      function positionTable(input) {
+        const rect = input.getBoundingClientRect();
+        const tableHeight = NVDoptionsTable.offsetHeight; // Use NVDoptionsTable here
+        const tableWidth = NVDoptionsTable.offsetWidth; // Not used but added for completeness
+
+        // Position the table below the input field
+        const bottomPosition =
+          rect.bottom + tableHeight <= window.innerHeight
+            ? rect.bottom
+            : rect.top - tableHeight;
+        const leftPosition = rect.left + window.scrollX;
+
+        // Set position for the options table
+        NVDoptionsTable.style.top = `${bottomPosition + window.scrollY}px`; // Use NVDoptionsTable
+        NVDoptionsTable.style.left = `${leftPosition}px`; // Use NVDoptionsTable
+      }
+
+      // Show the options table when input field is clicked
+      nvdInputs.forEach((input) => {
+        input.addEventListener("click", (e) => {
+          activeNvdInputField = e.target; // Store reference to clicked input
+          positionTable(activeNvdInputField); // Position the table near the input
+          NVDoptionsTable.style.display = "block"; // Show the options table
+        });
+      });
+
+      // Select value from the options table
+      NVDoptionsTable.addEventListener("click", (e) => {
+        if (e.target.tagName === "TD" && activeNvdInputField) {
+          activeNvdInputField.value = e.target.innerText; // Set input value
+          NVDoptionsTable.style.display = "none"; // Hide the options table after selection
+        }
+        e.stopPropagation(); // Prevent event from propagating to document
+      });
+
+      // Close the options table when clicked outside
+      document.addEventListener("click", (e) => {
+        if (
+          !NVDoptionsTable.contains(e.target) && // Clicked outside the table
+          !Array.from(nvdInputs).includes(e.target) // Clicked outside the input fields
+        ) {
+          NVDoptionsTable.style.display = "none"; // Hide the options table
+        }
+      });
+    </script>
 
 
-function savelocal(){
-  var name = document.getElementById("patient-name").value;
-  localStorage.setItem("name",name);
-  console.log(name);
-}
+    <script>
+      function showSurgicalOptions() {
+        // Hide all the item grids first
+        document.getElementById("Right Eye").style.display = "none";
+        document.getElementById("Left Eye").style.display = "none";
+        document.getElementById("Both Eyes").style.display = "none";
 
-function generatePDF() {
-  try{
-  // Get All the input values
-  const name = document.getElementById("patient-name").value;
-  const age = document.getElementById("age").value;
-  const gender = document.getElementById("gender").value;
-  const mobileNumber = document.getElementById("mobile-number").value;
+        // Get selected option from the dropdown
+        var selectedOption = document.getElementById(
+          "surgical-eye-select"
+        ).value;
 
-  //Get the selected eye for symptoms, medical history, surgical history, dignosis, and investigation dropdown values
-  const selectedEyeSymptoms = document.getElementById("symptoms-eye-select").value;
-  const selectedEyeSurgical = document.getElementById("surgical-eye-select").value;
-  const selectedEyeDignosis = document.getElementById("dignosis-eye-select").value;
-  const selectedEyeInvestigation = document.getElementById("investigation-eye-select").value;
+        // Show the corresponding item grid based on the selected option
+        if (selectedOption === "RE") {
+          document.getElementById("Right Eye").style.display = "flex";
+        } else if (selectedOption === "LE") {
+          document.getElementById("Left Eye").style.display = "flex";
+        } else if (selectedOption === "BE") {
+          document.getElementById("Both Eyes").style.display = "flex";
+        }
+      }
 
-  // Store the selected eye values in local storage
-  localStorage.setItem("selectedEyeSymptoms", selectedEyeSymptoms);
-  localStorage.setItem("selectedEyeSurgical", selectedEyeSurgical);
-  localStorage.setItem("selectedEyeDignosis", selectedEyeDignosis);
-  localStorage.setItem("selectedEyeInvestigation", selectedEyeInvestigation);
-
-  // print the values in the console
-  console.log(selectedEyeSymptoms, selectedEyeSurgical, selectedEyeDignosis, selectedEyeInvestigation);
+      function toggleSurgical(element) {
+        element.classList.toggle("selected");
+      }
 
 
-  console.log(name, age,gender,mobileNumber);
 
-  //Current Power Glasses values
-  const DVSPH = document.getElementById("DV-SPH").value;
-  const DVCYL = document.getElementById("DV-CYL").value;
-  const DVAxis = document.getElementById("DV-Axis").value;
-  const DVVA = document.getElementById("DV-VA").value;
-  const DVSPH2 = document.getElementById("DV-SPH2").value;
-  const DVCYL2 = document.getElementById("DV-CYL2").value;
-  const DVAxis2 = document.getElementById("DV-Axis2").value;
-  const DVVA2 = document.getElementById("DV-VA2").value;
-  const NVSPH = document.getElementById("NV-SPH").value;
-  const NVCYL = document.getElementById("NV-CYL").value;
-  const NVAxis = document.getElementById("NV-Axis").value;
-  const NVVA = document.getElementById("NV-VA").value;
-  const NVSPH2 = document.getElementById("NV-SPH2").value;
-  const NVCYL2 = document.getElementById("NV-CYL2").value;
-  const NVAxis2 = document.getElementById("NV-Axis2").value;
-  const NVVA2 = document.getElementById("NV-VA2").value;
 
-  // Store Current Power Glasses the dictionary name and value
-  const currentPowerGlasses = {
-    "DVSPH": DVSPH,
-    "DVCYL": DVCYL,
-    "DVAxis": DVAxis,
-    "DVVA": DVVA,
-    "DVSPH2": DVSPH2,
-    "DVCYL2": DVCYL2,
-    "DVAxis2": DVAxis2,
-    "DVVA2": DVVA2,
-    "NVSPH": NVSPH,
-    "NVCYL": NVCYL,
-    "NVAxis": NVAxis,
-    "NVVA": NVVA,
-    "NVSPH2": NVSPH2,
-    "NVCYL2": NVCYL2,
-    "NVAxis2": NVAxis2,
-    "NVVA2": NVVA2
-  };
 
-  console.log(currentPowerGlasses);
 
-  let count = 0;
-  // Check if all the values are present in keys of the currentPowerGlasses dictionary "" or not using for loop
-  for (const key in currentPowerGlasses) {
-    if(currentPowerGlasses[key] === "") {
-     count += 1;
+
+
+
+      function showSymptomOptions() {
+    // Hide all symptom grids first
+    document.getElementById("Right-Eye-Symptoms").style.display = "none";
+    document.getElementById("Left-Eye-Symptoms").style.display = "none";
+    document.getElementById("Both-Eyes-Symptoms").style.display = "none";
+
+    // Get the selected option from the dropdown
+    var selectedEye = document.getElementById("symptoms-eye-select").value;
+
+    // Show the corresponding symptom grid based on the selected eye
+    if (selectedEye === "RE") {
+      document.getElementById("Right-Eye-Symptoms").style.display = "flex";
+    } else if (selectedEye === "LE") {
+      document.getElementById("Left-Eye-Symptoms").style.display = "flex";
+    } else if (selectedEye === "BE") {
+      document.getElementById("Both-Eyes-Symptoms").style.display = "flex";
     }
   }
-  console.log(count);
 
-
-  if(count === 16){
-    console.log("All the values are empty");
-    localStorage.setItem("CPG_Table", "false");
+  function toggleSymptoms(element) {
+    element.classList.toggle("selected");
   }
-  else{
-    console.log("All the values are not empty");
-    localStorage.setItem("CPG_Table", "true");
+
+
+  function showDiagnosisOptions() {
+    // Hide all diagnosis grids first
+    document.getElementById("Right-Eye-Diagnosis").style.display = "none";
+    document.getElementById("Left-Eye-Diagnosis").style.display = "none";
+    document.getElementById("Both-Eyes-Diagnosis").style.display = "none";
+
+    // Get the selected option from the dropdown
+    var selectedEye = document.getElementById("diagnosis-eye-select").value;
+
+    // Show the corresponding diagnosis grid based on the selected eye
+    if (selectedEye === "RE") {
+      document.getElementById("Right-Eye-Diagnosis").style.display = "flex";
+    } else if (selectedEye === "LE") {
+      document.getElementById("Left-Eye-Diagnosis").style.display = "flex";
+    } else if (selectedEye === "BE") {
+      document.getElementById("Both-Eyes-Diagnosis").style.display = "flex";
+    }
   }
-  
 
-  // Save the values in local storage
-  localStorage.setItem("currentPowerGlasses", JSON.stringify(currentPowerGlasses));
-
-  // Get the medicine entries
-  const medicineEntries = document.querySelectorAll(".medicine-entry");
-
-  // Store the medicine entries in an array
-  const medicines = [];
-
-  // Loop through each medicine entry
-
-  medicineEntries.forEach((entry, index) => {
-    const medicineSelect = entry.querySelector(".medicine-select").value;
-    const medicineDose = entry.querySelector(".medicine-dose").value;
-    const medicineQuantity = entry.querySelector(".medicine-quantity").value;
-
-    // Store the medicine entry in a dictionary
-    const medicine = {
-      "medicineSelect": medicineSelect,
-      "medicineDose": medicineDose,
-      "medicineQuantity": medicineQuantity
-    };
-
-    // Push the medicine entry to the medicines array
-    medicines.push(medicine);
-  });
-
-  console.log(medicines);
-
-  // Save the medicines in local storage
-  localStorage.setItem("medicines", JSON.stringify(medicines));
-  
-  
-
-  // Save the values in local storage
-  localStorage.setItem("name", name);
-  localStorage.setItem("age", age);
-  localStorage.setItem("gender",gender);
-  localStorage.setItem("mobileNumber", mobileNumber);
-
-
-  if(name === "" || age === "" || gender === "") {
-    alert("Patient Name, Age, and Gender are required fields");
-    return;
+  function toggleDiagnosis(element) {
+    element.classList.toggle("selected");
   }
-  else if(mobileNumber.length !== 10) {
-    alert("Mobile Number should be 10 digits");
-    return;
-  }
-  else{
-    // Opent print.html
-  window.open("print.html");
-  }
-}
-catch(e){
-  console.log(e);
-  alert("Error:"+e);
-} 
-
-  
-}
-
-// Dom loaded event
-document.addEventListener("DOMContentLoaded", () => {
-  //Clear the local storage
-  localStorage.clear();
-});
-
-
-
-  </script>
-  <SCRIPT>
-// First block: Options for SPH, CYL, etc.
-const inputs = document.querySelectorAll(
-    '#DV-SPH, #DV-CYL, #NV-SPH, #NV-CYL, #NV-SPH2, #NV-CYL2, #DV-CYL2, #DV-SPH2'
-);
-const optionsTable = document.getElementById('optionsTable');
-let currentInput = null;
-
-// Event listener to show options
-inputs.forEach((input) => {
-    input.addEventListener('click', (e) => {
-        currentInput = e.target; // Save reference to the clicked input box
-        const rect = currentInput.getBoundingClientRect();
-        optionsTable.style.top = `${rect.bottom + window.scrollY}px`;
-        optionsTable.style.left = `${rect.left + window.scrollX}px`;
-        optionsTable.style.display = 'block';
-    });
-});
-
-// Event listener for option selection
-optionsTable.addEventListener('click', (e) => {
-    if (e.target.tagName === 'TD' && currentInput) {
-        currentInput.value = e.target.innerText; // Set value to the clicked option
-        optionsTable.style.display = 'none';
-    }
-});
-
-// Close table when clicking outside
-document.addEventListener('click', (e) => {
-    if (!optionsTable.contains(e.target) && !Array.from(inputs).includes(e.target)) {
-        optionsTable.style.display = 'none';
-    }
-});
-
-
-
-
-// Second block: Axis Options
-const axisInputs = document.querySelectorAll(
-    '#NV-Axis, #NV-Axis2, #DV-Axis, #DV-Axis2'
-);
-const axisOptionsTable = document.getElementById('axisOptionsTable');
-let currentAxisInput = null;
-
-// Show options table on input click
-axisInputs.forEach((input) => {
-    input.addEventListener('click', (e) => {
-        currentAxisInput = e.target; // Save reference to the clicked input
-        const rect = currentAxisInput.getBoundingClientRect();
-        axisOptionsTable.style.top = `${rect.bottom + window.scrollY}px`;
-        axisOptionsTable.style.left = `${rect.left + window.scrollX}px`;
-        axisOptionsTable.style.display = 'block';
-    });
-});
-
-// Set value when option is clicked
-axisOptionsTable.addEventListener('click', (e) => {
-    if (e.target.tagName === 'TD' && currentAxisInput) {
-        currentAxisInput.value = e.target.innerText;
-        axisOptionsTable.style.display = 'none';
-    }
-});
-
-// Close options table on outside click
-document.addEventListener('click', (e) => {
-    if (!axisOptionsTable.contains(e.target) && !Array.from(axisInputs).includes(e.target)) {
-        axisOptionsTable.style.display = 'none';
-    }
-});
-
-
-
-
-// Third block: VA Options
-const vaInputs = document.querySelectorAll('#DV-VA, #DV-VA2'); // Corrected input field IDs
-const VAoptionsTable = document.getElementById('NV-VATable'); // Table to show options
-
-let activeVaInputField = null;
-
-// Show options table on input click
-vaInputs.forEach((input) => {
-    input.addEventListener('click', (e) => {
-        activeVaInputField = e.target; // Save reference to the clicked input
-        const rect = activeVaInputField.getBoundingClientRect();
-        VAoptionsTable.style.top = `${rect.bottom + window.scrollY}px`; // Position below the input
-        VAoptionsTable.style.left = `${rect.left + window.scrollX}px`; // Position aligned with the input
-        VAoptionsTable.style.display = 'block'; // Show the options table
-    });
-});
-
-// Set value when option is clicked
-VAoptionsTable.addEventListener('click', (e) => {
-    if (e.target.tagName === 'TD' && activeVaInputField) {
-        activeVaInputField.value = e.target.innerText; // Set the value to the clicked option
-        VAoptionsTable.style.display = 'none'; // Hide the options table after selection
-    }
-});
-
-// Close options table on outside click
-document.addEventListener('click', (e) => {
-    if (
-        !VAoptionsTable.contains(e.target) && // Clicked outside the table
-        !Array.from(vaInputs).includes(e.target) // Clicked outside the input fields
-    ) {
-        VAoptionsTable.style.display = 'none'; // Hide the options table
-    }
-});
-
-
-
-
-// Fourth block: NVD Options (with correct IDs and positions)
-const nvdInputs = document.querySelectorAll('#NV-VA, #NV-VA2'); // Corrected input field IDs
-const NVDoptionsTable = document.getElementById('NVDVATable'); // Corrected table ID
-let activeNvdInputField = null;
-
-// Function to position the options table
-function positionTable(input) {
-    const rect = input.getBoundingClientRect();
-    const tableHeight = NVDoptionsTable.offsetHeight; // Use NVDoptionsTable here
-    const tableWidth = NVDoptionsTable.offsetWidth; // Not used but added for completeness
-
-    // Position the table below the input field
-    const bottomPosition = rect.bottom + tableHeight <= window.innerHeight
-        ? rect.bottom
-        : rect.top - tableHeight;
-    const leftPosition = rect.left + window.scrollX;
-
-    // Set position for the options table
-    NVDoptionsTable.style.top = `${bottomPosition + window.scrollY}px`; // Use NVDoptionsTable
-    NVDoptionsTable.style.left = `${leftPosition}px`; // Use NVDoptionsTable
-}
-
-// Show the options table when input field is clicked
-nvdInputs.forEach((input) => {
-    input.addEventListener('click', (e) => {
-        activeNvdInputField = e.target; // Store reference to clicked input
-        positionTable(activeNvdInputField); // Position the table near the input
-        NVDoptionsTable.style.display = 'block'; // Show the options table
-    });
-});
-
-// Select value from the options table
-NVDoptionsTable.addEventListener('click', (e) => {
-    if (e.target.tagName === 'TD' && activeNvdInputField) {
-        activeNvdInputField.value = e.target.innerText; // Set input value
-        NVDoptionsTable.style.display = 'none'; // Hide the options table after selection
-    }
-    e.stopPropagation(); // Prevent event from propagating to document
-});
-
-// Close the options table when clicked outside
-document.addEventListener('click', (e) => {
-    if (
-        !NVDoptionsTable.contains(e.target) && // Clicked outside the table
-        !Array.from(nvdInputs).includes(e.target) // Clicked outside the input fields
-    ) {
-        NVDoptionsTable.style.display = 'none'; // Hide the options table
-    }
-});
-
-
-
-</script>
-
-</script>
-
-
-
-</body>
+    </script>
+  </body>
 </html>

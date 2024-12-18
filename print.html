@@ -78,26 +78,7 @@
         height: 100%;
       }
 
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 10px;
-        border: 2px solid black;
-      }
-
-      table,
-      th,
-      td {
-        border: 1px solid #ddd;
-      }
-
-      th,
-      td {
-        text-align: center;
-        padding: 6px;
-        font-size: 14px;
-      }
-
+    
       .footer {
         margin-top: 30px;
         text-align: right;
@@ -129,6 +110,7 @@
         th,
         td {
           padding: 6px;
+          margin-right: 700px;
         }
 
         .header {
@@ -138,6 +120,7 @@
         .header .details {
           font-size: 12px;
         }
+      
       }
 
       .print-btn {
@@ -307,6 +290,10 @@
           overflow: visible; /* Prevent scrolling and hide scrollbar during printing */
         }
 
+        .section, .current-glass-power{
+          margin-right: 70px;
+        }
+
         /* Hide the URL and file path in the browser header/footer during printing */
         /* For most modern browsers, this can be hidden by disabling headers/footers in the print dialog */
       }
@@ -370,75 +357,55 @@
       </div>
 
       <div class="container-fluid">
-        <div class="row">
-          <div class="col" id="Symptoms">
-            <div class="details-section" id="Symptoms-section">
-              <h3 class="fs-5 fw-semibold mb-3">
-                Complaints/Symptoms
-              </h3>
-              <ul id="symptoms-list" class="list-unstyled d-flex gap-3">
-                <li>Chest Pain</li>
-                <li>Eye Redness</li>
-                <li>Nausea</li>
-              </ul>
-            </div>
-          </div>
-          
-          <div class="col" id="personal-history">
-            <div class="details-section" id="personal-history-section">
-              <h3 style="font-size: 16px; font-weight: 600">Medical History</h3>
-              <ul id="personal-history-list">
-                <li>Smoking, Involuntary</li>
-                <li>Tobacco Smoking</li>
-                <li>Allergy</li>
-              </ul>
-            </div>
-          </div>
-          <div class="col" id="past-history">
-            <div class="details-section" id="past-history-section">
-              <h3 style="font-size: 16px; font-weight: 600">
-                Surgical History
-              </h3>
-              <ul id="past-history-list">
-                <li>Diabetes</li>
-                <li>A (Adenine)</li>
-                <li>Hypertension</li>
-              </ul>
-            </div>
-          </div>
-          <div class="col" id="diagnosis">
-            <div class="details-section" id="diagnosis-section">
-              <h3 style="font-size: 16px; font-weight: 600">Diagnosis</h3>
-              <ul id="diagnosis-list">
-                <li>1A07.Z Typhoid Fever, Unspecified</li>
-                <li>Hypertension</li>
-                <li>Cataracts</li>
-              </ul>
-            </div>
-          </div>
-          <div class="col" id="investigation">
-            <div class="details-section" id="investigation-section">
-              <h3 style="font-size: 16px; font-weight: 600">Investigation</h3>
-              <ul id="investigation-list">
-                <li>Diabetes</li>
-                <li>A (Adenine)</li>
-                <li>Hypertension</li>
-              </ul>
-            </div>
-          </div>
-        </div>
 
-        <div class="container-fluid">
-          <div class="row"></div>
+        <!-- Complaints/Symptoms -->
+        <div class="details-section mb-2" id="Symptoms-section">
+          <span class="fw-bold">Complaints/Symptoms:</span>
+          <span class="text-primary">Eye Redness</span> | 
+          <span class="text-primary">Fever</span> | 
+          <span class="text-primary">Cough</span> | 
+          <span class="text-primary">COLD</span>
         </div>
-
-        <!-- <div class="vertical-line"></div> -->
+      
+        <!-- Medical History -->
+        <div class="details-section mb-2" id="personal-history-section">
+          <span class="fw-bold">Medical History:</span>
+          <span class="text-primary">Smoking, Involuntary</span> | 
+          <span class="text-primary">Tobacco Smoking</span> | 
+          <span class="text-primary">Allergy</span>
+        </div>
+      
+        <!-- Surgical History -->
+        <div class="details-section mb-2" id="past-history-section">
+          <span class="fw-bold">Surgical History:</span>
+          <span class="text-primary">Diabetes</span> | 
+          <span class="text-primary">A (Adenine)</span> | 
+          <span class="text-primary">Hypertension</span>
+        </div>
+      
+        <!-- Diagnosis -->
+        <div class="details-section mb-2" id="diagnosis-section">
+          <span class="fw-bold">Diagnosis:</span>
+          <span class="text-primary">1A07.Z Typhoid Fever, Unspecified</span> | 
+          <span class="text-primary">Hypertension</span> | 
+          <span class="text-primary">Cataracts</span>
+        </div>
+      
+        <!-- Investigation -->
+        <div class="details-section mb-2" id="investigation-section">
+          <span class="fw-bold">Investigation:</span>
+          <span class="text-primary">Diabetes</span> | 
+          <span class="text-primary">A (Adenine)</span> | 
+          <span class="text-primary">Hypertension</span>
+        </div>
+      
       </div>
+      
 
       <!-- Current Glass Power Section -->
 
       <div
-        class="section current-glass-power container h-30"
+        class="section current-glass-power container h-30 mr-2"
         id="current-glass-power"
       >
         <div class="details-section">
@@ -462,7 +429,7 @@
                 <th colspan="1">Axis</th>
                 <th colspan="1">V/A</th>
                 <th colspan="1">SPH</th>
-                <th colspan="1">CYK</th>
+                <th colspan="1">CYL</th>
                 <th colspan="1">Axis</th>
                 <th colspan="1">V/A</th>
               </tr>
