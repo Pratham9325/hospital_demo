@@ -390,42 +390,31 @@
         <!-- Complaints/Symptoms -->
         <div class="details-section mb-2" id="Symptoms-section">
           <span class="fw-bold">Complaints/Symptoms:</span>
-          <span class="text-primary">Eye Redness</span> | 
-          <span class="text-primary">Fever</span> | 
-          <span class="text-primary">Cough</span> | 
-          <span class="text-primary">COLD</span>
+          <span class="text-primary" id="symptoms-list"></span>
         </div>
       
         <!-- Medical History -->
-        <div class="details-section mb-2" id="selectedMedical">
+        <div class="details-section mb-2" id="personal-history-section">
           <span class="fw-bold">Medical History:</span>
-          <span class="text-primary">Smoking, Involuntary</span> | 
-          <span class="text-primary">Tobacco Smoking</span> | 
-          <span class="text-primary">Allergy</span>
+          <span class="text-primary" id="personal-history-list"></span>
         </div>
       
         <!-- Surgical History -->
         <div class="details-section mb-2" id="past-history-section">
           <span class="fw-bold">Surgical History:</span>
-          <span class="text-primary">Diabetes</span> | 
-          <span class="text-primary">A (Adenine)</span> | 
-          <span class="text-primary">Hypertension</span>
+          <span class="text-primary" id="past-history-list"></span>
         </div>
       
         <!-- Diagnosis -->
         <div class="details-section mb-2" id="diagnosis-section">
           <span class="fw-bold">Diagnosis:</span>
-          <span class="text-primary">1A07.Z Typhoid Fever, Unspecified</span> | 
-          <span class="text-primary">Hypertension</span> | 
-          <span class="text-primary">Cataracts</span>
+          <span class="text-primary" id="diagnosis-list"></span>
         </div>
       
         <!-- Investigation -->
         <div class="details-section mb-2" id="investigation-section">
           <span class="fw-bold">Investigation:</span>
-          <span class="text-primary">Diabetes</span> | 
-          <span class="text-primary">A (Adenine)</span> | 
-          <span class="text-primary">Hypertension</span>
+          <span class="text-primary" id="investigation-list"></span>
         </div>
       
       </div>
@@ -619,12 +608,12 @@
         const patientGender = localStorage.getItem("gender");
 
         //Get the selected eye for symptoms, medical history, surgical history, dignosis, and investigation dropdown values from local storage
-        const selectedEyeSymptoms = localStorage.getItem("selectedEyeSymptoms");
-        const selectedEyeSurgical = localStorage.getItem("selectedEyeSurgical");
-        const selectedEyeDignosis = localStorage.getItem("selectedEyeDignosis");
-        const selectedEyeInvestigation = localStorage.getItem(
-          "selectedEyeInvestigation"
-        );
+        // const selectedEyeSymptoms = localStorage.getItem("selectedEyeSymptoms");
+        // const selectedEyeSurgical = localStorage.getItem("selectedEyeSurgical");
+        // const selectedEyeDignosis = localStorage.getItem("selectedEyeDignosis");
+        // const selectedEyeInvestigation = localStorage.getItem(
+        //   "selectedEyeInvestigation"
+        // );
 
         selectedSymptoms = JSON.parse(localStorage.getItem("selectedSymptoms"));
         selectedMedical = JSON.parse(localStorage.getItem("selectedMedical"));
@@ -687,36 +676,23 @@
 
         // Print the selected symptoms
         if (selectedSymptoms && selectedSymptoms != "") {
-          // Find the ul with id "diagnosis-list"
+          // Find the span with id "diagnosis-list"
           const diagnosisList = document.getElementById("symptoms-list");
-
+          
           // Clear the inner HTML
-          diagnosisList.innerHTML = "";
+          diagnosisList.innerHTML = selectedSymptoms
+          .map((symptom) => `<span class="text-primary">${symptom}</span> `)
+          .join(`<span style="color: black; font-weight: bold;"> | </span>`);
+            
 
-          // Loop through the selected symptoms
-          selectedSymptoms.forEach((symptom, index) => {
-            // Create a new list item
-            const li = document.createElement("li");
-
-            // Set the text content of the list item
-            // li.textContent = `${index + 1}. ${symptom}`;
-            if (selectedEyeSymptoms === "") {
-              li.textContent = `${symptom}`;
-            } else {
-              li.textContent = `${symptom} (${selectedEyeSymptoms})`;
-            }
-
-            // Append the list item to the ul
-            diagnosisList.appendChild(li);
-          });
+          
         } else {
           // Hide the section if there are no selected symptoms
           document.getElementById("Symptoms-section").style.display = "none";
-          document.getElementById("Symptoms").style.display = "none";
 
         }
 
-        // Print the selected medical history
+        // // Print the selected medical history
         if (selectedMedical && selectedMedical != "") {
           // Find the ul with id "diagnosis-list"
           const diagnosisList = document.getElementById(
@@ -724,121 +700,65 @@
           );
 
           // Clear the inner HTML
-          diagnosisList.innerHTML = "";
+          diagnosisList.innerHTML = selectedMedical
+          .map((symptom) => `<span class="text-primary">${symptom}</span> `)
+          .join(`<span style="color: black; font-weight: bold;"> | </span>`);
 
-          // Loop through the selected symptoms
-          selectedMedical.forEach((symptom, index) => {
-            // Create a new list item
-            const li = document.createElement("li");
 
-            // Set the text content of the list item
-            // li.textContent = `${index + 1}. ${symptom}`;
 
-            li.textContent = `${symptom}`;
-
-            // Append the list item to the ul
-            diagnosisList.appendChild(li);
-          });
         } else {
           // Hide the section if there are no selected symptoms
           document.getElementById("personal-history-section").style.display =
             "none";
-            document.getElementById("personal-history").style.display =
-            "none";
         }
 
-        // Print the selected surgical history
+        // // Print the selected surgical history
         if (selectedSurgical && selectedSurgical != "") {
           // Find the ul with id "diagnosis-list"
           const diagnosisList = document.getElementById("past-history-list");
 
           // Clear the inner HTML
-          diagnosisList.innerHTML = "";
+          diagnosisList.innerHTML = selectedSurgical
+          .map((symptom) => `<span class="text-primary">${symptom}</span> `)
+          .join(`<span style="color: black; font-weight: bold;"> | </span>`);
 
-          // Loop through the selected symptoms
-          selectedSurgical.forEach((symptom, index) => {
-            // Create a new list item
-            const li = document.createElement("li");
-
-            // Set the text content of the list item
-            // li.textContent = `${index + 1}. ${symptom}`;
-            if (selectedEyeSurgical === "") {
-              li.textContent = `${symptom}`;
-            } else {
-              li.textContent = `${symptom} (${selectedEyeSurgical})`;
-            }
-
-            // Append the list item to the ul
-            diagnosisList.appendChild(li);
-          });
         } else {
           // Hide the section if there are no selected symptoms
           document.getElementById("past-history-section").style.display =
             "none";
-          document.getElementById("past-history").style.display =
-            "none";
         }
 
-        // Print the selected dignosis
+        // // Print the selected dignosis
         if (selectedDignosis && selectedDignosis != "") {
           // Find the ul with id "diagnosis-list"
           const diagnosisList = document.getElementById("diagnosis-list");
 
           // Clear the inner HTML
-          diagnosisList.innerHTML = "";
+          diagnosisList.innerHTML = selectedDignosis
+          .map((symptom) => `<span class="text-primary">${symptom}</span> `)
+          .join(`<span style="color: black; font-weight: bold;"> | </span>`);
+          
 
-          // Loop through the selected symptoms
-          selectedDignosis.forEach((symptom, index) => {
-            // Create a new list item
-            const li = document.createElement("li");
-
-            // Set the text content of the list item
-            // li.textContent = `${index + 1}. ${symptom}`;
-            if (selectedEyeDignosis === "") {
-              li.textContent = `${symptom}`;
-            } else {
-              li.textContent = `${symptom} (${selectedEyeDignosis})`;
-            }
-
-            // Append the list item to the ul
-            diagnosisList.appendChild(li);
-          });
+          
         } else {
           // Hide the section if there are no selected symptoms
           document.getElementById("diagnosis-section").style.display = "none";
-          document.getElementById("diagnosis").style.display = "none";
 
         }
 
-        // Print the selected investigation
+        // // Print the selected investigation
         if (selectedInvestigation && selectedInvestigation != "") {
           // Find the ul with id "diagnosis-list"
           const diagnosisList = document.getElementById("investigation-list");
 
           // Clear the inner HTML
-          diagnosisList.innerHTML = "";
+          diagnosisList.innerHTML = selectedInvestigation
+          .map((symptom) => `<span class="text-primary">${symptom}</span> `)
+          .join(`<span style="color: black; font-weight: bold;"> | </span>`);
 
-          // Loop through the selected symptoms
-          selectedInvestigation.forEach((symptom, index) => {
-            // Create a new list item
-            const li = document.createElement("li");
-
-            // Set the text content of the list item
-            // li.textContent = `${index + 1}. ${symptom}`;
-            if (selectedEyeInvestigation === "") {
-              li.textContent = `${symptom}`;
-            } else {
-              li.textContent = `${symptom} (${selectedEyeInvestigation})`;
-            }
-
-            // Append the list item to the ul
-            diagnosisList.appendChild(li);
-          });
         } else {
           // Hide the section if there are no selected symptoms
           document.getElementById("investigation-section").style.display =
-            "none";
-            document.getElementById("investigation").style.display =
             "none";
         }
 
