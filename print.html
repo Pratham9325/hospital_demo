@@ -324,6 +324,35 @@
         height: 150px;
         overflow-y: auto; /* Add scrolling if the content overflows */
       }
+
+
+      
+
+      /* Table Styling */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+      }
+
+      th {
+        background-color: #f4f4f4;
+        font-weight: bold;
+      }
+
+      input[type="text"] {
+        width: 90%;
+        padding: 8px;
+        box-sizing: border-box;
+      }
+
     </style>
   </head>
   <body>
@@ -368,7 +397,7 @@
         </div>
       
         <!-- Medical History -->
-        <div class="details-section mb-2" id="personal-history-section">
+        <div class="details-section mb-2" id="selectedMedical">
           <span class="fw-bold">Medical History:</span>
           <span class="text-primary">Smoking, Involuntary</span> | 
           <span class="text-primary">Tobacco Smoking</span> | 
@@ -405,11 +434,10 @@
       <!-- Current Glass Power Section -->
 
       <div
-        class="section current-glass-power container h-30 mr-2"
+        class="section current-glass-power  "
         id="current-glass-power"
       >
         <div class="details-section">
-          <h3>Current Power Glass</h3>
 
           <table
             class="table table-bordered border-primary container table-custom-height"
@@ -559,10 +587,10 @@
       </div>
 
       <!-- Me Section -->
-      <h3 id="medicines-title" style="font-size: 16px;">Medication List</h3>
+      <h3 id="medicines-title" style="font-size: 16px; font-weight: bold;">RX</h3>
       <table
         id="medicines-table"
-        class="table table-bordered border-primary border border-3"
+        class="table table-bordered border-primary border border-1"
       >
         <thead>
           <tr class="text-center">

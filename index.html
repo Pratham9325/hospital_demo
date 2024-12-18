@@ -11,7 +11,11 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
-    <link rel="icon" type="image/x-icon" href="./Screenshot 2024-12-17 224433.png">
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="./Screenshot 2024-12-17 224433.png"
+    />
     <style>
       /* Custom container */
       .container {
@@ -40,7 +44,6 @@
 
       .form-group {
         margin-bottom: 20px;
-       
       }
 
       label {
@@ -255,7 +258,6 @@
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       } */
 
-    
       .item-grid {
         display: flex;
         flex-wrap: wrap;
@@ -267,25 +269,24 @@
       }
 
       .item-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
 
-  .diagnosis {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    cursor: pointer;
-    background:#f0f0f0;
-    color: black;
-  }
+      .diagnosis {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+        background: #f0f0f0;
+        color: black;
+      }
 
-  .diagnosis.selected {
-    background-color: #007bff;
-    color: white;
-  }
-
+      .diagnosis.selected {
+        background-color: #007bff;
+        color: white;
+      }
     </style>
     <link rel="stylesheet" href="./style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -355,64 +356,231 @@
         <div class="form-step" id="step-2">
           <div class="form-group">
             <h3>Select Symptoms:</h3>
-            <select id="symptoms-eye-select" name="eye" style="width: 140px" onchange="showSymptomOptions()">
+            <select
+              id="symptoms-eye-select"
+              name="eye"
+              style="width: 140px"
+              onchange="showSymptomOptions()"
+            >
               <option value="">Select Eye</option>
               <option value="RE">Right Eye</option>
               <option value="LE">Left Eye</option>
               <option value="BE">Both Eyes</option>
             </select>
-            
+
             <!-- Symptom options for Right Eye -->
-            <div class="item-grid" id="Right-Eye-Symptoms" style="display: none">
-              <div class="item" onclick="toggleSymptoms(this)">Blurry Vision</div>
-              <div class="item" onclick="toggleSymptoms(this)">Spot in Front of Eye</div>
-              <div class="item" onclick="toggleSymptoms(this)">Light Sensitivity</div>
+            <div
+              class="item-grid"
+              id="Right-Eye-Symptoms"
+              style="display: none; text-transform: capitalize"
+            >
+              <div class="item" onclick="toggleSymptoms(this)">
+                Blurry Vision
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                Spot in Front of Eye
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                Light Sensitivity
+              </div>
               <div class="item" onclick="toggleSymptoms(this)">Headache</div>
               <div class="item" onclick="toggleSymptoms(this)">Floaters</div>
               <div class="item" onclick="toggleSymptoms(this)">Pain in Eye</div>
-              <div class="item" onclick="toggleSymptoms(this)">Swelling on Lid</div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                Swelling on Lid
+              </div>
               <div class="item" onclick="toggleSymptoms(this)">Irritation</div>
               <div class="item" onclick="toggleSymptoms(this)">Itching</div>
               <div class="item" onclick="toggleSymptoms(this)">Watering</div>
-              <div class="item" onclick="toggleSymptoms(this)">Night Vision Problem</div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                Night Vision Problem
+              </div>
               <div class="item" onclick="toggleSymptoms(this)">Redness</div>
+              <div class="item" onclick="toggleSymptoms(this)">DISCHARGE</div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                f.b.sensation
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">[be] dov</div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                dryness in eye
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                double vision
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                lumps on eyelid
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                blood spot in eye
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                dilated pupil
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                droping eyelid
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">chemosis</div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                swelling on lid
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                night vision Problem
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                pain arownd eye
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                white ring arownd cornea
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                sudden loss of Vision
+              </div>
               <!-- Add more symptoms if needed -->
             </div>
-            
+
             <!-- Symptom options for Left Eye -->
-            <div class="item-grid" id="Left-Eye-Symptoms" style="display: none">
-              <div class="item" onclick="toggleSymptoms(this)">Blurry Vision</div>
-              <div class="item" onclick="toggleSymptoms(this)">Spot in Front of Eye</div>
-              <div class="item" onclick="toggleSymptoms(this)">Light Sensitivity</div>
+            <div
+              class="item-grid"
+              id="Left-Eye-Symptoms"
+              style="display: none; text-transform: capitalize"
+            >
+              <div class="item" onclick="toggleSymptoms(this)">
+                Blurry Vision
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                Spot in Front of Eye
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                Light Sensitivity
+              </div>
               <div class="item" onclick="toggleSymptoms(this)">Headache</div>
               <div class="item" onclick="toggleSymptoms(this)">Floaters</div>
               <div class="item" onclick="toggleSymptoms(this)">Pain in Eye</div>
-              <div class="item" onclick="toggleSymptoms(this)">Swelling on Lid</div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                Swelling on Lid
+              </div>
               <div class="item" onclick="toggleSymptoms(this)">Irritation</div>
               <div class="item" onclick="toggleSymptoms(this)">Itching</div>
               <div class="item" onclick="toggleSymptoms(this)">Watering</div>
-              <div class="item" onclick="toggleSymptoms(this)">Night Vision Problem</div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                Night Vision Problem
+              </div>
               <div class="item" onclick="toggleSymptoms(this)">Redness</div>
+              <div class="item" onclick="toggleSymptoms(this)">DISCHARGE</div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                f.b.sensation
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">[be] dov</div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                dryness in eye
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                double vision
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                lumps on eyelid
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                blood spot in eye
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                dilated pupil
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                droping eyelid
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">chemosis</div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                swelling on lid
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                night vision Problem
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                pain arownd eye
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                white ring arownd cornea
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                sudden loss of Vision
+              </div>
               <!-- Add more symptoms if needed -->
             </div>
             <!-- Symptom options for Both Eyes -->
-<div class="item-grid" id="Both-Eyes-Symptoms" style="display: none">
-  <div class="item" onclick="toggleSymptoms(this)">Blurry Vision</div>
-  <div class="item" onclick="toggleSymptoms(this)">Spot in Front of Eye</div>
-  <div class="item" onclick="toggleSymptoms(this)">Light Sensitivity</div>
-  <div class="item" onclick="toggleSymptoms(this)">Headache</div>
-  <div class="item" onclick="toggleSymptoms(this)">Floaters</div>
-  <div class="item" onclick="toggleSymptoms(this)">Pain in Eye</div>
-  <div class="item" onclick="toggleSymptoms(this)">Swelling on Lid</div>
-  <div class="item" onclick="toggleSymptoms(this)">Irritation</div>
-  <div class="item" onclick="toggleSymptoms(this)">Itching</div>
-  <div class="item" onclick="toggleSymptoms(this)">Watering</div>
-  <div class="item" onclick="toggleSymptoms(this)">Night Vision Problem</div>
-  <div class="item" onclick="toggleSymptoms(this)">Redness</div>
-  <!-- Add more symptoms if needed -->
-</div>
+            <div
+              class="item-grid"
+              id="Both-Eyes-Symptoms"
+              style="display: none; text-transform: capitalize"
+            >
+              <div class="item" onclick="toggleSymptoms(this)">
+                Blurry Vision
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                Spot in Front of Eye
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                Light Sensitivity
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">Headache</div>
+              <div class="item" onclick="toggleSymptoms(this)">Floaters</div>
+              <div class="item" onclick="toggleSymptoms(this)">Pain in Eye</div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                Swelling on Lid
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">Irritation</div>
+              <div class="item" onclick="toggleSymptoms(this)">Itching</div>
+              <div class="item" onclick="toggleSymptoms(this)">Watering</div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                Night Vision Problem
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">Redness</div>
+              <div class="item" onclick="toggleSymptoms(this)">DISCHARGE</div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                f.b.sensation
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">[be] dov</div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                dryness in eye
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                double vision
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                lumps on eyelid
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                blood spot in eye
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                dilated pupil
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                droping eyelid
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">chemosis</div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                swelling on lid
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                night vision Problem
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                pain arownd eye
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                white ring arownd cornea
+              </div>
+              <div class="item" onclick="toggleSymptoms(this)">
+                sudden loss of Vision
+              </div>
+              <!-- Add more symptoms if needed -->
+            </div>
           </div>
-          <div class="form-group" style="margin-top: 70px">
+          <div
+            class="form-group"
+            style="margin-top: 70px; text-transform: capitalize"
+          >
             <h3>Medical History:</h3>
             <!-- <select id="medical-eye-select" name="eye" style="width: 140px;">
             <option value="">Select Eye </option>
@@ -427,6 +595,9 @@
               </div>
               <div class="medical" onclick="toggleMedical(this)">Asthama</div>
               <div class="medical" onclick="toggleMedical(this)">Diabetes</div>
+              <div class="medical" onclick="toggleMedical(this)">
+                paralysis attack
+              </div>
 
               <div class="medical" onclick="toggleMedical(this)">IHD</div>
               <div class="medical" onclick="toggleMedical(this)">Jaundice</div>
@@ -434,9 +605,12 @@
               <div class="medical" onclick="toggleMedical(this)">Cancer</div>
               <div class="medical" onclick="toggleMedical(this)">CABG</div>
               <div class="medical" onclick="toggleMedical(this)">PTCA</div>
+              <div class="medical" onclick="toggleMedical(this)">
+                pt is on antiplatelet
+              </div>
             </div>
           </div>
-         
+
           <div class="form-group" style="margin-top: 60px">
             <h3>Surgical History:</h3>
 
@@ -455,91 +629,74 @@
             </select>
 
             <!-- Surgical options for Right Eye -->
-            <div class="item-grid " id="Right Eye" style="display: none">
-              <div class="col-item">
-                <div class="surgical w-5" onclick="toggleSurgical(this)">
+            <div class="item-grid" id="Right Eye" style="display: none">
+              <div class="col-grid">
+                <div class="medical" onclick="toggleSurgical(this)">
                   Retina Surgery
                 </div>
               </div>
-              <div class="col-item">
-                <div class="surgical" onclick="toggleSurgical(this)">
+              <div class="col-grid">
+                <div class="medical" onclick="toggleSurgical(this)">
                   Glaucoma Surgery
                 </div>
               </div>
-              <div class="col-item">
-                <div class="surgical" onclick="toggleSurgical(this)">
+              <div class="col-grid">
+                <div class="medical" onclick="toggleSurgical(this)">
                   Cataract Surgery
                 </div>
               </div>
-              <div class="col-item">
-                <div class="surgical" onclick="toggleSurgical(this)">
+              <div class="col-grid">
+                <div class="medical" onclick="toggleSurgical(this)">
                   Pterygium Surgery
                 </div>
               </div>
               <!-- Add more surgery options if needed -->
-              <div class="col-item">
-                <div class="surgical" onclick="toggleSurgical(this)">
-                  Another Surgery
-                </div>
-              </div>
             </div>
 
             <!-- Surgical options for Left Eye -->
             <div class="item-grid" id="Left Eye" style="display: none">
-              <div class="col-item">
-                <div class="surgical" onclick="toggleSurgical(this)">
+              <div class="col-grid">
+                <div class="medical" onclick="toggleSurgical(this)">
                   Retina Surgery
                 </div>
               </div>
-              <div class="col-item">
-                <div class="surgical" onclick="toggleSurgical(this)">
+              <div class="col-grid">
+                <div class="medical" onclick="toggleSurgical(this)">
                   Glaucoma Surgery
                 </div>
               </div>
-              <div class="col-item">
-                <div class="surgical" onclick="toggleSurgical(this)">
+              <div class="col-grid">
+                <div class="medical" onclick="toggleSurgical(this)">
                   Cataract Surgery
                 </div>
               </div>
-              <div class="col-item">
-                <div class="surgical" onclick="toggleSurgical(this)">
+              <div class="col-grid">
+                <div class="medical" onclick="toggleSurgical(this)">
                   Pterygium Surgery
-                </div>
-              </div>
-              <!-- Add more surgery options if needed -->
-              <div class="col-item">
-                <div class="surgical" onclick="toggleSurgical(this)">
-                  Another Surgery
                 </div>
               </div>
             </div>
 
             <!-- Surgical options for Both Eyes -->
             <div class="item-grid" id="Both Eyes" style="display: none">
-              <div class="col-item">
-                <div class="surgical" onclick="toggleSurgical(this)">
+              <div class="col-grid">
+                <div class="medical" onclick="toggleSurgical(this)">
                   Retina Surgery
                 </div>
               </div>
-              <div class="col-item">
-                <div class="surgical" onclick="toggleSurgical(this)">
+              <div class="col-grid">
+                <div class="medical" onclick="toggleSurgical(this)">
                   Glaucoma Surgery
                 </div>
               </div>
-              <div class="col-item">
-                <div class="surgical" onclick="toggleSurgical(this)">
+              <div class="col-grid">
+                <div class="medical" onclick="toggleSurgical(this)">
                   Cataract Surgery
                 </div>
               </div>
-              <div class="col-item">
-                <div class="surgical" onclick="toggleSurgical(this)">
+              <div class="col-grid">
+                <div class="medical" onclick="toggleSurgical(this)">
                   Pterygium Surgery
-                </div>
-              </div>
-              <!-- Add more surgery options if needed -->
-              <div class="col-item">
-                <div class="surgical" onclick="toggleSurgical(this)">
-                  Another Surgery
                 </div>
               </div>
             </div>
@@ -630,80 +787,333 @@
       <div class="form-step" id="step-5">
         <div class="form-group">
           <h3>Dignosis:</h3>
-          <select id="diagnosis-eye-select" name="eye" style="width: 140px" onchange="showDiagnosisOptions()">
+          <select
+            id="diagnosis-eye-select"
+            name="eye"
+            style="width: 140px"
+            onchange="showDiagnosisOptions()"
+          >
             <option value="">Select Eye</option>
             <option value="RE">Right Eye</option>
             <option value="LE">Left Eye</option>
             <option value="BE">Both Eyes</option>
           </select>
-          
+
           <!-- Diagnosis options for Right Eye -->
-          <div class="item-grid" id="Right-Eye-Diagnosis" style="display: none">
+          <div
+            class="item-grid"
+            id="Right-Eye-Diagnosis"
+            style="display: none; text-transform: capitalize"
+          >
             <div class="diagnosis" onclick="toggleDiagnosis(this)">Myopia</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Blepharitis</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Hypermetropia</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Macular Edema</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Astigmatism</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Macular Hole</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Blepharitis
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Hypermetropia
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              age related macular degeration
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">aphakia</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              amblyopia
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              color blindness
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              immature senile cataract
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              ulternate exotrphia
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              ulternate esotrphia
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              convergent squint
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              macular hole
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              macular pucker
+            </div>
+
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Macular Edema
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Astigmatism
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Macular Hole
+            </div>
             <div class="diagnosis" onclick="toggleDiagnosis(this)">Stye</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Chalazion</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Presbyopia</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Conjunctivitis</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Refractive Errors</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Glaucoma</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Retinal Detachment</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Pseudophakia</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Diabetic Retinopathy</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Chalazion
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Presbyopia
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Conjunctivitis
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Refractive Errors
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Glaucoma
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              retinitis pigmentosa
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">ROP</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">iritis</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">uveitis</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              vitreous detachement
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Retinal Detachment
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Pseudophakia
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Diabetic Retinopathy
+            </div>
           </div>
-          
+
           <!-- Diagnosis options for Left Eye -->
           <div class="item-grid" id="Left-Eye-Diagnosis" style="display: none">
+           
             <div class="diagnosis" onclick="toggleDiagnosis(this)">Myopia</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Blepharitis</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Hypermetropia</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Macular Edema</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Astigmatism</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Macular Hole</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Blepharitis
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Hypermetropia
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              age related macular degeration
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">aphakia</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              amblyopia
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              color blindness
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              immature senile cataract
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              ulternate exotrphia
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              ulternate esotrphia
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              convergent squint
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              macular hole
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              macular pucker
+            </div>
+
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Macular Edema
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Astigmatism
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Macular Hole
+            </div>
             <div class="diagnosis" onclick="toggleDiagnosis(this)">Stye</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Chalazion</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Presbyopia</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Conjunctivitis</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Refractive Errors</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Glaucoma</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Retinal Detachment</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Pseudophakia</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Diabetic Retinopathy</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Chalazion
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Presbyopia
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Conjunctivitis
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Refractive Errors
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Glaucoma
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              retinitis pigmentosa
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">ROP</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">iritis</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">uveitis</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              vitreous detachement
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Retinal Detachment
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Pseudophakia
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Diabetic Retinopathy
+            </div>
           </div>
-          
+
+       
           <!-- Diagnosis options for Both Eyes -->
           <div class="item-grid" id="Both-Eyes-Diagnosis" style="display: none">
             <div class="diagnosis" onclick="toggleDiagnosis(this)">Myopia</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Blepharitis</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Hypermetropia</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Macular Edema</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Astigmatism</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Macular Hole</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Blepharitis
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Hypermetropia
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              age related macular degeration
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">aphakia</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              amblyopia
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              color blindness
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              immature senile cataract
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              ulternate exotrphia
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              ulternate esotrphia
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              convergent squint
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              macular hole
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              macular pucker
+            </div>
+
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Macular Edema
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Astigmatism
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Macular Hole
+            </div>
             <div class="diagnosis" onclick="toggleDiagnosis(this)">Stye</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Chalazion</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Presbyopia</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Conjunctivitis</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Refractive Errors</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Glaucoma</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Retinal Detachment</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Pseudophakia</div>
-            <div class="diagnosis" onclick="toggleDiagnosis(this)">Diabetic Retinopathy</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Chalazion
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Presbyopia
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Conjunctivitis
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Refractive Errors
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Glaucoma
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              retinitis pigmentosa
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">ROP</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">iritis</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">uveitis</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              vitreous detachement
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Retinal Detachment
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Pseudophakia
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Diabetic Retinopathy
+            </div>
+          </div>
+
+          <!-- Diagnosis options for Left Eye -->
+          <div class="item-grid" id="Left-Eye-Diagnosis" style="display: none">
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Myopia</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Blepharitis
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Hypermetropia
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Macular Edema
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Astigmatism
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Macular Hole
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">Stye</div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Chalazion
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Presbyopia
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Conjunctivitis
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Refractive Errors
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Glaucoma
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Retinal Detachment
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Pseudophakia
+            </div>
+            <div class="diagnosis" onclick="toggleDiagnosis(this)">
+              Diabetic Retinopathy
+            </div>
           </div>
         </div>
-        <div class="form-group" style="margin-top: 70px">
+        <div class="form-group" style="margin-top: 70px; text-transform: capitalize;">
           <h3>Investigation:</h3>
 
-          
           <div class="item-grid">
             <div class="investigation" onclick="toggleInvestigation(this)">
               CBC
             </div>
             <div class="investigation" onclick="toggleInvestigation(this)">
               BSL (R)
+            </div>
+            <div class="investigation" onclick="toggleInvestigation(this)">
+              BSL (fasting)
+            </div>
+            <div class="investigation" onclick="toggleInvestigation(this)">
+              BSL (postprandial)
             </div>
 
             <div class="investigation" onclick="toggleInvestigation(this)">
@@ -726,6 +1136,9 @@
             </div>
             <div class="investigation" onclick="toggleInvestigation(this)">
               Sr. Urea
+            </div>
+            <div class="investigation" onclick="toggleInvestigation(this)">
+              virc acid
             </div>
           </div>
         </div>
@@ -1510,7 +1923,6 @@
       });
     </script>
 
-
     <script>
       function showSurgicalOptions() {
         // Hide all the item grids first
@@ -1537,60 +1949,51 @@
         element.classList.toggle("selected");
       }
 
-
-
-
-
-
-
-
-
       function showSymptomOptions() {
-    // Hide all symptom grids first
-    document.getElementById("Right-Eye-Symptoms").style.display = "none";
-    document.getElementById("Left-Eye-Symptoms").style.display = "none";
-    document.getElementById("Both-Eyes-Symptoms").style.display = "none";
+        // Hide all symptom grids first
+        document.getElementById("Right-Eye-Symptoms").style.display = "none";
+        document.getElementById("Left-Eye-Symptoms").style.display = "none";
+        document.getElementById("Both-Eyes-Symptoms").style.display = "none";
 
-    // Get the selected option from the dropdown
-    var selectedEye = document.getElementById("symptoms-eye-select").value;
+        // Get the selected option from the dropdown
+        var selectedEye = document.getElementById("symptoms-eye-select").value;
 
-    // Show the corresponding symptom grid based on the selected eye
-    if (selectedEye === "RE") {
-      document.getElementById("Right-Eye-Symptoms").style.display = "flex";
-    } else if (selectedEye === "LE") {
-      document.getElementById("Left-Eye-Symptoms").style.display = "flex";
-    } else if (selectedEye === "BE") {
-      document.getElementById("Both-Eyes-Symptoms").style.display = "flex";
-    }
-  }
+        // Show the corresponding symptom grid based on the selected eye
+        if (selectedEye === "RE") {
+          document.getElementById("Right-Eye-Symptoms").style.display = "flex";
+        } else if (selectedEye === "LE") {
+          document.getElementById("Left-Eye-Symptoms").style.display = "flex";
+        } else if (selectedEye === "BE") {
+          document.getElementById("Both-Eyes-Symptoms").style.display = "flex";
+        }
+      }
 
-  function toggleSymptoms(element) {
-    element.classList.toggle("selected");
-  }
+      function toggleSymptoms(element) {
+        element.classList.toggle("selected");
+      }
 
+      function showDiagnosisOptions() {
+        // Hide all diagnosis grids first
+        document.getElementById("Right-Eye-Diagnosis").style.display = "none";
+        document.getElementById("Left-Eye-Diagnosis").style.display = "none";
+        document.getElementById("Both-Eyes-Diagnosis").style.display = "none";
 
-  function showDiagnosisOptions() {
-    // Hide all diagnosis grids first
-    document.getElementById("Right-Eye-Diagnosis").style.display = "none";
-    document.getElementById("Left-Eye-Diagnosis").style.display = "none";
-    document.getElementById("Both-Eyes-Diagnosis").style.display = "none";
+        // Get the selected option from the dropdown
+        var selectedEye = document.getElementById("diagnosis-eye-select").value;
 
-    // Get the selected option from the dropdown
-    var selectedEye = document.getElementById("diagnosis-eye-select").value;
+        // Show the corresponding diagnosis grid based on the selected eye
+        if (selectedEye === "RE") {
+          document.getElementById("Right-Eye-Diagnosis").style.display = "flex";
+        } else if (selectedEye === "LE") {
+          document.getElementById("Left-Eye-Diagnosis").style.display = "flex";
+        } else if (selectedEye === "BE") {
+          document.getElementById("Both-Eyes-Diagnosis").style.display = "flex";
+        }
+      }
 
-    // Show the corresponding diagnosis grid based on the selected eye
-    if (selectedEye === "RE") {
-      document.getElementById("Right-Eye-Diagnosis").style.display = "flex";
-    } else if (selectedEye === "LE") {
-      document.getElementById("Left-Eye-Diagnosis").style.display = "flex";
-    } else if (selectedEye === "BE") {
-      document.getElementById("Both-Eyes-Diagnosis").style.display = "flex";
-    }
-  }
-
-  function toggleDiagnosis(element) {
-    element.classList.toggle("selected");
-  }
+      function toggleDiagnosis(element) {
+        element.classList.toggle("selected");
+      }
     </script>
   </body>
 </html>
