@@ -588,7 +588,7 @@
 
 
       
-      <!-- <div class="container my-4">
+      <div class="container my-4" id="eye-examination-table">
        
         <div class="table-responsive">
           <table class="table table-bordered">
@@ -600,58 +600,58 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr id="Eyelids-row">
                 <td>Eyelids & Adnexa</td>
-                <td><input type="text" class="form-control" readonly></td>
-                <td><input type="text" class="form-control" readonly></td>
+                <td><input type="text" class="form-control" readonly id="EyelidsR"></td>
+                <td><input type="text" class="form-control" readonly id="EyelidsL"></td>
               </tr>
               
-              <tr>
+              <tr id="Conjunctiva-row">
                 <td>Conjunctiva</td>
-                <td><input type="text" class="form-control" readonly></td>
-                <td><input type="text" class="form-control" readonly></td>
+                <td><input type="text" class="form-control" readonly id="ConjunctivaR"></td>
+                <td><input type="text" class="form-control" readonly id="ConjunctivaL"></td>
               </tr>
-              <tr>
+              <tr id="Sclera-row">
                 <td>Sclera</td>
-                <td><input type="text" class="form-control" readonly></td>
-                <td><input type="text" class="form-control"readonly></td>
+                <td><input type="text" class="form-control" readonly id="ScleraR"></td>
+                <td><input type="text" class="form-control"readonly id="ScleraL"></td>
               </tr>
-              <tr>
+              <tr id="Cornea-row">
                 <td>Cornea</td>
-                <td><input type="text" class="form-control" readonly></td>
-                <td><input type="text" class="form-control" readonly></td>
+                <td><input type="text" class="form-control" readonly id="CorneaR"></td>
+                <td><input type="text" class="form-control" readonly id="CorneaL"></td>
               </tr>
-              <tr>
+              <tr id="Anterior-row">
                 <td>Anterior Chamber</td>
-                <td><input type="text" class="form-control" readonly></td>
-                <td><input type="text" class="form-control" readonly></td>
+                <td><input type="text" class="form-control" readonly id="AnteriorR"></td>
+                <td><input type="text" class="form-control" readonly id="AnteriorL"></td>
               </tr>
-              <tr>
+              <tr id="Iris-row">
                 <td>Iris</td>
-                <td><input type="text" class="form-control" readonly></td>
-                <td><input type="text" class="form-control" readonly></td>
+                <td><input type="text" class="form-control" readonly id="IrisR"></td>
+                <td><input type="text" class="form-control" readonly id="IrisL"></td>
               </tr>
-              <tr>
+              <tr id="Pupil-row">
                 <td>Pupil</td>
-                <td><input type="text" class="form-control" readonly></td>
-                <td><input type="text" class="form-control" readonly></td>
+                <td><input type="text" class="form-control" readonly id="PupilR"></td>
+                <td><input type="text" class="form-control" readonly id="PupilL"></td>
               </tr>
-              <tr>
+              <tr id="Lens-row">
                 <td>Lens</td>
-                <td><input type="text" class="form-control" readonly></td>
-                <td><input type="text" class="form-control" readonly></td>
+                <td><input type="text" class="form-control" readonly id="LensR"></td>
+                <td><input type="text" class="form-control" readonly id="LensL"></td>
               </tr>
               
-              <tr>
+              <tr id="Vitreous-row">
                 <td>Fundus</td>
-                <td><input type="text" class="form-control" readonly></td>
-                <td><input type="text" class="form-control" readonly></td>
+                <td><input type="text" class="form-control" readonly id="FundusR"></td>
+                <td><input type="text" class="form-control" readonly id="FundusL"></td>
               </tr>
              
             </tbody>
           </table>
         </div>
-      </div> -->
+      </div>
 
       
 
@@ -710,6 +710,10 @@
           localStorage.getItem("currentPowerGlasses")
         );
         const CPG_Table = localStorage.getItem("CPG_Table");
+        const EE_Table = localStorage.getItem("EE_Table");
+
+        //get Eye Examination Table values from local storage
+        eyeExaminationTable = JSON.parse(localStorage.getItem("eyeExaminationTable"));
 
         // get medicines from local storage
         const medicines = JSON.parse(localStorage.getItem("medicines"));
@@ -718,11 +722,14 @@
         console.log(currentPowerGlasses);
 
         console.log(CPG_Table);
+        console.log(EE_Table);
         if (CPG_Table === "true") {
           console.log("Table Found");
         } else {
           console.log("Table Not Found");
         }
+
+
 
         // Print the patient's details
         if (patientName) {
@@ -919,6 +926,79 @@
           }
         } else {
           document.getElementById("current-glass-power").style.display = "none";
+        }
+
+        // Print the selected eye examination table values
+        if (EE_Table === "true") {
+          if (eyeExaminationTable.EyelidsR != "" && eyeExaminationTable.EyelidsL != "") {
+            document.getElementById("EyelidsR").value = eyeExaminationTable.EyelidsR;
+            document.getElementById("EyelidsL").value = eyeExaminationTable.EyelidsL;
+          }else{
+            document.getElementById("Eyelids-row").style.display = "none";
+          }
+
+          if (eyeExaminationTable.ConjunctivaR != "" && eyeExaminationTable.ConjunctivaL != "") {
+            document.getElementById("ConjunctivaR").value = eyeExaminationTable.ConjunctivaR;
+            document.getElementById("ConjunctivaL").value = eyeExaminationTable.ConjunctivaL;
+          }else{
+            document.getElementById("Conjunctiva-row").style.display = "none";
+          }
+
+          if (eyeExaminationTable.ScleraR != "" && eyeExaminationTable.ScleraL != "") {
+            document.getElementById("ScleraR").value = eyeExaminationTable.ScleraR;
+            document.getElementById("ScleraL").value = eyeExaminationTable.ScleraL;
+          }else{
+            document.getElementById("Sclera-row").style.display = "none";
+          }
+
+          if (eyeExaminationTable.CorneaR != "" && eyeExaminationTable.CorneaL != "") {
+            document.getElementById("CorneaR").value = eyeExaminationTable.CorneaR;
+            document.getElementById("CorneaL").value = eyeExaminationTable.CorneaL;
+          }else{
+            document.getElementById("Cornea-row").style.display = "none";
+          }
+
+          if (eyeExaminationTable.AnteriorR != "" && eyeExaminationTable.AnteriorL != "") {
+            document.getElementById("AnteriorR").value = eyeExaminationTable.AnteriorR;
+            document.getElementById("AnteriorL").value = eyeExaminationTable.AnteriorL;
+          }else{
+            document.getElementById("Anterior-row").style.display = "none";
+          }
+
+          if (eyeExaminationTable.IrisR != "" && eyeExaminationTable.IrisL != "") {
+            document.getElementById("IrisR").value = eyeExaminationTable.IrisR;
+            document.getElementById("IrisL").value = eyeExaminationTable.IrisL;
+          }else{
+            document.getElementById("Iris-row").style.display = "none";
+          }
+
+          if (eyeExaminationTable.PupilR != "" && eyeExaminationTable.PupilL != "") {
+            document.getElementById("PupilR").value = eyeExaminationTable.PupilR;
+            document.getElementById("PupilL").value = eyeExaminationTable.PupilL;
+          }else{
+            document.getElementById("Pupil-row").style.display = "none";
+          }
+
+          if (eyeExaminationTable.LensR != "" && eyeExaminationTable.LensL != "") {
+            document.getElementById("LensR").value = eyeExaminationTable.LensR;
+            document.getElementById("LensL").value = eyeExaminationTable.LensL;
+          }else{
+            document.getElementById("Lens-row").style.display = "none";
+          }
+
+          if (eyeExaminationTable.FundusR != "" && eyeExaminationTable.FundusL != "") {
+            document.getElementById("FundusR").value = eyeExaminationTable.FundusR;
+            document.getElementById("FundusL").value = eyeExaminationTable.FundusL;
+          }else{
+            document.getElementById("Vitreous-row").style.display = "none";
+          }
+          
+          
+
+        } else {
+          // Hide the section if there are no selected symptoms
+          document.getElementById("eye-examination-table").style.display =
+            "none";
         }
 
         // / Check if medicines exist in localStorage

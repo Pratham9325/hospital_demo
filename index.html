@@ -631,50 +631,50 @@
                   <tbody>
                     <tr>
                       <td>Eyelids & Adnexa</td>
-                      <td><input type="text" class="form-control" ></td>
-                      <td><input type="text" class="form-control" ></td>
+                      <td><input type="text" class="form-control" id="EyelidsR"></td>
+                      <td><input type="text" class="form-control" id="EyelidsL"></td>
                     </tr>
                     
                     <tr>
                       <td>Conjunctiva</td>
-                      <td><input type="text" class="form-control"></td>
-                      <td><input type="text" class="form-control"></td>
+                      <td><input type="text" class="form-control" id="ConjunctivaR"></td>
+                      <td><input type="text" class="form-control" id="ConjunctivaL"></td>
                     </tr>
                     <tr>
                       <td>Sclera</td>
-                      <td><input type="text" class="form-control" ></td>
-                      <td><input type="text" class="form-control" ></td>
+                      <td><input type="text" class="form-control" id="ScleraR"></td>
+                      <td><input type="text" class="form-control" id="ScleraL"></td>
                     </tr>
                     <tr>
                       <td>Cornea</td>
-                      <td><input type="text" class="form-control" ></td>
-                      <td><input type="text" class="form-control"></td>
+                      <td><input type="text" class="form-control" id="CorneaR"></td>
+                      <td><input type="text" class="form-control" id="CorneaL"></td>
                     </tr>
                     <tr>
                       <td>Anterior Chamber</td>
-                      <td><input type="text" class="form-control" ></td>
-                      <td><input type="text" class="form-control"></td>
+                      <td><input type="text" class="form-control" id="AnteriorR"></td>
+                      <td><input type="text" class="form-control" id="AnteriorL"></td>
                     </tr>
                     <tr>
                       <td>Iris</td>
-                      <td><input type="text" class="form-control" ></td>
-                      <td><input type="text" class="form-control"></td>
+                      <td><input type="text" class="form-control" id="IrisR"></td>
+                      <td><input type="text" class="form-control" id="IrisL"></td>
                     </tr>
                     <tr>
                       <td>Pupil</td>
-                      <td><input type="text" class="form-control" ></td>
-                      <td><input type="text" class="form-control" ></td>
+                      <td><input type="text" class="form-control" id="PupilR"></td>
+                      <td><input type="text" class="form-control" id="PupilL"></td>
                     </tr>
                     <tr>
                       <td>Lens</td>
-                      <td><input type="text" class="form-control"></td>
-                      <td><input type="text" class="form-control" ></td>
+                      <td><input type="text" class="form-control" id="LensR"></td>
+                      <td><input type="text" class="form-control" id="LensL"></td>
                     </tr>
                     
                     <tr>
                       <td>Fundus</td>
-                      <td><input type="text" class="form-control" ></td>
-                      <td><input type="text" class="form-control" ></td>
+                      <td><input type="text" class="form-control" id="FundusR"></td>
+                      <td><input type="text" class="form-control" id="FundusL"></td>
                     </tr>
                    
                   </tbody>
@@ -1487,6 +1487,54 @@
           localStorage.setItem(
             "currentPowerGlasses",
             JSON.stringify(currentPowerGlasses)
+          );
+
+          //Eye Examination values
+          const eyeExaminationTable = {
+            EyelidsR: document.getElementById("EyelidsR").value,
+            EyelidsL: document.getElementById("EyelidsL").value,
+            ConjunctivaR: document.getElementById("ConjunctivaR").value,
+            ConjunctivaL: document.getElementById("ConjunctivaL").value,
+            ScleraR: document.getElementById("ScleraR").value,
+            ScleraL: document.getElementById("ScleraL").value,
+            CorneaR: document.getElementById("CorneaR").value,
+            CorneaL: document.getElementById("CorneaL").value,
+            AnteriorR: document.getElementById("AnteriorR").value,
+            AnteriorL: document.getElementById("AnteriorL").value,
+            IrisR: document.getElementById("IrisR").value,
+            IrisL: document.getElementById("IrisL").value,
+            PupilR: document.getElementById("PupilR").value,
+            PupilL: document.getElementById("PupilL").value,
+            LensR: document.getElementById("LensR").value,
+            LensL: document.getElementById("LensL").value,
+            FundusR: document.getElementById("FundusR").value,
+            FundusL: document.getElementById("FundusL").value,
+
+          }
+
+          console.log(eyeExaminationTable);
+
+          count = 0;
+          // Check if all the values are present in keys of the eyeExaminationTable dictionary "" or not using for loop
+          for (const key in eyeExaminationTable) {
+            if (eyeExaminationTable[key] === "") {
+              count += 1;
+            }
+          }
+          console.log(count);
+
+          if (count === 18) {
+            console.log("All the values are empty");
+            localStorage.setItem("EE_Table", "false");
+          } else {
+            console.log("All the values are not empty");
+            localStorage.setItem("EE_Table", "true");
+          }
+
+          // Save the values in local storage
+          localStorage.setItem(
+            "eyeExaminationTable",
+            JSON.stringify(eyeExaminationTable)
           );
 
           // Get the medicine entries
