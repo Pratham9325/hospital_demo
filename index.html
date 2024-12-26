@@ -678,27 +678,27 @@
                       <td><input type="text" class="form-control" id="FundusL"></td>
                     </tr>
                    
-                    <!-- <tr>
+                    <tr>
                       <td>Vision Unaided</td>
-                      <td><input type="text" class="form-control" ></td>
-                      <td><input type="text" class="form-control" ></td>
+                      <td><input type="text" class="form-control" id="UnaidedR"></td>
+                      <td><input type="text" class="form-control" id="UnaidedL"></td>
                     </tr>
                     <tr>
                       <td>Vision Pin hole</td>
-                      <td><input type="text" class="form-control" ></td>
-                      <td><input type="text" class="form-control" ></td>
+                      <td><input type="text" class="form-control" id="PinholeR"></td>
+                      <td><input type="text" class="form-control" id="PinholeL"></td>
                     </tr>
                     <tr>
                       <td>Old glass vision</td>
-                      <td><input type="text" class="form-control" ></td>
-                      <td><input type="text" class="form-control" ></td>
+                      <td><input type="text" class="form-control" id="GlassvisionR"></td>
+                      <td><input type="text" class="form-control" id="GlassvisionL"></td>
                     </tr>
                     <tr>
                       <td>Retraction</td>
-                      <td><input type="text" class="form-control" ></td>
-                      <td><input type="text" class="form-control" ></td>
+                      <td><input type="text" class="form-control" id="RetractionR"></td>
+                      <td><input type="text" class="form-control" id="RetractionL"></td>
                     </tr>
-                    -->
+                   
 
                   </tbody>
                 </table>
@@ -1532,6 +1532,15 @@
             LensL: document.getElementById("LensL").value,
             FundusR: document.getElementById("FundusR").value,
             FundusL: document.getElementById("FundusL").value,
+            UnaidedR: document.getElementById("UnaidedR").value,
+            UnaidedL: document.getElementById("UnaidedL").value,
+            PinholeR: document.getElementById("PinholeR").value,
+            PinholeL: document.getElementById("PinholeL").value,
+            GlassvisionR: document.getElementById("GlassvisionR").value,
+            GlassvisionL: document.getElementById("GlassvisionL").value,
+            RetractionR: document.getElementById("RetractionR").value,
+            RetractionL: document.getElementById("RetractionL").value,
+
 
           }
 
@@ -1546,7 +1555,7 @@
           }
           console.log(count);
 
-          if (count === 18) {
+          if (count === 26) {
             console.log("All the values are empty");
             localStorage.setItem("EE_Table", "false");
           } else {
