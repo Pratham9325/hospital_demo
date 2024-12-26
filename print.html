@@ -421,177 +421,116 @@
           <span class="text-primary" id="diagnosis-list"></span>
         </div>
       
-        <!-- Investigation -->
-        <div class="details-section mb-2" id="investigation-section">
-          <span class="fw-bold">Investigation:</span>
-          <span class="text-primary" id="investigation-list"></span>
-        </div>
+       
       
       </div>
       
 
       <!-- Current Glass Power Section -->
-
       <div
-        class="section current-glass-power  "
-        id="current-glass-power"
-      >
-        <div class="details-section">
-
-          <table
-            class="table table-bordered border-primary container table-custom-height"
-          >
-            <thead>
-              <tr>
-                <th></th>
-                <th colspan="4" class="text-center">Right Eye</th>
-                <th colspan="4" class="text-center">Left Eye</th>
-              </tr>
-            </thead>
-            <thead>
-              <tr>
-                <th></th>
-                <th colspan="1">SPH</th>
-                <th colspan="1">CYL</th>
-                <th colspan="1">Axis</th>
-                <th colspan="1">V/A</th>
-                <th colspan="1">SPH</th>
-                <th colspan="1">CYL</th>
-                <th colspan="1">Axis</th>
-                <th colspan="1">V/A</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>DV</td>
-                <td>
-                  <input type="text" style="width: 60px" id="DV-SPH" readonly />
-                </td>
-                <td>
-                  <input type="text" style="width: 60px" id="DV-CYL" readonly />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    style="width: 60px"
-                    id="DV-Axis"
-                    readonly
-                  />
-                </td>
-                <td>
-                  <input type="text" style="width: 50px" id="DV-VA" readonly />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    style="width: 60px"
-                    id="DV-SPH2"
-                    readonly
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    style="width: 60px"
-                    id="DV-CYL2"
-                    readonly
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    style="width: 60px"
-                    id="DV-Axis2"
-                    readonly
-                  />
-                </td>
-                <td>
-                  <input type="text" style="width: 60px" id="DV-VA2" readonly />
-                </td>
-              </tr>
-              <tr>
-                <td>NV</td>
-                <td>
-                  <input type="text" style="width: 60px" id="NV-SPH" readonly />
-                </td>
-                <td>
-                  <input type="text" style="width: 60px" id="NV-CYL" readonly />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    style="width: 60px"
-                    id="NV-Axis"
-                    readonly
-                  />
-                </td>
-                <td>
-                  <input type="text" style="width: 60px" id="NV-VA" readonly />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    style="width: 60px"
-                    id="NV-SPH2"
-                    readonly
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    style="width: 60px"
-                    id="NV-CYL2"
-                    readonly
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    style="width: 60px"
-                    id="NV-Axis2"
-                    readonly
-                  />
-                </td>
-                <td>
-                  <input type="text" style="width: 60px" id="NV-VA2" readonly />
-                </td>
-              </tr>
-              <!-- <tr>
-                    <td>IPD (mm)</td>
-                    <td colspan="8">
-                      <input
-                        type="text"
-                        placeholder="Enter IPD (mm)"
-                        style="width: 600px"
-                        id="IPD"
-                        readonly
-                      />
-                    </td>
-                  </tr> -->
-              <!-- <tr>
-                    <td>Type of Glass</td>
-                    <td colspan="8">
-                      <input
-                        type="text"
-                        placeholder="Enter Type of Glass"
-                        style="width: 600px"
-                        id="TOG"
-                        readonly
-                      />
-                    </td>
-                  </tr> -->
-            </tbody>
-          </table>
-
-        </div>
+      class="section current-glass-power"
+      id="current-glass-power"
+      style="margin-top: 0px;"
+    >
+      <div class="details-section">
+        <table
+          class="table table-bordered border-primary container"
+          style="max-width: 87%; margin: auto;"
+        >
+          <thead>
+            <tr>
+              <th></th>
+              <th colspan="4" class="text-center">Right Eye</th>
+              <th colspan="4" class="text-center">Left Eye</th>
+            </tr>
+          </thead>
+          <thead>
+            <tr>
+              <th></th>
+              <th>SPH</th>
+              <th>CYL</th>
+              <th>Axis</th>
+              <th>V/A</th>
+              <th>SPH</th>
+              <th>CYL</th>
+              <th>Axis</th>
+              <th>V/A</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>DV</td>
+              <td>
+                <input type="text" class="form-control" id="DV-SPH" readonly / style="width: 55px;">
+              </td>
+              <td>
+                <input type="text" class="form-control" id="DV-CYL" readonly / style="width: 55px;">
+              </td>
+              <td>
+                <input type="text" class="form-control" id="DV-Axis" readonly / style="width: 55px;">
+              </td>
+              <td>
+                <input type="text" class="form-control" id="DV-VA" readonly / style="width: 55px;">
+              </td>
+              <td>
+                <input type="text" class="form-control" id="DV-SPH2" readonly / style="width: 55px;">
+              </td>
+              <td>
+                <input type="text" class="form-control" id="DV-CYL2" readonly / style="width: 55px;">
+              </td>
+              <td>
+                <input type="text" class="form-control" id="DV-Axis2" readonly / style="width: 55px;">
+              </td>
+              <td>
+                <input type="text" class="form-control" id="DV-VA2" readonly / style="width: 55px;">
+              </td>
+            </tr>
+            <tr>
+              <td>NV</td>
+              <td>
+                <input type="text" class="form-control" id="NV-SPH" readonly / style="width: 55px;">
+              </td>
+              <td>
+                <input type="text" class="form-control" id="NV-CYL" readonly / style="width: 55px;">
+              </td>
+              <td>
+                <input type="text" class="form-control" id="NV-Axis" readonly / style="width: 55px;">
+              </td>
+              <td>
+                <input type="text" class="form-control" id="NV-VA" readonly / style="width: 55px;">
+              </td>
+              <td>
+                <input type="text" class="form-control" id="NV-SPH2" readonly / style="width: 55px;">
+              </td>
+              <td>
+                <input type="text" class="form-control" id="NV-CYL2" readonly / style="width: 55px;">
+              </td>
+              <td>
+                <input type="text" class="form-control" id="NV-Axis2" readonly / style="width: 55px;">
+              </td>
+              <td>
+                <input type="text" class="form-control" id="NV-VA2" readonly / style="width: 55px;">
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-
+    </div>
+    
+      <div class="container-fluid" style="margin-top: 1px;">
+ <!-- Investigation -->
+ <div class="details-section mb-2" id="investigation-section">
+  <span class="fw-bold">Investigation:</span>
+  <span class="text-primary" id="investigation-list"></span>
+</div>
+        </div>
 
       
-      <div class="container my-4" id="eye-examination-table">
+      <div class="container my-2" id="eye-examination-table">
        
-        <div class="table-responsive">
-          <table class="table table-bordered">
+        <div class="table-responsive" >
+        
+          <table class="table table-bordered table-sm text-center custom-table border-primary container" style="font-size: 0.9rem; margin: auto; width: 90%;">
             <thead>
               <tr>
                 <th scope="col" style="width: 5%;"></th>
@@ -647,7 +586,26 @@
                 <td><input type="text" class="form-control" readonly id="FundusR"></td>
                 <td><input type="text" class="form-control" readonly id="FundusL"></td>
               </tr>
-             
+              <!-- <tr >
+                <td>Vision Unaided</td>
+                <td><input type="text" class="form-control" readonly ></td>
+                <td><input type="text" class="form-control" readonly ></td>
+              </tr>
+              <tr >
+              <td>Vision Pin hole</td>
+                <td><input type="text" class="form-control" readonly ></td>
+                <td><input type="text" class="form-control" readonly ></td>
+              </tr>
+              <tr >
+              <td>Old glass vision</td>
+              <td><input type="text" class="form-control" readonly ></td>
+              <td><input type="text" class="form-control" readonly ></td>
+            </tr>
+            <tr >
+              <td>Retraction</td>
+              <td><input type="text" class="form-control" readonly ></td>
+              <td><input type="text" class="form-control" readonly ></td>
+            </tr> -->
             </tbody>
           </table>
         </div>
@@ -663,7 +621,7 @@
       <table
         id="medicines-table"
         class="table table-bordered border-primary border border-1"
-      >
+      style="margin: auto;">
         <thead>
           <tr class="text-center">
             <th>Medicine Name</th>
